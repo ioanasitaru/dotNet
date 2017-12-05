@@ -13132,11 +13132,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\skillpoint-backend\\skillpoint.csproj",
+      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\skillpoint\\skillpoint.csproj",
       "projectName": "skillpoint",
-      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\skillpoint-backend\\skillpoint.csproj",
+      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\skillpoint\\skillpoint.csproj",
       "packagesPath": "C:\\Users\\Bogdan\\.nuget\\packages\\",
-      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\skillpoint-backend\\obj\\",
+      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\skillpoint\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
