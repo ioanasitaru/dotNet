@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skillpoint", "skillpoint-backend\skillpoint.csproj", "{D9E3F823-A859-4246-8764-8E4F05E5458A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skillpoint", "skillpoint\skillpoint.csproj", "{D9E3F823-A859-4246-8764-8E4F05E5458A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
