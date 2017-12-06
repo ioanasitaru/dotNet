@@ -5621,23 +5621,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ioana\\.nuget\\packages\\": {},
+    "C:\\Users\\Bogdan\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\ioana\\Desktop\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "C:\\Users\\ioana\\Desktop\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
-      "packagesPath": "C:\\Users\\ioana\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ioana\\Desktop\\dotNet\\skillpoint-backend\\UnitTests\\obj\\",
+      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
+      "packagesPath": "C:\\Users\\Bogdan\\.nuget\\packages\\",
+      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\ioana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Bogdan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5661,23 +5664,22 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "suppressParent": "All",
+          "MSTest.TestFramework": {
             "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
-          },
-          "Microsoft.NET.Test.Sdk": {
-            "target": "Package",
-            "version": "15.3.0-preview-20170628-02"
+            "version": "1.1.18"
           },
           "MSTest.TestAdapter": {
             "target": "Package",
             "version": "1.1.18"
           },
-          "MSTest.TestFramework": {
+          "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "1.1.18"
+            "version": "2.0",
+            "autoReferenced": true
+          },
+          "Microsoft.NET.Test.Sdk": {
+            "target": "Package",
+            "version": "15.3.0-preview-20170628-02"
           }
         },
         "imports": [

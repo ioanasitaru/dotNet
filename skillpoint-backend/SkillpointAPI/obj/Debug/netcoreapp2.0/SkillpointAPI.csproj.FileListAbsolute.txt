@@ -1,0 +1,11 @@
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\SkillpointAPI.deps.json
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\SkillpointAPI.runtimeconfig.json
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\SkillpointAPI.runtimeconfig.dev.json
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\SkillpointAPI.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\SkillpointAPI.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.csprojResolveAssemblyReference.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.csproj.CoreCompileInputs.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.AssemblyInfoInputs.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.AssemblyInfo.cs
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.pdb
