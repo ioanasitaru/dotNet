@@ -7,3 +7,12 @@ C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Domain\obj\Debug
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.dll
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.pdb
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.csprojResolveAssemblyReference.cache
+C:\dotNet\skillpoint-backend\Data.Domain\bin\Debug\netcoreapp2.0\Data.Domain.deps.json
+C:\dotNet\skillpoint-backend\Data.Domain\bin\Debug\netcoreapp2.0\Data.Domain.dll
+C:\dotNet\skillpoint-backend\Data.Domain\bin\Debug\netcoreapp2.0\Data.Domain.pdb
+C:\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.csprojResolveAssemblyReference.cache
+C:\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.csproj.CoreCompileInputs.cache
+C:\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.AssemblyInfoInputs.cache
+C:\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.AssemblyInfo.cs
+C:\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.dll
+C:\dotNet\skillpoint-backend\Data.Domain\obj\Debug\netcoreapp2.0\Data.Domain.pdb

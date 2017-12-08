@@ -9,3 +9,14 @@ C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Persistence\bin\
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.csprojResolveAssemblyReference.cache
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.dll
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.pdb
+C:\dotNet\skillpoint-backend\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Persistence.deps.json
+C:\dotNet\skillpoint-backend\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Persistence.dll
+C:\dotNet\skillpoint-backend\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
+C:\dotNet\skillpoint-backend\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Domain.dll
+C:\dotNet\skillpoint-backend\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Domain.pdb
+C:\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.csprojResolveAssemblyReference.cache
+C:\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.csproj.CoreCompileInputs.cache
+C:\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.AssemblyInfoInputs.cache
+C:\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.AssemblyInfo.cs
+C:\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.dll
+C:\dotNet\skillpoint-backend\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.pdb

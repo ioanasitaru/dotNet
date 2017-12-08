@@ -664,7 +664,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
+    "C:\\Users\\Alex\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -673,17 +673,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
+      "projectUniqueName": "C:\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
       "projectName": "Data.Domain",
-      "projectPath": "C:\\Users\\Lenovo\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\obj\\",
+      "projectPath": "C:\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
+      "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
+      "outputPath": "C:\\dotNet\\skillpoint-backend\\Data.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

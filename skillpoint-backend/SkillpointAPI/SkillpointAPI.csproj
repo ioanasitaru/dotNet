@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj" />
+    <ProjectReference Include="..\ClassLibrary1\Service.csproj" />
     <ProjectReference Include="..\Data.Domain\Data.Domain.csproj" />
     <ProjectReference Include="..\Data.Persistence\Data.Persistence.csproj" />
   </ItemGroup>

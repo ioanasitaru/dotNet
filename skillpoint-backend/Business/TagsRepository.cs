@@ -10,7 +10,9 @@ namespace Business
 {
     public class TagsRepository : ITagsRepository
     {
-        private IDatabaseContext _databaseContext;
+        private readonly IDatabaseContext _databaseContext;
+
+        public TagsRepository(IDatabaseContext databaseContext) => _databaseContext = databaseContext;
 
         public void CreateTag(Tag _tag)
         {

@@ -11,6 +11,7 @@ using Data.Domain.Entities;
 using Data.Domain.Interfaces;
 using Data.Persistence;
 using SkillpointAPI.DTOs;
+using Service;
 
 namespace SkillpointAPI.Controllers
 {
@@ -18,25 +19,25 @@ namespace SkillpointAPI.Controllers
     [Route("api/Tags")]
     public class TagsController : Controller
     {
-        private readonly ITagsRepository repository;
+        private readonly ITagsService service;
 
-        public TagsController(ITagsRepository _repository)
+        public TagsController(ITagsService _service)
         {
-            repository = _repository;
+            service = _service;
         }
 
         // GET: api/Tags
         [HttpGet]
         public IEnumerable<Tag> GetTags()
         {
-            return repository.GetAllTags();
+            return service.GetAllTags();
         }
 
         // GET: api/Tags/5
         [HttpGet("{id}")]
         public Tag GetTag([FromRoute] Guid id)
         {
-            return repository.GetTagById(id);
+            return service.GetTagById(id);
         }
 
     
@@ -48,21 +49,21 @@ namespace SkillpointAPI.Controllers
             var userId = tagDto.UserId;
             
 
-            if (repository.GetTagByLabel(tagLabel) == null)
+            if (service.GetTagByLabel(tagLabel) == null)
             {
-                //momentan cream un user, doarece nu avem repository-ul de user
+                //momentan cream un user, doarece nu avem service-ul de user
                 var user = new User();
                 var tag = Tag.Create(tagLabel, user);
-                repository.CreateTag(tag);
+                service.CreateTag(tag);
                
             }
             else
             {
-                //momentan cream un user, doarece nu avem repository-ul de user
+                //momentan cream un user, doarece nu avem service-ul de user
                 var user = new User();
-                var tag = repository.GetTagByLabel(tagLabel);
+                var tag = service.GetTagByLabel(tagLabel);
                 tag.Update(tagLabel,false,user);
-                repository.UpdateTag(tag);
+                service.UpdateTag(tag);
             }
         }
 
@@ -70,7 +71,7 @@ namespace SkillpointAPI.Controllers
         [HttpDelete("{id}")]
         public void DeleteTag([FromRoute] Guid id)
         {
-            repository.DeleteTag(id);
+            service.DeleteTag(id);
         }
     }
 }
