@@ -11,3 +11,16 @@ C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\ne
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.dll
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.pdb
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Business.deps.json
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Business.dll
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Business.pdb
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Domain.dll
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Persistence.dll
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Domain.pdb
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.csprojResolveAssemblyReference.cache
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.csproj.CoreCompileInputs.cache
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.AssemblyInfoInputs.cache
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.AssemblyInfo.cs
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.dll
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.pdb

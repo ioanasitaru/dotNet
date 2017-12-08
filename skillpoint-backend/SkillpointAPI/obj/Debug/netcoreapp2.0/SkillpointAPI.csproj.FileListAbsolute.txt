@@ -26,3 +26,9 @@ C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\bin\Deb
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\SkillpointAPI.pdb
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\Business.pdb
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.csprojResolveAssemblyReference.cache
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.csproj.CoreCompileInputs.cache
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.AssemblyInfoInputs.cache
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.AssemblyInfo.cs
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.dll
+C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\SkillpointAPI\obj\Debug\netcoreapp2.0\SkillpointAPI.pdb
