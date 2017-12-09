@@ -7,6 +7,7 @@ namespace Data.Persistence
     {
         DbSet<Tag> Tags { get; set; }
         DbSet<Event> Events { get; set; }
+        DbSet<User> Users { get; set; }
         int SaveChanges();
     }
 }

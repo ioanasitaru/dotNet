@@ -10,7 +10,8 @@ namespace Data.Persistence
         {
             Database.EnsureCreated();
         }
-        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Data.Domain.Entities.Tag> Tags { get; set; }
         public DbSet<Data.Domain.Entities.Event> Events { get; set; }
+        public DbSet<Data.Domain.Entities.User> Users { get; set; }
     }
 }
