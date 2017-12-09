@@ -11,6 +11,6 @@ namespace Data.Persistence
             Database.EnsureCreated();
         }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<Event> Events { get; set; }
+        public DbSet<Data.Domain.Entities.Event> Events { get; set; }
     }
 }

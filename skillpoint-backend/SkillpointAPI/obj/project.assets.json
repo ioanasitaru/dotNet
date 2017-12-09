@@ -5093,7 +5093,7 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "Business/1.0.0": {
+      "Business.Repositories/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
@@ -5102,10 +5102,24 @@
           "Microsoft.EntityFrameworkCore": "2.0.1"
         },
         "compile": {
-          "bin/placeholder/Business.dll": {}
+          "bin/placeholder/Business.Repositories.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Business.dll": {}
+          "bin/placeholder/Business.Repositories.dll": {}
+        }
+      },
+      "Business.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Business.Repositories": "1.0.0",
+          "Data.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Business.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Business.Services.dll": {}
         }
       },
       "Data.Domain/1.0.0": {
@@ -13261,10 +13275,15 @@
         "windowsazure.storage.nuspec"
       ]
     },
-    "Business/1.0.0": {
+    "Business.Repositories/1.0.0": {
       "type": "project",
-      "path": "../Business/Business.csproj",
-      "msbuildProject": "../Business/Business.csproj"
+      "path": "../Business/Business.Repositories.csproj",
+      "msbuildProject": "../Business/Business.Repositories.csproj"
+    },
+    "Business.Services/1.0.0": {
+      "type": "project",
+      "path": "../Business.Services/Business.Services.csproj",
+      "msbuildProject": "../Business.Services/Business.Services.csproj"
     },
     "Data.Domain/1.0.0": {
       "type": "project",
@@ -13279,7 +13298,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "Business >= 1.0.0",
+      "Business.Repositories >= 1.0.0",
+      "Business.Services >= 1.0.0",
       "Data.Domain >= 1.0.0",
       "Data.Persistence >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.3",
@@ -13327,8 +13347,11 @@
             "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj": {
               "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj"
             },
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.csproj"
+            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj": {
+              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj"
+            },
+            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj": {
+              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj"
             }
           }
         }
