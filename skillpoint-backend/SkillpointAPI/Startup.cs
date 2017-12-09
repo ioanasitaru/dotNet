@@ -1,5 +1,5 @@
-﻿using Business;
-using Data.Domain.Interfaces;
+﻿using Business.Implementations;
+using Business.Interfaces;
 using Data.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +24,7 @@ namespace SkillpointAPI
         {
             services.AddTransient<IDatabaseContext, DatabaseContext>();
             services.AddTransient<ITagsRepository, TagsRepository>();
+            services.AddTransient<IEventsRepository, EventsRepository>();
 
             var connectionString = @"Server = .\SQLEXPRESS; Database = Skillpoint.Dev; Trusted_Connection = true";
 

@@ -9,9 +9,9 @@ namespace UnitTests
     public class TagModelTests
     {
         [TestMethod]
-        public void Given_TagModel_When_LabelIsNull_Then_ShouldThrowsException()
+        public void Given_TagModel_When_LabelIsNull_Then_ShouldThrowException()
         {
-            Action a = () => Tag.Create(null);
+            Action a = () => Tag.Create(null, null);
             a.ShouldThrow<Exception>();
         }
 

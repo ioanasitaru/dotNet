@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Data.Domain.Entities
 {
     public class Tag
     {
-        
         public Guid Id { get; private set; }
 
         private string _label;
@@ -18,19 +16,21 @@ namespace Data.Domain.Entities
         }
 
         public List<User> Users { get; private set; }
-        
+
         public bool Verified { get; private set; }
 
-        private Tag() { }
-
-        public static Tag Create(string label,User user)
+        private Tag()
         {
-            var instance = new Tag() { Id = Guid.NewGuid(), Users = new List<User>()};
-            instance.Update(label,false,user);
+        }
+
+        public static Tag Create(string label, User user)
+        {
+            var instance = new Tag() {Id = Guid.NewGuid(), Users = new List<User>()};
+            instance.Update(label, false, user);
             return instance;
         }
 
-        public void Update(string label,bool verified,User user)
+        public void Update(string label, bool verified, User user)
         {
             this.Label = label;
             this.Verified = verified;
@@ -48,6 +48,5 @@ namespace Data.Domain.Entities
                 this._label = label;
             }
         }
-
     }
 }

@@ -11,3 +11,16 @@ C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\ne
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.dll
 C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Business.deps.json
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Business.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Business.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Domain.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Persistence.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Domain.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.csprojResolveAssemblyReference.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.csproj.CoreCompileInputs.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.AssemblyInfoInputs.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.AssemblyInfo.cs
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business\obj\Debug\netcoreapp2.0\Business.pdb

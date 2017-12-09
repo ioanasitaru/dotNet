@@ -6,6 +6,5 @@ namespace SkillpointAPI.DTOs
     {
         public string Label { get; set; }
         public Guid UserId { get; set; }
-
     }
 }
