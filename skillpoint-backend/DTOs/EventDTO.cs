@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Data.Domain.Entities;
 
-namespace SkillpointAPI.DTOs
+namespace DTOs
 {
     public class EventDTO
     {
@@ -11,6 +10,6 @@ namespace SkillpointAPI.DTOs
         public DateTime DateAndTime { get; set; }
         public string Location { get; set; }
         public byte[] Image { get; set; }
-        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<TagDTO> Tags { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Data.Domain.Entities
 {
@@ -15,26 +14,23 @@ namespace Data.Domain.Entities
             set => CheckLabel(value);
         }
 
-        public List<User> Users { get; private set; }
-
         public bool Verified { get; private set; }
 
         private Tag()
         {
         }
 
-        public static Tag Create(string label, User user)
+        public static Tag Create(string label)
         {
-            var instance = new Tag() {Id = Guid.NewGuid(), Users = new List<User>()};
-            instance.Update(label, false, user);
+            var instance = new Tag() {Id = Guid.NewGuid()};
+            instance.Update(label, false);
             return instance;
         }
 
-        public void Update(string label, bool verified, User user)
+        public void Update(string label, bool verified)
         {
             this.Label = label;
             this.Verified = verified;
-            this.Users.Add(user);
         }
 
         private void CheckLabel(string label)

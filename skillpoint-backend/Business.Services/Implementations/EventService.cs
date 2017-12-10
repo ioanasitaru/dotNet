@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Business.Interfaces;
+using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
 using Data.Domain.Entities;
 
@@ -9,7 +8,12 @@ namespace Business.Services.Implementations
 {
     public class EventService : IEventService
     {
-        private IEventsRepository _eventsRepository;
+        private readonly IEventsRepository _eventsRepository;
+
+        public EventService(IEventsRepository eventRepository)
+        {
+            _eventsRepository = eventRepository;
+        }
 
         public void Save(Event entity)
         {

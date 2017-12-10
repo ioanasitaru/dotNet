@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Business.Repositories.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
@@ -39,6 +40,22 @@ namespace Business.Repositories.Implementations
         public void Delete(User user)
         {
             _databaseContext.Users.Remove(user);
+        }
+
+        public void DeleteById(Guid id)
+        {
+            var user = GetUserById(id);
+            _databaseContext.Users.Remove(user);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return _databaseContext.Users.FirstOrDefault(u => u.Email == email);
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            return _databaseContext.Users.FirstOrDefault(u => u.Username == username);
         }
     }
 } 

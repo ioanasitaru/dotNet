@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Data.Domain.Entities;
 
-namespace Business.Interfaces
+namespace Business.Repositories.Interfaces
 {
     public interface IEventsRepository
     {
