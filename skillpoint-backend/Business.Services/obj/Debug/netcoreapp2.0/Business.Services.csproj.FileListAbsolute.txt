@@ -33,3 +33,5 @@ C:\Users\eduar\Documents\GitHub\dotNet\skillpoint-backend\Business.Services\obj\
 C:\Users\eduar\Documents\GitHub\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\DTOs.dll
 C:\Users\eduar\Documents\GitHub\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\DTOs.pdb
 >>>>>>> 30b46ff91fca14165d8d5d5630d68b68a50e0334
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\DTOs.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\DTOs.pdb

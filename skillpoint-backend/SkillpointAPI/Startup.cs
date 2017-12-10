@@ -1,9 +1,6 @@
 ﻿using Business.Interfaces;
 using Business.Repositories.Implementations;
-<<<<<<< HEAD
-=======
 using Business.Repositories.Interfaces;
->>>>>>> 30b46ff91fca14165d8d5d5630d68b68a50e0334
 using Business.Services.Implementations;
 using Business.Services.Interfaces;
 using Data.Persistence;
