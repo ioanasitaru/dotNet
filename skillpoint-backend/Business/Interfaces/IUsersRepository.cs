@@ -17,9 +17,5 @@ namespace Business.Repositories.Interfaces
         void Delete(User user);
 
         void DeleteById(Guid id);
-
-        User GetUserByEmail(string email);
-
-        User GetUserByUsername(string username);
     }
 } 

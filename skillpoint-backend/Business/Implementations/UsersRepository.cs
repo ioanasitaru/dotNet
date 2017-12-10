@@ -35,27 +35,19 @@ namespace Business.Repositories.Implementations
         public void Update(User user)
         {
             _databaseContext.Users.Update(user);
+            _databaseContext.SaveChanges();
         }
 
         public void Delete(User user)
         {
             _databaseContext.Users.Remove(user);
+            _databaseContext.SaveChanges();
         }
 
         public void DeleteById(Guid id)
-        {
-            var user = GetUserById(id);
-            _databaseContext.Users.Remove(user);
-        }
-
-        public User GetUserByEmail(string email)
-        {
-            return _databaseContext.Users.FirstOrDefault(u => u.Email == email);
-        }
-
-        public User GetUserByUsername(string username)
-        {
-            return _databaseContext.Users.FirstOrDefault(u => u.Username == username);
+        {   
+            _databaseContext.Users.Remove(GetUserById(id));
+            _databaseContext.SaveChanges();
         }
     }
 } 

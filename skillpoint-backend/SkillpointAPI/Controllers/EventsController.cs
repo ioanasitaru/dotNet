@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Business.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Data.Domain.Entities;
+using Data.Persistence;
 
 namespace SkillpointAPI.Controllers
 {
@@ -10,18 +13,18 @@ namespace SkillpointAPI.Controllers
     [Route("api/Events")]
     public class EventsController : Controller
     {
-        private readonly IEventService eventService;
+        private readonly IEventService _eventService;
 
-        public EventsController(IEventService _eventService)
+        public EventsController(IEventService eventService)
         {
-            eventService = _eventService;
+            _eventService = eventService;
         }
 
         // GET: api/Events
         [HttpGet]
         public IEnumerable<Event> GetEvents()
         {
-            return eventService.GetAll();
+            return _eventService.GetAll();
         }
 
         // GET: api/Events/5
@@ -33,7 +36,7 @@ namespace SkillpointAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var @event = eventService.GetById(id);
+            var @event = _eventService.GetById(id);
 
             if (@event == null)
             {
@@ -57,7 +60,7 @@ namespace SkillpointAPI.Controllers
                 return BadRequest();
             }
 
-            eventService.Save(@event);
+            _eventService.Save(@event);
 
             return NoContent();
         }
@@ -71,7 +74,7 @@ namespace SkillpointAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            eventService.Save(@event);
+            _eventService.Save(@event);
 
             return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
         }
@@ -85,13 +88,13 @@ namespace SkillpointAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var @event = eventService.GetById(id);
+            var @event = _eventService.GetById(id);
             if (@event == null)
             {
                 return NotFound();
             }
 
-            eventService.Delete(id);
+            _eventService.Delete(id);
 
             return Ok(@event);
         }

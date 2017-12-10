@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Business.Repositories.Interfaces;
+using Business.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
 
@@ -9,7 +9,7 @@ namespace Business.Repositories.Implementations
 {
     public class EventsRepository : IEventsRepository
     {
-        private IDatabaseContext _databaseContext;
+        private readonly IDatabaseContext _databaseContext;
 
         public EventsRepository(IDatabaseContext databaseContext)
         {
