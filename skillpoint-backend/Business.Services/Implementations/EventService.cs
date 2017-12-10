@@ -9,7 +9,12 @@ namespace Business.Services.Implementations
 {
     public class EventService : IEventService
     {
-        private IEventsRepository _eventsRepository;
+        private readonly IEventsRepository _eventsRepository;
+
+        public EventService(IEventsRepository eventsRepository)
+        {
+            _eventsRepository = eventsRepository;
+        }
 
         public void Save(Event entity)
         {

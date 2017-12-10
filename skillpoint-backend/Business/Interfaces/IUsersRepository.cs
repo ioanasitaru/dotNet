@@ -15,5 +15,7 @@ namespace Business.Repositories.Interfaces
         void Update(User user);
 
         void Delete(User user);
+
+        void DeleteById(Guid id);
     }
 } 

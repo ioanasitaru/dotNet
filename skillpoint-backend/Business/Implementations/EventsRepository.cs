@@ -9,7 +9,12 @@ namespace Business.Repositories.Implementations
 {
     public class EventsRepository : IEventsRepository
     {
-        private IDatabaseContext _databaseContext;
+        private readonly IDatabaseContext _databaseContext;
+
+        public EventsRepository(IDatabaseContext databaseContext)
+        {
+            _databaseContext = databaseContext;
+        }
 
         public void CreateEvent(Event myEvent)
         {

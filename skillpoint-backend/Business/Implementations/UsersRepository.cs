@@ -35,11 +35,19 @@ namespace Business.Repositories.Implementations
         public void Update(User user)
         {
             _databaseContext.Users.Update(user);
+            _databaseContext.SaveChanges();
         }
 
         public void Delete(User user)
         {
             _databaseContext.Users.Remove(user);
+            _databaseContext.SaveChanges();
+        }
+
+        public void DeleteById(Guid id)
+        {   
+            _databaseContext.Users.Remove(GetUserById(id));
+            _databaseContext.SaveChanges();
         }
     }
 } 

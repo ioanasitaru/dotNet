@@ -922,6 +922,16 @@
         "runtime": {
           "bin/placeholder/Data.Persistence.dll": {}
         }
+      },
+      "DTOs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DTOs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTOs.dll": {}
+        }
       }
     }
   },
@@ -3418,10 +3428,16 @@
       "type": "project",
       "path": "../Data.Persistence/Data.Persistence.csproj",
       "msbuildProject": "../Data.Persistence/Data.Persistence.csproj"
+    },
+    "DTOs/1.0.0": {
+      "type": "project",
+      "path": "../DTOs/DTOs.csproj",
+      "msbuildProject": "../DTOs/DTOs.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "DTOs >= 1.0.0",
       "Data.Domain >= 1.0.0",
       "Data.Persistence >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 2.0.1",
@@ -3466,6 +3482,9 @@
             },
             "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj": {
               "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj"
+            },
+            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\DTOs\\DTOs.csproj": {
+              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\DTOs\\DTOs.csproj"
             }
           }
         }
