@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Data.Domain.Entities;
+using DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
@@ -64,14 +65,14 @@ namespace SkillpointAPI.Controllers
 
         // POST: api/Events
         [HttpPost]
-        public IActionResult PostEvent([FromBody] Event @event)
+        public IActionResult PostEvent([FromBody] EventDTO eventDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _eventService.Save(@event);
+            var @event = _eventService.Save(Event.Create(eventDTO));
 
             return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
         }

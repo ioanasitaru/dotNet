@@ -33,7 +33,7 @@ namespace Data.Domain.Entities
         public static User Create(string username, string password, string name, string email, string location, List<Tag> tagsList)
         {
             //add eventlist and achivementlist
-            var instance = new User() {Id = Guid.NewGuid()};
+            var instance = new User {Id = Guid.NewGuid()};
             instance.Update(username, password, name, email, location, tagsList);
             return instance;
         }
@@ -46,12 +46,12 @@ namespace Data.Domain.Entities
         public void Update(string username, string password, string name, string email, string location,
             List<Tag> tagsList)
         {
-            this.Username = username;
-            this.Password = password;
-            this.Name = name;
-            this.Email = email;
-            this.Location = location;
-            this.TagsList = tagsList;
+            Username = username;
+            Password = password;
+            Name = name;
+            Email = email;
+            Location = location;
+            TagsList = tagsList;
         }
     }
 }

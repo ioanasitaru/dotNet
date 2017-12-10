@@ -13,7 +13,7 @@ namespace Business.Repositories.Implementations
 
         public UsersRepository(IDatabaseContext database)
         {
-            this._databaseContext = database;
+            _databaseContext = database;
         }
 
         public void CreateUser(User user)

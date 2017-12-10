@@ -10,7 +10,7 @@ namespace Data.Domain.Entities
 
         public string Label
         {
-            get => this._label;
+            get => _label;
             set => CheckLabel(value);
         }
 
@@ -22,15 +22,15 @@ namespace Data.Domain.Entities
 
         public static Tag Create(string label)
         {
-            var instance = new Tag() {Id = Guid.NewGuid()};
+            var instance = new Tag {Id = Guid.NewGuid()};
             instance.Update(label, false);
             return instance;
         }
 
         public void Update(string label, bool verified)
         {
-            this.Label = label;
-            this.Verified = verified;
+            Label = label;
+            Verified = verified;
         }
 
         private void CheckLabel(string label)
@@ -39,10 +39,7 @@ namespace Data.Domain.Entities
             {
                 throw new Exception("Invalid label!(No value specified!)");
             }
-            else
-            {
-                this._label = label;
-            }
+            _label = label;
         }
     }
 }

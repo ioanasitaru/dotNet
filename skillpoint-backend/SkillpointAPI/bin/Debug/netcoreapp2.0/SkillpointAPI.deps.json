@@ -4145,6 +4145,9 @@
         }
       },
       "Data.Domain/1.0.0": {
+        "dependencies": {
+          "DTOs": "1.0.0"
+        },
         "runtime": {
           "Data.Domain.dll": {}
         },

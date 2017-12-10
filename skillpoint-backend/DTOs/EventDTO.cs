@@ -10,6 +10,5 @@ namespace DTOs
         public DateTime DateAndTime { get; set; }
         public string Location { get; set; }
         public byte[] Image { get; set; }
-        public IEnumerable<TagDTO> Tags { get; set; }
     }
 }

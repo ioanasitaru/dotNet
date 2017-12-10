@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.Interfaces;
+using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
 using Data.Domain.Entities;
 
@@ -15,9 +16,9 @@ namespace Business.Services.Implementations
             _eventsRepository = eventsRepository;
         }
 
-        public void Save(Event entity)
+        public Event Save(Event entity)
         {
-            _eventsRepository.CreateEvent(entity);
+            return _eventsRepository.CreateEvent(entity);
         }
 
         public IEnumerable<Event> GetAll()

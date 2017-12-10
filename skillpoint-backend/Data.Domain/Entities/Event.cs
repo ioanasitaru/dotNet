@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DTOs;
 
 namespace Data.Domain.Entities
 {
@@ -18,12 +19,23 @@ namespace Data.Domain.Entities
 
         public static Event Create(string name, string description, DateTime dateAndTime, string location, byte[] image)
         {
-            var instance = new Event()
+            var instance = new Event
             {
                 Id = Guid.NewGuid(),
                 Tags = new List<Tag>()
             };
             instance.Update(name, description, dateAndTime, location, image);
+            return instance;
+        }
+
+        public static Event Create(EventDTO eventDTO)
+        {
+            var instance = new Event
+            {
+                Id = Guid.NewGuid(),
+                Tags = new List<Tag>()
+            };
+            instance.Update(eventDTO.Name, eventDTO.Description, eventDTO.DateAndTime, eventDTO.Location, eventDTO.Image);
             return instance;
         }
 

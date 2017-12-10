@@ -900,11 +900,24 @@
       "Data.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "DTOs": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Data.Domain.dll": {}
         },
         "runtime": {
           "bin/placeholder/Data.Domain.dll": {}
+        }
+      },
+      "DTOs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DTOs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTOs.dll": {}
         }
       }
     }
@@ -3397,6 +3410,11 @@
       "type": "project",
       "path": "../Data.Domain/Data.Domain.csproj",
       "msbuildProject": "../Data.Domain/Data.Domain.csproj"
+    },
+    "DTOs/1.0.0": {
+      "type": "project",
+      "path": "../DTOs/DTOs.csproj",
+      "msbuildProject": "../DTOs/DTOs.csproj"
     }
   },
   "projectFileDependencyGroups": {

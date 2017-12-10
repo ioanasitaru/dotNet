@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Data.Domain.Entities;
 using DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
@@ -15,7 +15,7 @@ namespace SkillpointAPI.Controllers
 
         public TagsController(ITagsRepository repository)
         {
-            this._repository = repository;
+            _repository = repository;
         }
 
         // GET: api/Tags

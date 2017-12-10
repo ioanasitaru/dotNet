@@ -440,8 +440,16 @@
         }
       },
       "Data.Domain/1.0.0": {
+        "dependencies": {
+          "DTOs": "1.0.0"
+        },
         "runtime": {
           "Data.Domain.dll": {}
+        }
+      },
+      "DTOs/1.0.0": {
+        "runtime": {
+          "DTOs.dll": {}
         }
       }
     }
@@ -817,6 +825,11 @@
       "hashPath": "system.threading.tasks.4.0.11.nupkg.sha512"
     },
     "Data.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DTOs/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,7 +1,7 @@
 ﻿using System;
+using Data.Domain.Entities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Data.Domain.Entities;
 
 namespace UnitTests
 {

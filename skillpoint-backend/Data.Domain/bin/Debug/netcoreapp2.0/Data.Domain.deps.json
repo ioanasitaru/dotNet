@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "Data.Domain/1.0.0": {
+        "dependencies": {
+          "DTOs": "1.0.0"
+        },
         "runtime": {
           "Data.Domain.dll": {}
+        }
+      },
+      "DTOs/1.0.0": {
+        "runtime": {
+          "DTOs.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Data.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DTOs/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
