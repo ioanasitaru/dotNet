@@ -44,7 +44,7 @@ namespace SkillpointAPI.Controllers
             if (_repository.GetTagByLabel(tagLabel) == null)
             {
                 //momentan cream un user, doarece nu avem repository-ul de user
-                var user = new User();
+                var user = Data.Domain.Entities.User.Create();
                 var tag = Tag.Create(tagLabel, user);
                 _repository.CreateTag(tag);
                
@@ -52,7 +52,7 @@ namespace SkillpointAPI.Controllers
             else
             {
                 //momentan cream un user, doarece nu avem repository-ul de user
-                var user = new User();
+                var user = Data.Domain.Entities.User.Create();
                 var tag = _repository.GetTagByLabel(tagLabel);
                 tag.Update(tagLabel,false,user);
                 _repository.UpdateTag(tag);

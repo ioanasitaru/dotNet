@@ -5,7 +5,7 @@ using Business.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
 
-namespace Business.Implementations
+namespace Business.Repositories.Implementations
 {
     public class EventsRepository : IEventsRepository
     {

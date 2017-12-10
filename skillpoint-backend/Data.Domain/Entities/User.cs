@@ -38,6 +38,11 @@ namespace Data.Domain.Entities
             return instance;
         }
 
+        public static User Create()
+        {
+            return new User(); //dummy
+        }
+
         public void Update(string username, string password, string name, string email, string location,
             List<Tag> tagsList)
         {

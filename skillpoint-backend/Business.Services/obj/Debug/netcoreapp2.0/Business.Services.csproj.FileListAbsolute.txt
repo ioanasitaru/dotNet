@@ -1,0 +1,15 @@
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\obj\Debug\netcoreapp2.0\Business.Services.csprojResolveAssemblyReference.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\obj\Debug\netcoreapp2.0\Business.Services.csproj.CoreCompileInputs.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\obj\Debug\netcoreapp2.0\Business.Services.AssemblyInfoInputs.cache
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\obj\Debug\netcoreapp2.0\Business.Services.AssemblyInfo.cs
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Business.Services.deps.json
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Business.Services.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Business.Services.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Business.Repositories.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Data.Domain.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Data.Persistence.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Business.Repositories.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Data.Domain.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\obj\Debug\netcoreapp2.0\Business.Services.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\Business.Services\obj\Debug\netcoreapp2.0\Business.Services.pdb
