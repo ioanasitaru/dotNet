@@ -8,12 +8,13 @@
     ".NETCoreApp,Version=v2.0": {
       "IntegrationTests/1.0.0": {
         "dependencies": {
-          "Business": "1.0.0",
+          "Business.Repositories": "1.0.0",
+          "Business.Services": "1.0.0",
+          "Data.Persistence": "1.0.0",
           "FluentAssertions": "4.19.4",
           "MSTest.TestAdapter": "1.2.0",
           "MSTest.TestFramework": "1.2.0",
-          "Microsoft.NET.Test.Sdk": "15.5.0",
-          "Service": "1.0.0"
+          "Microsoft.NET.Test.Sdk": "15.5.0"
         },
         "runtime": {
           "IntegrationTests.dll": {}
@@ -1225,17 +1226,30 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "Business/1.0.0": {
+      "Business.Repositories/1.0.0": {
         "dependencies": {
+          "DTOs": "1.0.0",
           "Data.Domain": "1.0.0",
           "Data.Persistence": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.0.1"
         },
         "runtime": {
-          "Business.dll": {}
+          "Business.Repositories.dll": {}
+        }
+      },
+      "Business.Services/1.0.0": {
+        "dependencies": {
+          "Business.Repositories": "1.0.0",
+          "Data.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Business.Services.dll": {}
         }
       },
       "Data.Domain/1.0.0": {
+        "dependencies": {
+          "DTOs": "1.0.0"
+        },
         "runtime": {
           "Data.Domain.dll": {}
         }
@@ -1251,12 +1265,9 @@
           "Data.Persistence.dll": {}
         }
       },
-      "Service/1.0.0": {
-        "dependencies": {
-          "Data.Domain": "1.0.0"
-        },
+      "DTOs/1.0.0": {
         "runtime": {
-          "Service.dll": {}
+          "DTOs.dll": {}
         }
       }
     }
@@ -1967,7 +1978,12 @@
       "path": "system.xml.xpath.xmldocument/4.0.1",
       "hashPath": "system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
     },
-    "Business/1.0.0": {
+    "Business.Repositories/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Business.Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1982,7 +1998,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Service/1.0.0": {
+    "DTOs/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

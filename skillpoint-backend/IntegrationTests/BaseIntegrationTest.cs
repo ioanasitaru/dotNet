@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IntegrationTests
 {
@@ -30,7 +28,7 @@ namespace IntegrationTests
 
         private void RunOnSqlServer(Action<DatabaseContext> databaseAction)
         {
-            var connectionString = @"Server = .\SQLEXPRESS; Database = Skillpoint.Dev; Trusted_Connection = true";
+            var connectionString = @"Server = .\SQLEXPRESS01; Database = Skillpoint.Dev; Trusted_Connection = true";
             var options = new DbContextOptionsBuilder<DatabaseContext>()
                 .UseSqlServer(connectionString)
                 .Options;

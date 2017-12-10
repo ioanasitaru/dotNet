@@ -1,11 +1,8 @@
-﻿using Business;
-using Data.Domain.Entities;
-using Data.Domain.Interfaces;
+﻿using Data.Domain.Entities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Business.Repositories.Implementations;
+using Business.Repositories.Interfaces;
 
 namespace IntegrationTests
 {
@@ -18,7 +15,7 @@ namespace IntegrationTests
             RunOnDatabase(sut =>
             {
                 var tagRepository = new TagsRepository(sut);
-                var tag = Tag.Create("Label", new Data.Domain.User());
+                var tag = Tag.Create("Label");
                 tagRepository.CreateTag(tag);
                 tagRepository.GetAllTags().Should().HaveCount(1);
             });
@@ -30,7 +27,7 @@ namespace IntegrationTests
             RunOnDatabase(sut =>
             {
                 var tagRepository = new TagsRepository(sut);
-                var tag = Tag.Create("Label", new Data.Domain.User());
+                var tag = Tag.Create("Label");
                 tagRepository.CreateTag(tag);
                 tagRepository.DeleteTag(tag.Id);
                 tagRepository.GetAllTags().Should().HaveCount(0);
@@ -42,11 +39,11 @@ namespace IntegrationTests
             RunOnDatabase(sut =>
             {
                 var tagRepository = new TagsRepository(sut);
-                var firstTag = Tag.Create("Label1", new Data.Domain.User());
-                var secondTag = Tag.Create("Label2", new Data.Domain.User());
-                var thirdTag = Tag.Create("Label3", new Data.Domain.User());
-                var forthTag = Tag.Create("Label4", new Data.Domain.User());
-                var fiftsTag = Tag.Create("Label5", new Data.Domain.User());
+                var firstTag = Tag.Create("Label1");
+                var secondTag = Tag.Create("Label2");
+                var thirdTag = Tag.Create("Label3");
+                var forthTag = Tag.Create("Label4");
+                var fiftsTag = Tag.Create("Label5");
                 tagRepository.CreateTag(firstTag);
                 tagRepository.CreateTag(secondTag);
                 tagRepository.CreateTag(thirdTag);
@@ -61,17 +58,17 @@ namespace IntegrationTests
             RunOnDatabase(sut =>
             {
                 var tagRepository = new TagsRepository(sut);
-                var firstTag = Tag.Create("Label1", new Data.Domain.User());
-                var secondTag = Tag.Create("Label2", new Data.Domain.User());
-                var thirdTag = Tag.Create("Label3", new Data.Domain.User());
-                var forthTag = Tag.Create("Label4", new Data.Domain.User());
-                var fiftsTag = Tag.Create("Label5", new Data.Domain.User());
+                var firstTag = Tag.Create("Label1");
+                var secondTag = Tag.Create("Label2");
+                var thirdTag = Tag.Create("Label3");
+                var forthTag = Tag.Create("Label4");
+                var fiftsTag = Tag.Create("Label5");
                 tagRepository.CreateTag(firstTag);
                 tagRepository.CreateTag(secondTag);
                 tagRepository.CreateTag(thirdTag);
                 tagRepository.CreateTag(forthTag);
                 tagRepository.CreateTag(fiftsTag);
-                tagRepository.GetTagById(thirdTag.Id).Should().Equals(thirdTag);
+                tagRepository.GetTagById(thirdTag.Id).Should().Be(thirdTag);
             });
         }
         [TestMethod]
@@ -80,17 +77,17 @@ namespace IntegrationTests
             RunOnDatabase(sut =>
             {
                 var tagRepository = new TagsRepository(sut);
-                var firstTag = Tag.Create("Label1", new Data.Domain.User());
-                var secondTag = Tag.Create("Label2", new Data.Domain.User());
-                var thirdTag = Tag.Create("Label3", new Data.Domain.User());
-                var forthTag = Tag.Create("Label4", new Data.Domain.User());
-                var fiftsTag = Tag.Create("Label5", new Data.Domain.User());
+                var firstTag = Tag.Create("Label1");
+                var secondTag = Tag.Create("Label2");
+                var thirdTag = Tag.Create("Label3");
+                var forthTag = Tag.Create("Label4");
+                var fiftsTag = Tag.Create("Label5");
                 tagRepository.CreateTag(firstTag);
                 tagRepository.CreateTag(secondTag);
                 tagRepository.CreateTag(thirdTag);
                 tagRepository.CreateTag(forthTag);
                 tagRepository.CreateTag(fiftsTag);
-                tagRepository.GetTagByLabel(thirdTag.Label).Should().Equals(thirdTag);
+                tagRepository.GetTagByLabel(thirdTag.Label).Should().Be(thirdTag);
             });
         }
         [TestMethod]
@@ -99,11 +96,11 @@ namespace IntegrationTests
             RunOnDatabase(sut =>
             {
                 var tagRepository = new TagsRepository(sut);
-                var tag = Tag.Create("Label", new Data.Domain.User());
+                var tag = Tag.Create("Label");
                 tagRepository.CreateTag(tag);
-                tag.Update(tag.Label, true, new Data.Domain.User());
+                tag.Update(tag.Label, true);
                 tagRepository.UpdateTag(tag);
-                tagRepository.GetTagById(tag.Id).Should().Equals(tag);
+                tagRepository.GetTagById(tag.Id).Should().Be(tag);
             });
         }
 

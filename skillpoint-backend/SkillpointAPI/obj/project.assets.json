@@ -13333,6 +13333,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\SkillpointAPI\\SkillpointAPI.csproj",
       "projectName": "SkillpointAPI",
@@ -13357,17 +13360,17 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj"
-            },
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj"
-            },
             "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj": {
               "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj"
             },
             "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj": {
               "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj"
+            },
+            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj": {
+              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj"
+            },
+            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj": {
+              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj"
             }
           }
         }
@@ -13381,22 +13384,22 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+            "target": "Package",
+            "version": "2.0.0"
+          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "2.0",
             "autoReferenced": true
           },
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "2.0.3"
-          },
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-            "target": "Package",
-            "version": "2.0.0"
-          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "1.1.0"
+          },
+          "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "2.0.3"
           }
         },
         "imports": [

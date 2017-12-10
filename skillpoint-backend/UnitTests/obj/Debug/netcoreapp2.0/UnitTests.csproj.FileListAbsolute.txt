@@ -14,3 +14,5 @@ E:\MS.NET\project\dotNet\skillpoint-backend\UnitTests\obj\Debug\netcoreapp2.0\Un
 E:\MS.NET\project\dotNet\skillpoint-backend\UnitTests\obj\Debug\netcoreapp2.0\UnitTests.AssemblyInfo.cs
 E:\MS.NET\project\dotNet\skillpoint-backend\UnitTests\obj\Debug\netcoreapp2.0\UnitTests.dll
 E:\MS.NET\project\dotNet\skillpoint-backend\UnitTests\obj\Debug\netcoreapp2.0\UnitTests.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\UnitTests\bin\Debug\netcoreapp2.0\DTOs.dll
+E:\MS.NET\project\dotNet\skillpoint-backend\UnitTests\bin\Debug\netcoreapp2.0\DTOs.pdb

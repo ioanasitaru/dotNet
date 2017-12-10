@@ -1,5 +1,4 @@
-﻿using Business.Interfaces;
-using Business.Repositories.Implementations;
+﻿using Business.Repositories.Implementations;
 using Business.Repositories.Interfaces;
 using Business.Services.Implementations;
 using Business.Services.Interfaces;
@@ -43,27 +42,17 @@ namespace SkillpointAPI
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-<<<<<<< HEAD
         {   
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-=======
-        {
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-                app.UseSwagger();
->>>>>>> b63253666cfafb1243ffd5fa725aff98d50c5661
+
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-<<<<<<< HEAD
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Skillpoint V1");
             });
 
-=======
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Too V1");
-            });
->>>>>>> b63253666cfafb1243ffd5fa725aff98d50c5661
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

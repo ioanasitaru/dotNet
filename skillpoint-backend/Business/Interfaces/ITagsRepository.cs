@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Data.Domain.Entities;
 using DTOs;
 
-namespace Business.Interfaces
+namespace Business.Repositories.Interfaces
 {
     public interface ITagsRepository
     {

@@ -685,6 +685,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
       "projectName": "Data.Domain",

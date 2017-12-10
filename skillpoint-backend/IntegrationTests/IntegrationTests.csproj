@@ -14,8 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj" />
-    <ProjectReference Include="..\ClassLibrary1\Service.csproj" />
+    <ProjectReference Include="..\Business.Services\Business.Services.csproj" />
+    <ProjectReference Include="..\Business\Business.Repositories.csproj" />
+    <ProjectReference Include="..\Data.Persistence\Data.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

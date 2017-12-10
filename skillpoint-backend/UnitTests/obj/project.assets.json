@@ -1638,19 +1638,6 @@
         "runtime": {
           "bin/placeholder/DTOs.dll": {}
         }
-      },
-      "Service/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "dependencies": {
-          "Data.Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Service.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Service.dll": {}
-        }
       }
     }
   },
@@ -5767,11 +5754,6 @@
       "type": "project",
       "path": "../DTOs/DTOs.csproj",
       "msbuildProject": "../DTOs/DTOs.csproj"
-    },
-    "Service/1.0.0": {
-      "type": "project",
-      "path": "../ClassLibrary1/Service.csproj",
-      "msbuildProject": "../ClassLibrary1/Service.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5781,8 +5763,7 @@
       "MSTest.TestAdapter >= 1.1.18",
       "MSTest.TestFramework >= 1.1.18",
       "Microsoft.NET.Test.Sdk >= 15.3.0-preview-20170628-02",
-      "Microsoft.NETCore.App >= 2.0.0",
-      "Service >= 1.0.0"
+      "Microsoft.NETCore.App >= 2.0.0"
     ]
   },
   "packageFolders": {
@@ -5791,6 +5772,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
@@ -5815,9 +5799,6 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\ClassLibrary1\\Service.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\ClassLibrary1\\Service.csproj"
-            },
             "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj": {
               "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj"
             }
@@ -5833,27 +5814,26 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "suppressParent": "All",
+          "MSTest.TestFramework": {
             "target": "Package",
-            "version": "2.0",
-            "autoReferenced": true
+            "version": "1.1.18"
           },
           "FluentAssertions": {
             "target": "Package",
             "version": "4.19.4"
           },
-          "Microsoft.NET.Test.Sdk": {
-            "target": "Package",
-            "version": "15.3.0-preview-20170628-02"
-          },
           "MSTest.TestAdapter": {
             "target": "Package",
             "version": "1.1.18"
           },
-          "MSTest.TestFramework": {
+          "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "1.1.18"
+            "version": "2.0",
+            "autoReferenced": true
+          },
+          "Microsoft.NET.Test.Sdk": {
+            "target": "Package",
+            "version": "15.3.0-preview-20170628-02"
           }
         },
         "imports": [
