@@ -21,9 +21,18 @@ namespace IntegrationTests
             DeleteDatabase();
         }
 
+        protected virtual bool UseSqlServer => false;
+
         protected void RunOnDatabase(Action<DatabaseContext> databaseAction)
         {
-            RunOnSqlServer(databaseAction);
+            if (UseSqlServer)
+            {
+                RunOnSqlServer(databaseAction);
+            }
+            else
+            {
+                RunOnMemory(databaseAction);
+            }
         }
 
         private void RunOnSqlServer(Action<DatabaseContext> databaseAction)
@@ -31,6 +40,17 @@ namespace IntegrationTests
             var connectionString = @"Server = .\SQLEXPRESS01; Database = Skillpoint.Dev; Trusted_Connection = true";
             var options = new DbContextOptionsBuilder<DatabaseContext>()
                 .UseSqlServer(connectionString)
+                .Options;
+            using (var context = new DatabaseContext(options))
+            {
+                databaseAction(context);
+            }
+        }
+
+        private void RunOnMemory(Action<DatabaseContext> databaseAction)
+        {
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseInMemoryDatabase("Skillpoint")
                 .Options;
             using (var context = new DatabaseContext(options))
             {
