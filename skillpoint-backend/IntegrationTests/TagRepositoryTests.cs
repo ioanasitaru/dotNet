@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Business.Repositories.Implementations;
-using Business.Repositories.Interfaces;
 
 namespace IntegrationTests
 {
@@ -43,12 +42,12 @@ namespace IntegrationTests
                 var secondTag = Tag.Create("Label2");
                 var thirdTag = Tag.Create("Label3");
                 var forthTag = Tag.Create("Label4");
-                var fiftsTag = Tag.Create("Label5");
+                var fifthTag = Tag.Create("Label5");
                 tagRepository.CreateTag(firstTag);
                 tagRepository.CreateTag(secondTag);
                 tagRepository.CreateTag(thirdTag);
                 tagRepository.CreateTag(forthTag);
-                tagRepository.CreateTag(fiftsTag);
+                tagRepository.CreateTag(fifthTag);
                 tagRepository.GetAllTags().Should().HaveCount(5);
             });
         }

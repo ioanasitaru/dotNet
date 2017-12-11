@@ -45,21 +45,7 @@ namespace Business.Repositories.Implementations
 
         public List<Tag> TagsFromDTO(List<TagDTO> tagsDtos)
         {
-            List<Tag> tagsList = new List<Tag>();
-
-            foreach (var tagDto in tagsDtos)
-            {
-                var tag = GetTagByLabel(tagDto.Label);
-
-                if (tag == null)
-                {
-                    tag = Tag.Create(tagDto.Label);
-                }
-
-                tagsList.Add(tag);
-            }
-
-            return tagsList;
+            return tagsDtos.Select(tagDto => GetTagByLabel(tagDto.Label) ?? Tag.Create(tagDto.Label)).ToList();
         }
     }
 }

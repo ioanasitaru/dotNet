@@ -58,7 +58,7 @@ namespace SkillpointAPI.Controllers
                 return BadRequest();
             }
 
-            _eventService.Save(@event);
+            _eventService.Create(@event);
 
             return NoContent();
         }
@@ -72,7 +72,7 @@ namespace SkillpointAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var @event = _eventService.Save(Event.Create(eventDTO));
+            var @event = _eventService.Create(Event.Create(eventDTO));
 
             return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
         }

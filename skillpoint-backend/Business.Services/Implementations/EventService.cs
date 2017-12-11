@@ -15,9 +15,14 @@ namespace Business.Services.Implementations
             _eventsRepository = eventsRepository;
         }
 
-        public Event Save(Event entity)
+        public Event Create(Event entity)
         {
             return _eventsRepository.CreateEvent(entity);
+        }
+
+        public void Update(Event entity)
+        {
+            _eventsRepository.UpdateEvent(entity);
         }
 
         public IEnumerable<Event> GetAll()
