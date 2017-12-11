@@ -38,7 +38,7 @@ namespace SkillpointAPI.Controllers
         [HttpPost]
         public void PostUser([FromBody] UserDTO userDto)
         {
-            var tagsList = _tagsRepository.TagsFromDTO(userDto.TagsList);
+            var tagsList = _tagsRepository.TagsFromDTO(userDto.Tags);
             var user = Data.Domain.Entities.User.Create(userDto.Username, userDto.Password, userDto.Name, userDto.Email,
                 userDto.Location, tagsList);
             _usersRepository.CreateUser(user);

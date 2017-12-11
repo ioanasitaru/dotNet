@@ -1,6 +1,4 @@
-﻿
-
-namespace DTOs
+﻿namespace DTOs
 {
     public class TagDTO
     {

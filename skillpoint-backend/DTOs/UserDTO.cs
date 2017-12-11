@@ -15,6 +15,6 @@ namespace DTOs
 
         public String Location { get; set; }
 
-        public List<TagDTO> TagsList { get; set; }
+        public List<TagDTO> Tags { get; set; }
     }
 }
