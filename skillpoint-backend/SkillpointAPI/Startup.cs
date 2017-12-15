@@ -1,5 +1,4 @@
-﻿using Business.Interfaces;
-using Business.Repositories.Implementations;
+﻿using Business.Repositories.Implementations;
 using Business.Repositories.Interfaces;
 using Business.Services.Implementations;
 using Business.Services.Interfaces;
@@ -30,6 +29,8 @@ namespace SkillpointAPI
             services.AddTransient<IEventsRepository, EventsRepository>();
             services.AddTransient<IUsersRepository, UsersRepository>();
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ITagsService, TagsService>();
 
             var connectionString = @"Server = .\SQLEXPRESS; Database = Skillpoint.Dev; Trusted_Connection = true";
 
@@ -46,6 +47,7 @@ namespace SkillpointAPI
         {   
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
+
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>

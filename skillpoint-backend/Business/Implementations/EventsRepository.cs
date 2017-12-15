@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Business.Interfaces;
+using Business.Repositories.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
 
@@ -16,10 +16,11 @@ namespace Business.Repositories.Implementations
             _databaseContext = databaseContext;
         }
 
-        public void CreateEvent(Event myEvent)
+        public Event CreateEvent(Event myEvent)
         {
             _databaseContext.Events.Add(myEvent);
             _databaseContext.SaveChanges();
+            return GetEventById(myEvent.Id);
         }
 
         public IReadOnlyList<Event> GetAllEvents()

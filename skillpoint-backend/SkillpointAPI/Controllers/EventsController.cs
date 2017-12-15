@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Business.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using CreatingModels;
 using Data.Domain.Entities;
-using Data.Persistence;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
@@ -60,23 +58,23 @@ namespace SkillpointAPI.Controllers
                 return BadRequest();
             }
 
-            _eventService.Save(@event);
+            _eventService.Create(@event);
 
             return NoContent();
         }
 
         // POST: api/Events
         [HttpPost]
-        public IActionResult PostEvent([FromBody] Event @event)
+        public IActionResult PostEvent([FromBody] EventCreatingModel eventModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _eventService.Save(@event);
+            _eventService.Create(Event.Create(eventModel));
 
-            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+            return Created("", null);
         }
 
         // DELETE: api/Events/5

@@ -1,10 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Data.Domain.Entities;
 
 namespace DTOs
 {
     public class UserDTO
     {
+
+        public UserDTO(User user)
+        {
+            Id = user.Id;
+            Username = user.Username;
+            Password = user.Password;
+            Name = user.Name;
+            Email = user.Email;
+            Location = user.Location;
+            Tags = user.TagsList.ConvertAll(ut => new TagDTO(ut)).ToList();
+        }
+
+        public Guid Id { get; set; }
+
         public String Username { get; set; }
 
         public String Password { get; set; }
@@ -15,6 +31,6 @@ namespace DTOs
 
         public String Location { get; set; }
 
-        public List<TagDTO> TagsList { get; set; }
+        public List<TagDTO> Tags { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CreatingModels;
 using Data.Domain.Entities;
 
 namespace Business.Repositories.Interfaces
 {
     public interface IUsersRepository
     {
-        void CreateUser(User user);
+        User CreateUser(UserCreatingModel user, List<Tag> tagsList);
 
         IReadOnlyList<User> GetAllUsers();
 

@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using CreatingModels;
 
 namespace Data.Domain.Entities
 {
     public class Tag
     {
-        public Guid Id { get; private set; }
-
         private string _label;
-
+        
+        [Key]
         public string Label
         {
-            get => this._label;
-            set => CheckLabel(value);
+            get => _label;
+            private set => CheckLabel(value);
         }
+
+        public List<UserTag> UsersList { get; private set; }
 
         public bool Verified { get; private set; }
 
@@ -21,17 +24,17 @@ namespace Data.Domain.Entities
         {
         }
 
-        public static Tag Create(string label)
+        public static Tag Create(TagCreatingModel tagModel)
         {
-            var instance = new Tag() {Id = Guid.NewGuid()};
-            instance.Update(label, false);
+            var instance = new Tag();
+            instance.Update(tagModel.Label, false);
             return instance;
         }
 
         public void Update(string label, bool verified)
         {
-            this.Label = label;
-            this.Verified = verified;
+            Label = label;
+            Verified = verified;
         }
 
         private void CheckLabel(string label)
@@ -40,10 +43,7 @@ namespace Data.Domain.Entities
             {
                 throw new Exception("Invalid label!(No value specified!)");
             }
-            else
-            {
-                this._label = label;
-            }
+            _label = label;
         }
     }
 }

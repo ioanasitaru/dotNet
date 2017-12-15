@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CreatingModels;
 
 namespace Data.Domain.Entities
 {
@@ -18,12 +19,23 @@ namespace Data.Domain.Entities
 
         public static Event Create(string name, string description, DateTime dateAndTime, string location, byte[] image)
         {
-            var instance = new Event()
+            var instance = new Event
             {
                 Id = Guid.NewGuid(),
                 Tags = new List<Tag>()
             };
             instance.Update(name, description, dateAndTime, location, image);
+            return instance;
+        }
+
+        public static Event Create(EventCreatingModel eventModel)
+        {
+            var instance = new Event
+            {
+                Id = Guid.NewGuid(),
+                Tags = new List<Tag>()
+            };
+            instance.Update(eventModel.Name, eventModel.Description, eventModel.DateAndTime, eventModel.Location, eventModel.Image);
             return instance;
         }
 

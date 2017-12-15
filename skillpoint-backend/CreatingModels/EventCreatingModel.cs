@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DTOs
+namespace CreatingModels
 {
-    public class EventDTO
+    public class EventCreatingModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

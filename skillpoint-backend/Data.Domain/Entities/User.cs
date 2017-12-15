@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CreatingModels;
 
 namespace Data.Domain.Entities
 {
@@ -25,28 +26,37 @@ namespace Data.Domain.Entities
 
         public String Location { get; private set; }
 
-        public List<Tag> TagsList { get; private set; }
+        public List<UserTag> TagsList { get; private set; }
 
         //public List<Event> EventsList { get; private set; }
         //        public List<Achivement> AchievementsList { get; private set; }
 
-        public static User Create(string username, string password, string name, string email, string location, List<Tag> tagsList)
+        public static User Create(string username, string password, string name, string email, string location,
+            List<UserTag> tagsList)
         {
             //add eventlist and achivementlist
-            var instance = new User() {Id = Guid.NewGuid()};
+            var instance = new User {Id = Guid.NewGuid()};
             instance.Update(username, password, name, email, location, tagsList);
             return instance;
         }
 
-        public void Update(string username, string password, string name, string email, string location,
-            List<Tag> tagsList)
+        public static User Create(UserCreatingModel userModel, List<UserTag> tagsList)
         {
-            this.Username = username;
-            this.Password = password;
-            this.Name = name;
-            this.Email = email;
-            this.Location = location;
-            this.TagsList = tagsList;
+            //add eventlist and achivementlist
+            var instance = new User { Id = Guid.NewGuid() };
+            instance.Update(userModel.Username, userModel.Password, userModel.Name, userModel.Email, userModel.Location, tagsList);
+            return instance;
+        }
+
+        public void Update(string username, string password, string name, string email, string location,
+            List<UserTag> tagsList)
+        {
+            Username = username;
+            Password = password;
+            Name = name;
+            Email = email;
+            Location = location;
+            TagsList = tagsList;
         }
     }
 }
