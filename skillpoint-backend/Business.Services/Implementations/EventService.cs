@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
+using CreatingModels;
 using Data.Domain.Entities;
+using DTOs;
 
 namespace Business.Services.Implementations
 {
@@ -15,29 +18,29 @@ namespace Business.Services.Implementations
             _eventsRepository = eventsRepository;
         }
 
-        public Event Create(Event entity)
+        public void Create(CreatingModel<Event> entity)
         {
-            return _eventsRepository.CreateEvent(entity);
+            _eventsRepository.Create(entity);
         }
 
         public void Update(Event entity)
         {
-            _eventsRepository.UpdateEvent(entity);
+            _eventsRepository.Update(entity);
         }
 
-        public IEnumerable<Event> GetAll()
+        public IEnumerable<DTO<Event>> GetAll()
         {
-            return _eventsRepository.GetAllEvents();
+            return _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
         }
 
-        public Event GetById(Guid id)
+        public DTO<Event> GetById(Guid id)
         {
-            return _eventsRepository.GetEventById(id);
+            return new EventDTO(_eventsRepository.GetById(id));
         }
 
         public void Delete(Guid id)
         {
-            _eventsRepository.DeleteEvent(id);
+            _eventsRepository.Delete(id);
         }
     }
 }

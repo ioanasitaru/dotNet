@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CreatingModels\CreatingModels.csproj" />
     <ProjectReference Include="..\Data.Domain\Data.Domain.csproj" />
     <ProjectReference Include="..\Data.Persistence\Data.Persistence.csproj" />
     <ProjectReference Include="..\DTOs\DTOs.csproj" />

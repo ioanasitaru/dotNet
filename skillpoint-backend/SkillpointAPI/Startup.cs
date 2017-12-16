@@ -29,6 +29,8 @@ namespace SkillpointAPI
             services.AddTransient<IEventsRepository, EventsRepository>();
             services.AddTransient<IUsersRepository, UsersRepository>();
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<ITagsService, TagsService>();
 
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 

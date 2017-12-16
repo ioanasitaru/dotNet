@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CreatingModels;
 using Data.Domain.Entities;
 
 namespace Business.Repositories.Interfaces
 {
-    public interface IUsersRepository
+    public interface IUsersRepository : ICrudRepository<User>
     {
-        void CreateUser(User user);
-
-        IReadOnlyList<User> GetAllUsers();
-
-        User GetUserById(Guid id);
-
-        void Update(User user);
-
+        User Create(User user, List<Tag> tags);
         void Delete(User user);
-
-        void DeleteById(Guid id);
     }
 } 

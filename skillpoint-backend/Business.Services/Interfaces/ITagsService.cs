@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using CreatingModels;
 using Data.Domain.Entities;
+ using DTOs;
 
 namespace Business.Services.Interfaces
 {
-    public interface ITagsService
+    public interface ITagsService : ICrudService<Tag>
+
     {
-        void CreateTag(Tag tag);
+        TagDTO GetTagByLabel(string label);
 
-        IReadOnlyList<Tag> GetAllTags();
-
-        Tag GetTagByLabel(string label);
-
-        Tag GetTagById(Guid id);
-
-        void UpdateTag(Tag tag);
-
-        void DeleteTag(Guid id);
+        List<Tag> TagsFromCreatingModels(List<TagCreatingModel> tagModels);
     }
 }

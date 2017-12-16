@@ -4,7 +4,7 @@ using System.Linq;
 using Business.Repositories.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace Business.Repositories.Implementations
 {
@@ -17,20 +17,68 @@ namespace Business.Repositories.Implementations
             _databaseContext = database;
         }
 
-        public void CreateUser(User user)
+        public User Create(User user, List<Tag> tagsList)
         {
+            List<UserTag> userTags = new List<UserTag>();
+            foreach (var tag in tagsList)
+            {
+                userTags.Add(new UserTag(user.Id, user, tag.Label, tag));
+            }
+            user.Update(user.Username, user.Password, user.Name, user.Email, user.Location, userTags);
             _databaseContext.Users.Add(user);
             _databaseContext.SaveChanges();
+            return _databaseContext.Users.FirstOrDefault(u => u.Id == user.Id);
         }
 
-        public IReadOnlyList<User> GetAllUsers()
+        public User Create(User user)
         {
-            return _databaseContext.Users.Include(u => u.TagsList).ToList();
+            throw new NotImplementedException();
         }
 
-        public User GetUserById(Guid id)
+        public IReadOnlyList<User> GetAll()
         {
-            return _databaseContext.Users.FirstOrDefault(u => u.Id == id);
+            List<User> users = new List<User>();
+
+            foreach (var user in _databaseContext.Users.ToList())
+            {
+                var userTags = _databaseContext.Entry(user).Collection("TagsList");
+                if (!userTags.IsLoaded)
+                {
+                    userTags.Load();
+
+                }
+                foreach (var ut in userTags.CurrentValue)
+                {
+                    var tags = _databaseContext.Entry(ut).Reference("Tag");
+                    if (!tags.IsLoaded)
+                    {
+                        tags.Load();
+                    }
+                }
+                users.Add(user);
+            }
+            return users;
+        }
+
+        public User GetById(Guid id)
+        {
+            var user = _databaseContext.Users.FirstOrDefault(u => u.Id == id);
+            var userTags = _databaseContext.Entry(user).Collection("TagsList");
+            if (!userTags.IsLoaded)
+            {
+                userTags.Load();
+
+            }
+            foreach (var ut in userTags.CurrentValue)
+            {
+                var tags = _databaseContext.Entry(ut).Reference("Tag");
+                if (!tags.IsLoaded)
+                {
+                    tags.Load();
+
+                }
+            }
+            return user;
         }
 
         public void Update(User user)
@@ -45,10 +93,10 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
-        public void DeleteById(Guid id)
-        {   
-            _databaseContext.Users.Remove(GetUserById(id));
+        public void Delete(Guid id)
+        {
+            _databaseContext.Users.Remove(GetById(id));
             _databaseContext.SaveChanges();
         }
     }
-} 
+}

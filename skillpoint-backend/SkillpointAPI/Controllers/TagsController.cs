@@ -1,8 +1,7 @@
-﻿using System;
 using System.Collections.Generic;
 using Business.Services.Interfaces;
+using CreatingModels;
 using Data.Domain.Entities;
-using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
@@ -28,21 +27,21 @@ namespace SkillpointAPI.Controllers
 
         // GET: api/Tags/5
         [HttpGet("{id}")]
-        public Tag GetTag([FromRoute] Guid id)
+        public Tag GetTag([FromRoute] string label)
         {
-            return _service.GetTagById(id);
+            return _service.GetTagByLabel(label);
         }
 
     
         // POST: api/Tags
         [HttpPost]
-        public void PostTag([FromBody] TagDTO tagDto)
+        public void PostTag([FromBody] TagCreatingModel tagModel)
         {
-            var tagLabel = tagDto.Label;
-            if (_service.GetTagByLabel(tagLabel) == null)
+            var tagLabel = tagModel.Label;
+            if (_service.GetByLabel(tagLabel) == null)
             {
                 //momentan cream un user, doarece nu avem service-ul de user
-                var tag = Tag.Create(tagLabel);
+                var tag = Tag.Create(tagModel);
                 _service.CreateTag(tag);
             }
             else
@@ -56,10 +55,9 @@ namespace SkillpointAPI.Controllers
 
         // DELETE: api/Tags/5
         [HttpDelete("{id}")]
-        public void DeleteTag([FromRoute] Guid id)
+        public void DeleteTag([FromRoute] string label)
         {
-            _service.DeleteTag(id);
-
+            _service.DeleteTag(label);
         }
     }
 }

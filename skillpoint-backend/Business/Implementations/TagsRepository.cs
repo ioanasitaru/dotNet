@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Business.Repositories.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
-using DTOs;
 
 namespace Business.Repositories.Implementations
 {
@@ -17,35 +15,28 @@ namespace Business.Repositories.Implementations
             _databaseContext = databaseContext;
         }
 
-        public void CreateTag(Tag tag)
+        public void Create(Tag tag)
         {
             _databaseContext.Tags.Add(tag);
             _databaseContext.SaveChanges();
         }
 
-        public IReadOnlyList<Tag> GetAllTags() => _databaseContext.Tags.ToList();
+        public IReadOnlyList<Tag> GetAll() => _databaseContext.Tags.ToList();
 
-        public Tag GetTagByLabel(string label) =>
+        public Tag GetByLabel(string label) =>
             _databaseContext.Tags.FirstOrDefault(t => t.Label.ToLower().Equals(label.ToLower()));
 
-        public Tag GetTagById(Guid id) => _databaseContext.Tags.FirstOrDefault(t => t.Id == id);
-
-        public void UpdateTag(Tag tag)
+        public void Update(Tag tag)
         {
             _databaseContext.Tags.Update(tag);
             _databaseContext.SaveChanges();
         }
 
-        public void DeleteTag(Guid id)
+        public void DeleteTag(string label)
         {
-            var tag = _databaseContext.Tags.FirstOrDefault(t => t.Id == id);
+            var tag = _databaseContext.Tags.FirstOrDefault(t => t.Label.Equals(label));
             _databaseContext.Tags.Remove(tag);
             _databaseContext.SaveChanges();
-        }
-
-        public List<Tag> TagsFromDTO(List<TagDTO> tagsDtos)
-        {
-            return tagsDtos.Select(tagDto => GetTagByLabel(tagDto.Label) ?? Tag.Create(tagDto.Label)).ToList();
         }
     }
 }

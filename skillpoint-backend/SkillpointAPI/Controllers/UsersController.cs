@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Business.Repositories.Interfaces;
-using Data.Domain.Entities;
+using Business.Services.Interfaces;
+using CreatingModels;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,44 +11,43 @@ namespace SkillpointAPI.Controllers
     [Route("api/Users")]
     public class UsersController : Controller
     {
-        private readonly IUsersRepository _usersRepository;
-        private readonly ITagsRepository _tagsRepository;
+        private readonly IUsersService _usersService;
+        private readonly ITagsService _tagsService;
 
-        public UsersController(IUsersRepository usersRepository, ITagsRepository tagsRepository)
+        public UsersController(IUsersService usersService, ITagsService tagsService)
         {
-            _usersRepository = usersRepository;
-            _tagsRepository = tagsRepository;
+            _usersService = usersService;
+            _tagsService = tagsService;
         }
 
         //GET: api/Users
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<UserDTO> GetUsers()
         {
-            return _usersRepository.GetAllUsers();
+            var users = _usersService.GetAll();
+            return users;
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public User GetUser([FromRoute] Guid id)
+        public UserDTO GetUser([FromRoute] Guid id)
         {
-            return _usersRepository.GetUserById(id);
+            return _usersService.GetById(id);
         }
 
         // POST: api/Users
         [HttpPost]
-        public void PostUser([FromBody] UserDTO userDto)
+        public void PostUser([FromBody] UserCreatingModel userModel)
         {
-            var tagsList = _tagsRepository.TagsFromDTO(userDto.Tags);
-            var user = Data.Domain.Entities.User.Create(userDto.Username, userDto.Password, userDto.Name, userDto.Email,
-                userDto.Location, tagsList);
-            _usersRepository.CreateUser(user);
+            var tagsList = _tagsService.TagsFromCreatingModels(userModel.Tags);
+            _usersService.Create(userModel, tagsList);
         }
         
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public void DeleteUser([FromRoute] Guid id)
         {
-            _usersRepository.DeleteById(id);
+            _usersService.Delete(id);
         }
     }
 }

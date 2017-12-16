@@ -4,6 +4,7 @@ using System.Linq;
 using Business.Repositories.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
+using DTOs;
 
 namespace Business.Repositories.Implementations
 {
@@ -16,14 +17,14 @@ namespace Business.Repositories.Implementations
             _databaseContext = databaseContext;
         }
 
-        public Event CreateEvent(Event myEvent)
+        public Event Create(Event myEvent)
         {
             _databaseContext.Events.Add(myEvent);
             _databaseContext.SaveChanges();
             return GetEventById(myEvent.Id);
         }
 
-        public IReadOnlyList<Event> GetAllEvents()
+        public IReadOnlyList<EventDTO> GetAll()
         {
             return _databaseContext.Events.ToList();
         }

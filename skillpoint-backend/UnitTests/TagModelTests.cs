@@ -1,4 +1,5 @@
 ﻿using System;
+using CreatingModels;
 using Data.Domain.Entities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,7 +18,7 @@ namespace UnitTests
         [TestMethod]
         public void Given_TagModel_When_LabelIsNotNull_Then_ShouldNotThrowException()
         {
-            Action a = () => Tag.Create("Label");
+            Action a = () => Tag.Create(new TagCreatingModel {Label = "test"});
             a.ShouldNotThrow<Exception>();
         }
 
