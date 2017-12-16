@@ -28,19 +28,14 @@ namespace Data.Domain.Entities
         public List<Tag> TagsList { get; private set; }
 
         //public List<Event> EventsList { get; private set; }
-        //        public List<Achivement> AchievementsList { get; private set; }
+        //public List<Achivement> AchievementsList { get; private set; }
 
         public static User Create(string username, string password, string name, string email, string location, List<Tag> tagsList)
         {
-            //add eventlist and achivementlist
+            //TODO: add eventlist and achivementlist
             var instance = new User {Id = Guid.NewGuid()};
             instance.Update(username, password, name, email, location, tagsList);
             return instance;
-        }
-
-        public static User Create()
-        {
-            return new User(); //dummy
         }
 
         public void Update(string username, string password, string name, string email, string location,

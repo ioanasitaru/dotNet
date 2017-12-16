@@ -4,6 +4,7 @@ using System.Linq;
 using Business.Repositories.Interfaces;
 using Data.Domain.Entities;
 using Data.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Repositories.Implementations
 {
@@ -24,7 +25,7 @@ namespace Business.Repositories.Implementations
 
         public IReadOnlyList<User> GetAllUsers()
         {
-            return _databaseContext.Users.ToList();
+            return _databaseContext.Users.Include(u => u.TagsList).ToList();
         }
 
         public User GetUserById(Guid id)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DTOs
 {
@@ -9,5 +10,6 @@ namespace DTOs
         public DateTime DateAndTime { get; set; }
         public string Location { get; set; }
         public byte[] Image { get; set; }
+        public List<TagDTO> Tags { get; set; }
     }
 }
