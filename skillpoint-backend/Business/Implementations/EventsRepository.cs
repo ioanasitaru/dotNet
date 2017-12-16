@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Business.Repositories.Interfaces;
+using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using DTOs;
@@ -17,32 +18,35 @@ namespace Business.Repositories.Implementations
             _databaseContext = databaseContext;
         }
 
-        public Event Create(Event myEvent)
+        public Event Create(EventCreatingModel myEvent)
         {
-            _databaseContext.Events.Add(myEvent);
+            var @event = Event.Create(myEvent.Name, myEvent.Description, myEvent.DateAndTime, myEvent.Location, myEvent.Image);
+            _databaseContext.Events.Add(@event);
             _databaseContext.SaveChanges();
-            return GetEventById(myEvent.Id);
+            return GetById(@event.Id);
         }
 
-        public IReadOnlyList<EventDTO> GetAll()
+        public IReadOnlyList<Event> GetAll()
         {
             return _databaseContext.Events.ToList();
         }
 
-        public Event GetEventById(Guid id)
+        public Event GetById(Guid id)
         {
             return _databaseContext.Events.First(e => e.Id == id);
         }
 
-        public void UpdateEvent(Event myEvent)
+        public void Update(EventDTO myEvent)
         {
-            _databaseContext.Events.Update(myEvent);
+            var @event = GetById(myEvent.Id);
+            @event.Update(myEvent.Name, myEvent.Description, myEvent.DateAndTime, myEvent.Location, myEvent.Image);
+            _databaseContext.Events.Update(@event);
             _databaseContext.SaveChanges();
         }
 
-        public void DeleteEvent(Guid id)
+        public void Delete(Guid id)
         {
-            _databaseContext.Events.Remove(GetEventById(id));
+            _databaseContext.Events.Remove(GetById(id));
             _databaseContext.SaveChanges();
         }
     }

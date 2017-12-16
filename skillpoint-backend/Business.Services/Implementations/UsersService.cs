@@ -36,24 +36,10 @@ namespace Business.Services.Implementations
             _usersRepository.Create(userModel, tagsList);
         }
 
-        public User Create(User entity)
+        public void Update(UserDTO user)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(User user)
-        {
-            _usersRepository.Update(user);
-        }
-
-        public void Create(UserDTO entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(UserDTO entity)
-        {
-            throw new NotImplementedException();
+            List<Tag> tags = new List<Tag>();
+            _usersRepository.Update(user, tags);
         }
 
         public IEnumerable<UserDTO> GetAll()
@@ -68,12 +54,13 @@ namespace Business.Services.Implementations
 
         public void Delete(Guid id)
         {
-            _usersRepository.DeleteById(id);
+            _usersRepository.Delete(id);
         }
 
-        public User Create(UserDTO userDto, List<Tag> tagsList)
+
+        public void Create(UserCreatingModel entity)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Users require a tag list as well");
         }
     }
 }

@@ -47,7 +47,7 @@ namespace SkillpointAPI.Controllers
 
         // PUT: api/Events/5
         [HttpPut("{id}")]
-        public IActionResult PutEvent([FromRoute] Guid id, [FromBody] Event @event)
+        public IActionResult PutEvent([FromRoute] Guid id, [FromBody] EventDTO @event)
         {
             if (!ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace SkillpointAPI.Controllers
                 return BadRequest();
             }
 
-            _eventService.Create(@event);
+            _eventService.Update(@event);
 
             return NoContent();
         }
@@ -72,7 +72,7 @@ namespace SkillpointAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _eventService.Create(Event.Create(eventModel));
+            _eventService.Create(eventModel);
 
             return Created("", null);
         }

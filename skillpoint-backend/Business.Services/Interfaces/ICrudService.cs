@@ -5,12 +5,12 @@ using DTOs;
 
 namespace Business.Services.Interfaces
 {
-    public interface ICrudService<T>
+    public interface ICrudService<T, in TCreatingModel, TDTO>
     {
-        void Create(CreatingModel<T> entity);
-        void Update(CreatingModel<T> entity);
-        IEnumerable<DTO<T>> GetAll();
-        DTO<T> GetById(Guid id);
+        void Create(TCreatingModel entity);
+        void Update(TDTO entity);
+        IEnumerable<TDTO> GetAll();
+        TDTO GetById(Guid id);
         void Delete(Guid id);
     }
 }

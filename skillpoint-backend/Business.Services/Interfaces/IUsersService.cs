@@ -5,7 +5,7 @@ using DTOs;
 
 namespace Business.Services.Interfaces
 {
-    public interface IUsersService : ICrudService<User>
+    public interface IUsersService : ICrudService<User, UserCreatingModel, UserDTO>
     {
         void Create(UserCreatingModel userModel, List<Tag> tagsList);
     }

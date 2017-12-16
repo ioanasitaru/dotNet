@@ -4,11 +4,15 @@ namespace DTOs
 {
     public class TagDTO : DTO<Tag>
     {
-        public TagDTO(UserTag ut)
+        public TagDTO(UserTag ut) : this(ut.Tag) { }
+
+        public TagDTO(string label, bool verified)
         {
-            Label = ut.TagLabel;
-            Verified = ut.Tag.Verified;
+            Label = label;
+            Verified = verified;
         }
+
+        public TagDTO(Tag t) : this(t.Label, t.Verified) { }
 
         public string Label { get; set; }
         public bool Verified { get; set; }

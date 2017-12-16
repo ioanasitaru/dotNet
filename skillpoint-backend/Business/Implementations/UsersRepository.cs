@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Business.Repositories.Interfaces;
+using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
+using DTOs;
 
 
 namespace Business.Repositories.Implementations
@@ -17,22 +19,23 @@ namespace Business.Repositories.Implementations
             _databaseContext = database;
         }
 
-        public User Create(User user, List<Tag> tagsList)
+        public User Create(UserCreatingModel user, List<Tag> tagsList)
         {
+            var dbUser = User.Create(user.Username, user.Password, user.Name, user.Email, user.Location, null);
             List<UserTag> userTags = new List<UserTag>();
             foreach (var tag in tagsList)
             {
-                userTags.Add(new UserTag(user.Id, user, tag.Label, tag));
+                userTags.Add(new UserTag(dbUser.Id, dbUser, tag.Label, tag));
             }
-            user.Update(user.Username, user.Password, user.Name, user.Email, user.Location, userTags);
-            _databaseContext.Users.Add(user);
+            dbUser.Update(user.Username, user.Password, user.Name, user.Email, user.Location, userTags);
+            _databaseContext.Users.Add(dbUser);
             _databaseContext.SaveChanges();
-            return _databaseContext.Users.FirstOrDefault(u => u.Id == user.Id);
+            return _databaseContext.Users.FirstOrDefault(u => u.Id == dbUser.Id);
         }
 
-        public User Create(User user)
+        public User Create(UserCreatingModel userModel)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Users require a tag list along the model");
         }
 
         public IReadOnlyList<User> GetAll()
@@ -81,9 +84,12 @@ namespace Business.Repositories.Implementations
             return user;
         }
 
-        public void Update(User user)
+        public void Update(UserDTO user, List<Tag> tags)
         {
-            _databaseContext.Users.Update(user);
+            var dbUser = GetById(user.Id);
+            var userTags = tags.ConvertAll(t => new UserTag(dbUser.Id, dbUser, t.Label, t)).ToList();
+            dbUser.Update(user.Username, user.Password, user.Name, user.Email, user.Location, userTags);
+            _databaseContext.Users.Update(dbUser);
             _databaseContext.SaveChanges();
         }
 
@@ -97,6 +103,11 @@ namespace Business.Repositories.Implementations
         {
             _databaseContext.Users.Remove(GetById(id));
             _databaseContext.SaveChanges();
+        }
+
+        public void Update(UserDTO entity)
+        {
+            throw new NotImplementedException("Users also require a tag list");
         }
     }
 }

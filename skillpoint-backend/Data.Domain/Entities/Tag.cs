@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CreatingModels;
 
 namespace Data.Domain.Entities
 {
@@ -24,10 +23,10 @@ namespace Data.Domain.Entities
         {
         }
 
-        public static Tag Create(TagCreatingModel tagModel)
+        public static Tag Create(string label)
         {
             var instance = new Tag();
-            instance.Update(tagModel.Label, false);
+            instance.Update(label, false);
             return instance;
         }
 

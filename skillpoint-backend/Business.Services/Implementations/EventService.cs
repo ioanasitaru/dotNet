@@ -18,22 +18,22 @@ namespace Business.Services.Implementations
             _eventsRepository = eventsRepository;
         }
 
-        public void Create(CreatingModel<Event> entity)
+        public void Create(EventCreatingModel entity)
         {
             _eventsRepository.Create(entity);
         }
 
-        public void Update(Event entity)
+        public void Update(EventDTO entity)
         {
             _eventsRepository.Update(entity);
         }
 
-        public IEnumerable<DTO<Event>> GetAll()
+        public IEnumerable<EventDTO> GetAll()
         {
             return _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
         }
 
-        public DTO<Event> GetById(Guid id)
+        public EventDTO GetById(Guid id)
         {
             return new EventDTO(_eventsRepository.GetById(id));
         }
