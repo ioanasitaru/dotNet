@@ -12,40 +12,26 @@ namespace Business.Services.Implementations
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly ITagsRepository _tagsRepository;
 
-        public UsersService(IUsersRepository usersRepository, ITagsRepository tagsRepository)
+        public UsersService(IUsersRepository usersRepository)
         {
             _usersRepository = usersRepository;
-            _tagsRepository = tagsRepository;
         }
 
         public void Create(UserCreatingModel userModel, List<Tag> tagsList)
         {
-            //            foreach (var tag in user.TagsList)
-            //            {
-            //                try
-            //                {
-            //                    _tagsRepository.DeleteTag(tag.Label);
-            //                }
-            //                catch (ArgumentNullException ex)
-            //                {
-            //                    continue;
-            //                }
-            //            }
-
             
             _usersRepository.CreateUser(userModel, tagsList);
         }
 
-        public User Create(User entity)
+        public void Create(UserCreatingModel entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User user)
+        public void UpdateUser(UserCreatingModel userModel, Guid Id)
         {
-            _usersRepository.Update(user);
+            _usersRepository.Update(userModel, Id);
         }
 
         public void Create(UserDTO entity)
@@ -71,11 +57,6 @@ namespace Business.Services.Implementations
         public void Delete(Guid id)
         {
             _usersRepository.DeleteById(id);
-        }
-
-        public User Create(UserDTO userDto, List<Tag> tagsList)
-        {
-            throw new NotImplementedException();
         }
     }
 }

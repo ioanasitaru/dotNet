@@ -13,7 +13,7 @@ namespace Business.Repositories.Interfaces
 
         User GetUserById(Guid id);
 
-        void Update(User user);
+        void Update(UserCreatingModel user, Guid Id);
 
         void Delete(User user);
 

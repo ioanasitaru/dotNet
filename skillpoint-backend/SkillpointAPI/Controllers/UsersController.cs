@@ -44,6 +44,13 @@ namespace SkillpointAPI.Controllers
             _usersService.Create(userModel, tagsList);
         }
         
+        // PUT: api/Users/5
+        [HttpPut("{id}")]
+        public void UpdateUser([FromBody] UserCreatingModel userModel, [FromRoute] Guid id)
+        {
+            _usersService.UpdateUser(userModel, id);
+        }
+
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public void DeleteUser([FromRoute] Guid id)

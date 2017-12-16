@@ -1,6 +1,7 @@
 ﻿using Data.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Data.Persistence
 {
@@ -12,5 +13,6 @@ namespace Data.Persistence
         DbSet<UserTag> UserTag { get; set; }
         int SaveChanges();
         EntityEntry Entry(object entity);
+        DatabaseFacade Database { get; }
     }
 }
