@@ -6,14 +6,12 @@ using CreatingModels;
 namespace Data.Domain.Entities
 {
     public class Tag
-    {
-        private string _label;
-        
+    {   
         [Key]
         public string Label
         {
-            get => _label;
-            private set => CheckLabel(value);
+            get ;
+            private set ;
         }
 
         public List<UserTag> UsersList { get; private set; }
@@ -37,13 +35,5 @@ namespace Data.Domain.Entities
             Verified = verified;
         }
 
-        private void CheckLabel(string label)
-        {
-            if (label == null)
-            {
-                throw new Exception("Invalid label!(No value specified!)");
-            }
-            _label = label;
-        }
     }
 }
