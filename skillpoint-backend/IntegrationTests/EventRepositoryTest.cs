@@ -12,8 +12,8 @@ namespace IntegrationTests
 //            {
 //                var eventRepository = new EventsRepository(sut);
 //                var @event = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
-//                eventRepository.CreateEvent(@event);
-//                eventRepository.GetAllEvents().Should().HaveCount(1);
+//                eventRepository.Create(@event);
+//                eventRepository.GetAll().Should().HaveCount(1);
 //            });
 //
 //        }
@@ -24,9 +24,9 @@ namespace IntegrationTests
 //            {
 //                var eventRepository = new EventsRepository(sut);
 //                var @event = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
-//                eventRepository.CreateEvent(@event);
+//                eventRepository.Create(@event);
 //                eventRepository.DeleteEvent(@event.Id);
-//                eventRepository.GetAllEvents().Should().HaveCount(0);
+//                eventRepository.GetAll().Should().HaveCount(0);
 //            });
 //        }
 //        [TestMethod]
@@ -38,10 +38,10 @@ namespace IntegrationTests
 //                var firstEvent = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
 //                var secondEvent = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
 //                var thirdEvent = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
-//                eventRepository.CreateEvent(firstEvent);
-//                eventRepository.CreateEvent(secondEvent);
-//                eventRepository.CreateEvent(thirdEvent);
-//                eventRepository.GetAllEvents().Should().HaveCount(3);
+//                eventRepository.Create(firstEvent);
+//                eventRepository.Create(secondEvent);
+//                eventRepository.Create(thirdEvent);
+//                eventRepository.GetAll().Should().HaveCount(3);
 //            });
 //        }
 //        [TestMethod]
@@ -53,9 +53,9 @@ namespace IntegrationTests
 //                var firstEvent = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
 //                var secondEvent = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
 //                var thirdEvent = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
-//                eventRepository.CreateEvent(firstEvent);
-//                eventRepository.CreateEvent(secondEvent);
-//                eventRepository.CreateEvent(thirdEvent);
+//                eventRepository.Create(firstEvent);
+//                eventRepository.Create(secondEvent);
+//                eventRepository.Create(thirdEvent);
 //                eventRepository.GetEventById(thirdEvent.Id).Should().Be(thirdEvent);
 //            });
 //        }
@@ -67,7 +67,7 @@ namespace IntegrationTests
 //            {
 //                var eventRepository = new EventsRepository(sut);
 //                var @event = Event.Create("name", "description", new DateTime(), "location", new byte[4]);
-//                eventRepository.CreateEvent(@event);
+//                eventRepository.Create(@event);
 //                @event.Update("newname", @event.Description, @event.DateAndTime, @event.Location, @event.Image);
 //                eventRepository.UpdateEvent(@event);
 //                eventRepository.GetEventById(@event.Id).Should().Be(@event);

@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CreatingModels;
 using Data.Domain.Entities;
 
 namespace DTOs
 {
-    public class UserDTO
+    public class UserDTO : UserCreatingModel
     {
+
+        public Guid Id { get; set; }
+
+        public List<TagDTO> Tags { get; set; }
 
         public UserDTO(User user)
         {
@@ -16,21 +21,7 @@ namespace DTOs
             Name = user.Name;
             Email = user.Email;
             Location = user.Location;
-            Tags = user.TagsList.ConvertAll(ut => new TagDTO(ut)).ToList();
+            Tags = user.Tags.ConvertAll(ut => new TagDTO(ut)).ToList();
         }
-
-        public Guid Id { get; set; }
-
-        public String Username { get; set; }
-
-        public String Password { get; set; }
-
-        public String Name { get; set; }
-       
-        public String Email { get; set; }
-
-        public String Location { get; set; }
-
-        public List<TagDTO> Tags { get; set; }
     }
 }

@@ -1,16 +1,20 @@
-﻿using Data.Domain.Entities;
+﻿using CreatingModels;
+using Data.Domain.Entities;
 
 namespace DTOs
 {
-    public class TagDTO
+    public class TagDTO : TagCreatingModel
     {
-        public TagDTO(UserTag ut)
+        public TagDTO(UserTag ut) : this(ut.Tag) { }
+
+        public TagDTO(EventTag et) : this(et.Tag) { }
+
+        public TagDTO(string label, bool verified)
         {
-            Label = ut.TagLabel;
-            Verified = ut.Tag.Verified;
+            Label = label;
+            Verified = verified;
         }
 
-        public string Label { get; set; }
-        public bool Verified { get; set; }
+        public TagDTO(Tag t) : this(t.Label, t.Verified) { }
     }
 }

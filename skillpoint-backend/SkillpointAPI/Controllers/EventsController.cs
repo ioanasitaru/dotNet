@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
@@ -22,7 +23,7 @@ namespace SkillpointAPI.Controllers
 
         // GET: api/Events
         [HttpGet]
-        public IEnumerable<Event> GetEvents()
+        public IEnumerable<EventDTO> GetEvents()
         {
             return _eventService.GetAll();
         }
@@ -48,19 +49,14 @@ namespace SkillpointAPI.Controllers
 
         // PUT: api/Events/5
         [HttpPut("{id}")]
-        public IActionResult PutEvent([FromRoute] Guid id, [FromBody] Event @event)
+        public IActionResult PutEvent([FromRoute] Guid id, [FromBody]EventCreatingModel @event)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != @event.Id)
-            {
-                return BadRequest();
-            }
-
-            _eventService.Create(@event);
+            _eventService.Update(@event,id);
 
             return NoContent();
         }
@@ -74,10 +70,7 @@ namespace SkillpointAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-
-//            _eventService.Create(Event.Create(eventModel));
-
-            _eventService.Create(eventModel,_tagsService.TagsFromCreatingModels(eventModel.Tags));
+            _eventService.Create(eventModel);
 
             return Created("", null);
         }

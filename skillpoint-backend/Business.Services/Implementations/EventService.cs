@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
+using DTOs;
 
 namespace Business.Services.Implementations
 {
@@ -16,36 +18,27 @@ namespace Business.Services.Implementations
             _eventsRepository = eventsRepository;
         }
 
-
-        public void Create(EventCreatingModel eventCreatingModel, List<Tag> tags)
+        public void Create(EventCreatingModel model)
         {
-            _eventsRepository.CreateEvent(eventCreatingModel, tags);
+            _eventsRepository.Create(model);
         }
 
+ 
 
-        public void Create(Event entity)
+        public void Update(EventCreatingModel model, Guid id)
         {
-            throw new NotImplementedException();
+            _eventsRepository.Update(model,id);
         }
 
-        public void Update(Event entity)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<EventDTO> GetAll() => _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
+    
 
-        public IEnumerable<Event> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public EventDTO GetById(Guid id) => new EventDTO(_eventsRepository.GetById(id));
 
-        public Event GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            _eventsRepository.Delete(id);
         }
     }
 }

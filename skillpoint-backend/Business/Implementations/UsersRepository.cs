@@ -6,6 +6,7 @@ using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
+using DTOs;
 
 namespace Business.Repositories.Implementations
 {
@@ -18,24 +19,21 @@ namespace Business.Repositories.Implementations
             _databaseContext = database;
         }
 
-        public User CreateUser(UserCreatingModel userModel, List<Tag> tagsList)
+        public void Create(UserCreatingModel user)
         {
-            var user = Data.Domain.Entities.User.Create(userModel.Username, userModel.Password, userModel.Name, userModel.Email,
-                userModel.Location, null);
 
-            List<UserTag> userTags = new List<UserTag>();
-
-            foreach (var tag in tagsList)
+            var dbUser = User.Create(user.Username, user.Password, user.Name, user.Email, user.Location, null);
+            List<Tag> userTags = new List<Tag>();
+            foreach (var tag in user.Tags)
             {
-                userTags.Add(new UserTag(user.Id, user, tag.Label, tag));
+                userTags.Add(Tag.Create(tag.Label));
             }
 
-            user.Update(user.Username, user.Password, user.Name, user.Email, user.Location,userTags);
+            AddUser(dbUser,userTags);
 
-            AddUser(user, tagsList);
             _databaseContext.SaveChanges();
-            return _databaseContext.Users.FirstOrDefault(u => u.Id == user.Id);
         }
+
 
         private void AddUser(User user, List<Tag> tags)
         {
@@ -47,9 +45,10 @@ namespace Business.Repositories.Implementations
             {
                 foreach (var tag in tags)
                 {
-                    if (_tagsRepository.GetTagByLabel(tag.Label) != null)
+                    if (_tagsRepository.GetById(tag.Label) != null)
                     {
-                        var sql = String.Format("INSERT INTO dbo.Users VALUES('{0}','{1}','{2}','{3}','{4}','{5}')", user.Id, user.Email, user.Location, user.Name, user.Password, user.Username);
+                        var sql = String.Format("INSERT INTO dbo.Users VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
+                            user.Id, user.Email, user.Location, user.Name, user.Password, user.Username);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
                         sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, tag.Label);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
@@ -57,9 +56,11 @@ namespace Business.Repositories.Implementations
                     }
                     else
                     {
-                        var sql = String.Format("INSERT INTO dbo.Users VALUES('{0}','{1}','{2}','{3}','{4}','{5}')", user.Id, user.Email, user.Location, user.Name, user.Password, user.Username);
+                        var sql = String.Format("INSERT INTO dbo.Users VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
+                            user.Id, user.Email, user.Location, user.Name, user.Password, user.Username);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
-                        sql = String.Format("INSERT INTO dbo.Tags VALUES('{0}','{3}')", tag.Label, "null","null", tag.Verified);
+                        sql = String.Format("INSERT INTO dbo.Tags VALUES('{0}','{3}')", tag.Label, "null", "null",
+                            tag.Verified);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
                         sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, tag.Label);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
@@ -73,92 +74,73 @@ namespace Business.Repositories.Implementations
             }
         }
 
-        public IReadOnlyList<User> GetAllUsers()
+        public IReadOnlyList<User> GetAll()
         {
             List<User> users = new List<User>();
 
             foreach (var user in _databaseContext.Users.ToList())
             {
-                var user_tags = _databaseContext.Entry(user).Collection("TagsList");
-
-                if (!user_tags.IsLoaded)
+                var userTags = _databaseContext.Entry(user).Collection("Tags");
+                if (!userTags.IsLoaded)
                 {
-                    user_tags.Load();
-                  
-                }
+                    userTags.Load();
 
-                foreach (var ut in user_tags.CurrentValue)
+                }
+                foreach (var ut in userTags.CurrentValue)
                 {
                     var tags = _databaseContext.Entry(ut).Reference("Tag");
-
                     if (!tags.IsLoaded)
                     {
                         tags.Load();
-
                     }
                 }
-
                 users.Add(user);
-                
             }
-
             return users;
         }
 
-        public User GetUserById(Guid id)
+        public User GetById(Guid id)
         {
             var user = _databaseContext.Users.FirstOrDefault(u => u.Id == id);
-
-            var user_tags = _databaseContext.Entry(user).Collection("TagsList");
-
-            if (!user_tags.IsLoaded)
+            var userTags = _databaseContext.Entry(user).Collection("Tags");
+            if (!userTags.IsLoaded)
             {
-                user_tags.Load();
+                userTags.Load();
 
             }
-
-            foreach (var ut in user_tags.CurrentValue)
+            foreach (var ut in userTags.CurrentValue)
             {
                 var tags = _databaseContext.Entry(ut).Reference("Tag");
-
                 if (!tags.IsLoaded)
                 {
                     tags.Load();
 
                 }
             }
-
             return user;
         }
 
         public void Update(UserCreatingModel userModel, Guid id)
         {
-            var user = GetUserById(id);
+            var user = GetById(id);
 
             List<UserTag> userTags = new List<UserTag>();
 
             foreach (var tag in userModel.Tags)
             {
-                userTags.Add(new UserTag(user.Id, user, tag.Label, Tag.Create(tag)));
+                userTags.Add(new UserTag(user.Id, user, tag.Label, Tag.Create(tag.Label)));
             }
 
             user.Update(userModel.Username, userModel.Password, userModel.Name, userModel.Email,
                 userModel.Location, userTags);
 
             _databaseContext.Users.Update(user);
-            _databaseContext.SaveChanges();
         }
 
-        public void Delete(User user)
+        public void Delete(Guid id)
         {
-            _databaseContext.Users.Remove(user);
-            _databaseContext.SaveChanges();
-        }
-
-        public void DeleteById(Guid id)
-        {   
-            _databaseContext.Users.Remove(GetUserById(id));
+            _databaseContext.Users.Remove(GetById(id));
             _databaseContext.SaveChanges();
         }
     }
-} 
+}

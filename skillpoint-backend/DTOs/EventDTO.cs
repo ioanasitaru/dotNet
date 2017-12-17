@@ -1,13 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CreatingModels;
+using Data.Domain.Entities;
 
 namespace DTOs
 {
-    public class EventDTO
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime DateAndTime { get; set; }
-        public string Location { get; set; }
-        public byte[] Image { get; set; }
+    public class EventDTO : EventCreatingModel
+    { 
+        public Guid Id { get; set; }
+
+        public List<TagDTO> Tags { get; set; }
+     
+
+        public EventDTO(Event Event)
+        {
+            Id = Event.Id;
+            Name = Event.Name;
+            Description = Event.Description;
+            DateAndTime = Event.DateAndTime;
+            Location = Event.Location;
+            Image = Event.Image;
+            Tags = Event.Tags.ConvertAll(et => new TagDTO(et)).ToList();
+        }
     }
 }

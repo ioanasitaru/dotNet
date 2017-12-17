@@ -32,9 +32,9 @@ namespace SkillpointAPI
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ITagsService, TagsService>();
 
-            var connectionString = @"Server = .\SQLEXPRESS; Database = Skillpoint.Dev; Trusted_Connection = true";
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {

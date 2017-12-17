@@ -1,20 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using CreatingModels;
 using Data.Domain.Entities;
+using DTOs;
 
 namespace Business.Repositories.Interfaces
 {
-    public interface ITagsRepository
+    public interface ITagsRepository : ICrudRepository<Tag, TagCreatingModel, string>
     {
-        void CreateTag(Tag tag);
-
-        IReadOnlyList<Tag> GetAllTags();
-
-
-
-        Tag GetTagByLabel(string label);
-
-        void UpdateTag(Tag tag);
-
-        void DeleteTag(string label);
+        
     }
 }

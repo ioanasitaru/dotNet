@@ -26,15 +26,16 @@ namespace Data.Domain.Entities
 
         public String Location { get; private set; }
 
-        public List<UserTag> TagsList { get; private set; }
+        public List<UserTag> Tags { get; private set; }
 
         //public List<Event> EventsList { get; private set; }
-        //        public List<Achivement> AchievementsList { get; private set; }
+        //public List<Achivement> AchievementsList { get; private set; }
 
         public static User Create(string username, string password, string name, string email, string location,
             List<UserTag> tagsList)
         {
-            //add eventlist and achivementlist
+            //TODO: add eventlist and achivementlist
+
             var instance = new User {Id = Guid.NewGuid()};
             instance.Update(username, password, name, email, location, tagsList);
             return instance;
@@ -56,7 +57,7 @@ namespace Data.Domain.Entities
             Name = name;
             Email = email;
             Location = location;
-            TagsList = tagsList;
+            Tags = tagsList;
         }
     }
 }

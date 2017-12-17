@@ -10,6 +10,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 .userprefs
 
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -211,7 +212,6 @@ UpgradeLog.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-# GhostDoc plugin setting file
 .GhostDoc.xml
 
 # Node.js Tools for Visual Studio

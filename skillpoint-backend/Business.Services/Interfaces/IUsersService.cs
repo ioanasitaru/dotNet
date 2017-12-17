@@ -6,9 +6,8 @@ using DTOs;
 
 namespace Business.Services.Interfaces
 {
-    public interface IUsersService : ICrudService<UserDTO>
+    public interface IUsersService : ICrudService<User, UserCreatingModel, UserDTO,Guid>
     {
-        void Create(UserCreatingModel userModel, List<Tag> tagsList);
-        void UpdateUser(UserCreatingModel userModel, Guid id);
+
     }
 }

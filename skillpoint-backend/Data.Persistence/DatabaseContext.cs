@@ -15,13 +15,13 @@ namespace Data.Persistence
         {
             modelBuilder.Entity<UserTag>().HasKey(t => new {t.UserId, t.TagLabel});
 
-            modelBuilder.Entity<UserTag>().HasOne(u => u.User).WithMany(t => t.TagsList).HasForeignKey(u => u.UserId);
+            modelBuilder.Entity<UserTag>().HasOne(u => u.User).WithMany(t => t.Tags).HasForeignKey(u => u.UserId);
 
             modelBuilder.Entity<UserTag>().HasOne(t => t.Tag).WithMany(u => u.UsersList).HasForeignKey(t => t.TagLabel);
 
             modelBuilder.Entity<EventTag>().HasKey(t => new { t.EventId, t.TagLabel });
 
-            modelBuilder.Entity<EventTag>().HasOne(u => u.Event).WithMany(t => t.TagList).HasForeignKey(u => u.EventId);
+            modelBuilder.Entity<EventTag>().HasOne(u => u.Event).WithMany(t => t.Tags).HasForeignKey(u => u.EventId);
 
             modelBuilder.Entity<EventTag>().HasOne(t => t.Tag).WithMany(e => e.EventsList).HasForeignKey(t => t.TagLabel);
 

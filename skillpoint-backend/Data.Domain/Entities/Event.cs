@@ -15,7 +15,7 @@ namespace Data.Domain.Entities
         public string Location { get; private set; }
         public byte[] Image { get; private set; }
 
-        public List<EventTag> TagList { get; private set; }
+        public List<EventTag> Tags { get; private set; }
 
         public static Event Create(string name, string description, DateTime dateAndTime, string location, byte[] image,List<EventTag> tagList)
         {
@@ -44,7 +44,7 @@ namespace Data.Domain.Entities
             DateAndTime = dateAndTime;
             Location = location;
             Image = image;
-            TagList = tagList;
+            Tags = tagList;
         }
     }
 }

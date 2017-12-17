@@ -18,45 +18,33 @@ namespace Business.Services.Implementations
             _usersRepository = usersRepository;
         }
 
-        public void Create(UserCreatingModel userModel, List<Tag> tagsList)
+        public void Create(UserCreatingModel userModel)
         {
             
-            _usersRepository.CreateUser(userModel, tagsList);
+            _usersRepository.Create(userModel);
         }
 
-        public void Create(UserCreatingModel entity)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void UpdateUser(UserCreatingModel userModel, Guid Id)
+        public void Update(UserCreatingModel userModel, Guid Id)
         {
             _usersRepository.Update(userModel, Id);
         }
 
-        public void Create(UserDTO entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(UserDTO entity)
-        {
-            throw new NotImplementedException();
-        }
 
         public IEnumerable<UserDTO> GetAll()
         {
-            return _usersRepository.GetAllUsers().ToList().ConvertAll(u => new UserDTO(u)).ToList();
+            return _usersRepository.GetAll().ToList().ConvertAll(u => new UserDTO(u)).ToList();
         }
 
         public UserDTO GetById(Guid id)
         {
-            return new UserDTO(_usersRepository.GetUserById(id));
+            return new UserDTO(_usersRepository.GetById(id));
         }
 
         public void Delete(Guid id)
         {
-            _usersRepository.DeleteById(id);
+            _usersRepository.Delete(id);
         }
+
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Business.Services.Interfaces;
+﻿using Business.Services.Interfaces;
 using CreatingModels;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace SkillpointAPI.Controllers
 {
@@ -39,16 +39,14 @@ namespace SkillpointAPI.Controllers
         [HttpPost]
         public void PostUser([FromBody] UserCreatingModel userModel)
         {
-            var tagsList = _tagsService.TagsFromCreatingModels(userModel.Tags);
-            
-            _usersService.Create(userModel, tagsList);
+            _usersService.Create(userModel);
         }
         
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public void UpdateUser([FromBody] UserCreatingModel userModel, [FromRoute] Guid id)
         {
-            _usersService.UpdateUser(userModel, id);
+            _usersService.Update(userModel, id);
         }
 
         // DELETE: api/Users/5

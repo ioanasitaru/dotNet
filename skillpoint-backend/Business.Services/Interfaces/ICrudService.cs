@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using CreatingModels;
+using DTOs;
 
 namespace Business.Services.Interfaces
 {
-    public interface ICrudService<T>
+    public interface ICrudService<T, in TCreatingModel, TDTO, ID>
     {
-        void Create(T entity);
-        void Update(T entity);
-        IEnumerable<T> GetAll();
-        T GetById(Guid id);
-        void Delete(Guid id);
+        void Create(TCreatingModel entity);
+        void Update(TCreatingModel entity, ID id);
+        IEnumerable<TDTO> GetAll();
+        TDTO GetById(ID id);
+        void Delete(ID id);
     }
 }

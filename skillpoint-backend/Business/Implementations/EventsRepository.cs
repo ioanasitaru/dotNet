@@ -7,6 +7,7 @@ using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
+using DTOs;
 
 namespace Business.Repositories.Implementations
 {
@@ -19,25 +20,25 @@ namespace Business.Repositories.Implementations
             _databaseContext = databaseContext;
         }
 
-        public Event CreateEvent(EventCreatingModel creatingModel, List<Tag> tags)
+        public void Create(EventCreatingModel creatingModel)
         {
+            ITagsRepository _tagsRepository = new TagsRepository(_databaseContext);
+
             var @event = Event.Create(creatingModel, null);
 
             List<EventTag> eventTags = new List<EventTag>();
 
-            foreach (var tag in tags)
+            foreach (var tag in creatingModel.Tags)
             {
-                eventTags.Add(new EventTag(@event.Id,@event,tag.Label,tag));
+                eventTags.Add(new EventTag(@event.Id,@event,tag.Label,_tagsRepository.GetById(tag.Label)));
             }
       
             @event.Update(@event.Name,@event.Description,@event.DateAndTime,@event.Location,@event.Image,eventTags);
-            AddEvent(@event, tags);
+            AddEvent(@event, creatingModel.Tags);
             _databaseContext.SaveChanges();
-
-            return _databaseContext.Events.FirstOrDefault(e => e.Id.Equals(@event.Id));
         }
 
-        private void AddEvent(Event _event, List<Tag> tags)
+        private void AddEvent(Event _event, List<TagCreatingModel> tags)
         {
             _databaseContext.Database.OpenConnection();
 
@@ -47,9 +48,10 @@ namespace Business.Repositories.Implementations
             {
                 foreach (var tag in tags)
                 {
-                    if (_tagsRepository.GetTagByLabel(tag.Label) != null)
+                    if (_tagsRepository.GetById(tag.Label) != null)
                     {
-                        var sql = String.Format("INSERT INTO dbo.Events VALUES('{0}','{1}','{2}',CONVERT(varbinary,'{3}'),'{4}','{5}')",
+                        var sql = String.Format(
+                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}',CONVERT(varbinary,'{3}'),'{4}','{5}')",
                             _event.Id, _event.DateAndTime, _event.Description, _event.Image, _event.Location,
                             _event.Name);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
@@ -60,8 +62,9 @@ namespace Business.Repositories.Implementations
                     }
                     else
                     {
-                        var sql = String.Format("INSERT INTO dbo.Events VALUES('{0}','{1}','{2}',CONVERT(varbinary,'{3}'),'{4}','{5}')",
-                            _event.Id, _event.DateAndTime, _event.Description,_event.Image, _event.Location,
+                        var sql = String.Format(
+                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}',CONVERT(varbinary,'{3}'),'{4}','{5}')",
+                            _event.Id, _event.DateAndTime, _event.Description, _event.Image, _event.Location,
                             _event.Name);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
 
@@ -79,14 +82,15 @@ namespace Business.Repositories.Implementations
                 _databaseContext.Database.CloseConnection();
             }
         }
+        
 
-        public IReadOnlyList<Event> GetAllEvents()
+        public IReadOnlyList<Event> GetAll()
         {
             List<Event> events = new List<Event>();
 
             foreach (var @event in _databaseContext.Events.ToList())
             {
-                var event_tags = _databaseContext.Entry(@event).Collection("TagList");
+                var event_tags = _databaseContext.Entry(@event).Collection("Tags");
 
                 if (!event_tags.IsLoaded)
                 {
@@ -112,14 +116,13 @@ namespace Business.Repositories.Implementations
             return events;
         }
 
-        public Event GetEventById(Guid id)
+        public Event GetById(Guid id)
         {
-
 
 
             var @event = _databaseContext.Events.FirstOrDefault(e => e.Id.Equals(id));
             
-            var event_tags = _databaseContext.Entry(@event).Collection("TagList");
+            var event_tags = _databaseContext.Entry(@event).Collection("Tags");
 
             if (!event_tags.IsLoaded)
             {
@@ -142,26 +145,25 @@ namespace Business.Repositories.Implementations
 
         }
 
-        public void UpdateEvent(EventCreatingModel eventCreatingModel, Guid id)
+        public void Update(EventCreatingModel eventCreatingModel, Guid id)
         {
-            var @event = GetEventById(id);
+            var @event = GetById(id);
 
             List<EventTag> eventTags = new List<EventTag>();
 
             foreach (var tag in eventCreatingModel.Tags)
             {
-                eventTags.Add(new EventTag(@event.Id,@event,tag.Label,Tag.Create(tag)));
+                eventTags.Add(new EventTag(@event.Id, @event, tag.Label, Tag.Create(tag.Label)));
             }
 
-            @event.Update(eventCreatingModel.Name,eventCreatingModel.Description,eventCreatingModel.DateAndTime,eventCreatingModel.Location,eventCreatingModel.Image,eventTags);
+            @event.Update(eventCreatingModel.Name, eventCreatingModel.Description, eventCreatingModel.DateAndTime,
+                eventCreatingModel.Location, eventCreatingModel.Image, eventTags);
 
-            _databaseContext.Events.Update(@event);
-            _databaseContext.SaveChanges();
         }
 
-        public void DeleteEvent(Guid id)
+        public void Delete(Guid id)
         {
-            _databaseContext.Events.Remove(GetEventById(id));
+            _databaseContext.Events.Remove(GetById(id));
             _databaseContext.SaveChanges();
         }
 
