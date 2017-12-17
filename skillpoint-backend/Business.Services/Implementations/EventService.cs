@@ -2,42 +2,50 @@
 using System.Collections.Generic;
 using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
+using CreatingModels;
 using Data.Domain.Entities;
 
 namespace Business.Services.Implementations
 {
     public class EventService : IEventService
     {
-        private readonly IEventsRepository _eventsRepository;
+        public readonly IEventsRepository _eventsRepository;
 
         public EventService(IEventsRepository eventsRepository)
         {
             _eventsRepository = eventsRepository;
         }
 
+
+        public void Create(EventCreatingModel eventCreatingModel, List<Tag> tags)
+        {
+            _eventsRepository.CreateEvent(eventCreatingModel, tags);
+        }
+
+
         public void Create(Event entity)
         {
-            _eventsRepository.CreateEvent(entity);
+            throw new NotImplementedException();
         }
 
         public void Update(Event entity)
         {
-            _eventsRepository.UpdateEvent(entity);
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Event> GetAll()
         {
-            return _eventsRepository.GetAllEvents();
+            throw new NotImplementedException();
         }
 
         public Event GetById(Guid id)
         {
-            return _eventsRepository.GetEventById(id);
+            throw new NotImplementedException();
         }
 
         public void Delete(Guid id)
         {
-            _eventsRepository.DeleteEvent(id);
+            throw new NotImplementedException();
         }
     }
 }

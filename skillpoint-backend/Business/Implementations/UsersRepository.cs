@@ -30,7 +30,7 @@ namespace Business.Repositories.Implementations
                 userTags.Add(new UserTag(user.Id, user, tag.Label, tag));
             }
 
-            user.Update(user.Username, user.Password, user.Name, user.Email, user.Location, userTags);
+            user.Update(user.Username, user.Password, user.Name, user.Email, user.Location,userTags);
 
             AddUser(user, tagsList);
             _databaseContext.SaveChanges();
@@ -59,7 +59,7 @@ namespace Business.Repositories.Implementations
                     {
                         var sql = String.Format("INSERT INTO dbo.Users VALUES('{0}','{1}','{2}','{3}','{4}','{5}')", user.Id, user.Email, user.Location, user.Name, user.Password, user.Username);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
-                        sql = String.Format("INSERT INTO dbo.Tags VALUES('{0}',{1},'{2}')", tag.Label, "null", tag.Verified);
+                        sql = String.Format("INSERT INTO dbo.Tags VALUES('{0}','{3}')", tag.Label, "null","null", tag.Verified);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
                         sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, tag.Label);
                         _databaseContext.Database.ExecuteSqlCommand(sql);

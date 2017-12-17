@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CreatingModels
 {
@@ -9,5 +10,7 @@ namespace CreatingModels
         public DateTime DateAndTime { get; set; }
         public string Location { get; set; }
         public byte[] Image { get; set; }
+        
+        public List<TagCreatingModel> Tags { get; set; }
     }
 }

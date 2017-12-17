@@ -15,6 +15,7 @@ namespace Data.Domain.Entities
         }
 
         public List<UserTag> UsersList { get; private set; }
+        public List<EventTag> EventsList { get; private set; }
 
         public bool Verified { get; private set; }
 

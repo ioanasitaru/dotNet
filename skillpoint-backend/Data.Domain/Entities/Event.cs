@@ -15,37 +15,36 @@ namespace Data.Domain.Entities
         public string Location { get; private set; }
         public byte[] Image { get; private set; }
 
-        public IEnumerable<Tag> Tags { get; private set; }
+        public List<EventTag> TagList { get; private set; }
 
-        public static Event Create(string name, string description, DateTime dateAndTime, string location, byte[] image)
+        public static Event Create(string name, string description, DateTime dateAndTime, string location, byte[] image,List<EventTag> tagList)
         {
             var instance = new Event
             {
-                Id = Guid.NewGuid(),
-                Tags = new List<Tag>()
+                Id = Guid.NewGuid()
             };
-            instance.Update(name, description, dateAndTime, location, image);
+            instance.Update(name, description, dateAndTime, location, image,tagList);
             return instance;
         }
 
-        public static Event Create(EventCreatingModel eventModel)
+        public static Event Create(EventCreatingModel eventModel,List<EventTag> tagList)
         {
             var instance = new Event
             {
-                Id = Guid.NewGuid(),
-                Tags = new List<Tag>()
+                Id = Guid.NewGuid()
             };
-            instance.Update(eventModel.Name, eventModel.Description, eventModel.DateAndTime, eventModel.Location, eventModel.Image);
+            instance.Update(eventModel.Name, eventModel.Description, eventModel.DateAndTime, eventModel.Location, eventModel.Image,tagList);
             return instance;
         }
 
-        public void Update(string name, string description, DateTime dateAndTime, string location, byte[] image)
+        public void Update(string name, string description, DateTime dateAndTime, string location, byte[] image,List<EventTag> tagList)
         {
             Name = name;
             Description = description;
             DateAndTime = dateAndTime;
             Location = location;
             Image = image;
+            TagList = tagList;
         }
     }
 }
