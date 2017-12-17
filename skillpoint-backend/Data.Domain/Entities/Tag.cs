@@ -5,6 +5,7 @@ using CreatingModels;
 
 namespace Data.Domain.Entities
 {
+    // + Perciun Adrian
     public class Tag
     {   
         [Key]
