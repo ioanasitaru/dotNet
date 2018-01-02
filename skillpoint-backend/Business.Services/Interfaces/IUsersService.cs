@@ -10,6 +10,8 @@ namespace Business.Services.Interfaces
 {
     public interface IUsersService : ICrudService<User, UserCreatingModel, UserDTO,Guid>
     {
-        Task LoginUser(LogInCreatingModel model, UserManager<User> user);
+        Task CreateAsync(UserCreatingModel model, UserManager<User> userManager);
+        User GetByUsername(string username);
+        void CreateRelations(User user, List<Tag> tags);
     }
 }

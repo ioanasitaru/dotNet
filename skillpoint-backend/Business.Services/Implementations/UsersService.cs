@@ -48,9 +48,15 @@ namespace Business.Services.Implementations
             _usersRepository.Delete(id);
         }
 
-        public async Task LoginUser(LogInCreatingModel model, UserManager<User> userManager)
+        public async Task CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
-           await _usersRepository.LoginUser(model, userManager);
+           await _usersRepository.CreateAsync(model, userManager);
+        }
+
+        public User GetByUsername(string username) => _usersRepository.GetByUsername(username);
+        public void CreateRelations(User user, List<Tag> tags)
+        {
+            _usersRepository.CreateRelations(user, tags);
         }
     }
 }

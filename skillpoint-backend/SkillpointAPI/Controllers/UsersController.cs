@@ -42,9 +42,12 @@ namespace SkillpointAPI.Controllers
 
         // POST: api/Users
         [HttpPost]
-        public void PostUser([FromBody] UserCreatingModel userModel)
+        public async Task PostUser([FromBody] UserCreatingModel userModel)
         {
-            _usersService.Create(userModel);
+            await _usersService.CreateAsync(userModel, _userManager);
+            var tags = _tagsService.CreateOrGet(userModel.Tags);
+            var user = _usersService.GetByUsername(userModel.Username);
+            _usersService.CreateRelations(user, tags);
         }
         
         // PUT: api/Users/5
@@ -61,10 +64,5 @@ namespace SkillpointAPI.Controllers
             _usersService.Delete(id);
         }
 
-        [HttpPost("login")]
-        public async Task LoginUser([FromBody] LogInCreatingModel model)
-        {
-           await _usersService.LoginUser(model, _userManager);
-        }
     }
 }

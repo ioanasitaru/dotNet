@@ -25,11 +25,24 @@ namespace Business.Services.Implementations
 
         public void Update(TagCreatingModel model, string label) => _repository.Update(model,label);
 
-        public List<Tag> TagsFromCreatingModels(List<TagCreatingModel> tagsModels)
+        public List<Tag> CreateOrGet(List<TagCreatingModel> tagsModels)
         {
+            List<Tag> tags = new List<Tag>();
+            foreach (var tag in tagsModels)
+            {
+                var dbTag = _repository.GetByLabel(tag.Label);
+                if (dbTag == null)
+                {
+                    _repository.Create(tag);
+                    dbTag = _repository.GetByLabel(tag.Label);
+                }
+                tags.Add(dbTag);
+            }
 
-            return tagsModels.Select(tagModel => _repository.GetById(tagModel.Label) ?? Tag.Create(tagModel.Label)).ToList();
+            return tags;
+
         }
-
     }
+
+    
 }

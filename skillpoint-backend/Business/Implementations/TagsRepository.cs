@@ -47,5 +47,7 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
+        public Tag GetByLabel(string label) => _databaseContext.Tags.FirstOrDefault(t => t.Label.Equals(label));
+           
     }
 }

@@ -10,6 +10,8 @@ namespace Business.Repositories.Interfaces
 {
     public interface IUsersRepository : ICrudRepository<User, UserCreatingModel, Guid>
     {
-        Task LoginUser(LogInCreatingModel model, UserManager<User> userManager);
+        Task CreateAsync(UserCreatingModel model, UserManager<User> userManager);
+        User GetByUsername(string username);
+        void CreateRelations(User user, List<Tag> tags);
     }
 } 

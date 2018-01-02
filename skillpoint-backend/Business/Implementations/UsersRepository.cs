@@ -21,60 +21,33 @@ namespace Business.Repositories.Implementations
             _databaseContext = database;
         }
 
-        public void Create(UserCreatingModel user)
+        public async Task CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
 
-            var dbUser = User.Create(user.Username, user.Name, user.Email, user.Location, null);
-            List<Tag> userTags = new List<Tag>();
-            foreach (var tag in user.Tags)
-            {
-                userTags.Add(Tag.Create(tag.Label));
-            }
+            var user = User.Create(model.Username, model.Name, model.Email, model.Location, null);
+            // Add the user to the Db with the choosen password
+            await userManager.CreateAsync(user, model.Password);
 
-            AddUser(dbUser,userTags);
-
+            await userManager.AddToRoleAsync(user, "RegisteredUser");
             _databaseContext.SaveChanges();
         }
 
+        public User GetByUsername(string username) =>
+            _databaseContext.Users.FirstOrDefault(u => u.UserName.Equals(username));
 
-        private void AddUser(User user, List<Tag> tags)
+        public void CreateRelations(User user, List<Tag> tags)
         {
-            _databaseContext.Database.OpenConnection();
-
-            ITagsRepository _tagsRepository = new TagsRepository(_databaseContext);
-
-            try
+            List<UserTag> userTags = tags.ConvertAll(t => new UserTag(user.Id, user, t.Label, t));
+            foreach (var userTag in userTags)
             {
-                foreach (var tag in tags)
-                {
-                    if (_tagsRepository.GetById(tag.Label) != null)
-                    {
-                        var sql = String.Format("INSERT INTO dbo.Users VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
-                            user.Id, user.Email, user.Location, user.Name, user.PasswordHash, user.UserName);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-                        sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, tag.Label);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-                        _databaseContext.SaveChanges();
-                    }
-                    else
-                    {
-                        var sql = String.Format("INSERT INTO dbo.AspNetUsers VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}')",
-                           user.Id, user.AccessFailedCount, user.ConcurrencyStamp, user.DisplayName, user.Email, user.EmailConfirmed,  user.Location, user.LockoutEnabled, user.LockoutEnd, user.Name, user.NormalizedEmail, user.NormalizedUserName, user.PasswordHash, user.PhoneNumber, user.PhoneNumberConfirmed, user.SecurityStamp, user.TwoFactorEnabled, user.UserName);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-                        sql = String.Format("INSERT INTO dbo.Tags VALUES('{0}','{3}')", tag.Label, "null", "null",
-                            tag.Verified);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-                        sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, tag.Label);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-                        _databaseContext.SaveChanges();
-                    }
-                }
+                //                _databaseContext.UserTag.Add(userTag);
+                var sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, userTag.Tag.Label);
+                _databaseContext.Database.ExecuteSqlCommand(sql);
+
             }
-            finally
-            {
-                _databaseContext.Database.CloseConnection();
-            }
+            _databaseContext.SaveChanges();
         }
+
 
         public IReadOnlyList<User> GetAll()
         {
@@ -145,14 +118,9 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
-        public async Task LoginUser(LogInCreatingModel model, UserManager<User> userManager)
+        public void Create(UserCreatingModel entity)
         {
-            var user = User.Create(model.Username, model.Name, model.Email, model.Location, null);
-            // Add the user to the Db with the choosen password
-            await userManager.CreateAsync(user, model.Password);
-
-            await userManager.AddToRoleAsync(user, "RegisteredUser");
-            _databaseContext.SaveChanges();
+            throw new NotImplementedException();
         }
     }
 }
