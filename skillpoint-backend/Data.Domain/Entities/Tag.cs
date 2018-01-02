@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data.Domain.Entities
 {
+    // + Perciun Adrian
     public class Tag
-    {
-        public Guid Id { get; private set; }
-
-        private string _label;
-
+    {   
+        [Key]
         public string Label
         {
-            get => this._label;
-            set => CheckLabel(value);
+            get ;
+            private set ;
         }
 
-        public List<User> Users { get; private set; }
+        public List<UserTag> UsersList { get; private set; }
+        public List<EventTag> EventsList { get; private set; }
 
         public bool Verified { get; private set; }
 
@@ -23,30 +23,18 @@ namespace Data.Domain.Entities
         {
         }
 
-        public static Tag Create(string label, User user)
+        public static Tag Create(string label)
         {
-            var instance = new Tag() {Id = Guid.NewGuid(), Users = new List<User>()};
-            instance.Update(label, false, user);
+            var instance = new Tag();
+            instance.Update(label, false);
             return instance;
         }
 
-        public void Update(string label, bool verified, User user)
+        public void Update(string label, bool verified)
         {
-            this.Label = label;
-            this.Verified = verified;
-            this.Users.Add(user);
+            Label = label;
+            Verified = verified;
         }
 
-        private void CheckLabel(string label)
-        {
-            if (label == null)
-            {
-                throw new Exception("Invalid label!(No value specified!)");
-            }
-            else
-            {
-                this._label = label;
-            }
-        }
     }
 }

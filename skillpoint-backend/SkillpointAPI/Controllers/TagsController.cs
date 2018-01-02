@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Business.Interfaces;
+﻿using System.Collections.Generic;
+using Business.Services.Interfaces;
+using CreatingModels;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
-using Data.Domain.Entities;
-using SkillpointAPI.DTOs;
 
 namespace SkillpointAPI.Controllers
 {
@@ -11,59 +10,44 @@ namespace SkillpointAPI.Controllers
     [Route("api/Tags")]
     public class TagsController : Controller
     {
-        private readonly ITagsRepository _repository;
+        private readonly ITagsService _service;
 
-        public TagsController(ITagsRepository repository)
+        public TagsController(ITagsService service)
         {
-            this._repository = repository;
+            _service = service;
         }
 
         // GET: api/Tags
         [HttpGet]
-        public IEnumerable<Tag> GetTags()
+        public IEnumerable<TagDTO> GetTags()
         {
-            return _repository.GetAllTags();
+            return _service.GetAll();
         }
 
         // GET: api/Tags/5
         [HttpGet("{id}")]
-        public Tag GetTag([FromRoute] Guid id)
+        public TagDTO GetTag([FromRoute] string label)
         {
-            return _repository.GetTagById(id);
+            return _service.GetById(label);
         }
 
-    
+
         // POST: api/Tags
         [HttpPost]
-        public void PostTag([FromBody] TagDTO tagDto)
+        public void PostTag([FromBody] TagCreatingModel tagModel)
         {
-            var tagLabel = tagDto.Label;
-            var userId = tagDto.UserId;
-            
-
-            if (_repository.GetTagByLabel(tagLabel) == null)
-            {
-                //momentan cream un user, doarece nu avem repository-ul de user
-                var user = Data.Domain.Entities.User.Create();
-                var tag = Tag.Create(tagLabel, user);
-                _repository.CreateTag(tag);
-               
-            }
+            var tagLabel = tagModel.Label;
+            if (_service.GetById(tagLabel) == null)
+                _service.Create(tagModel);
             else
-            {
-                //momentan cream un user, doarece nu avem repository-ul de user
-                var user = Data.Domain.Entities.User.Create();
-                var tag = _repository.GetTagByLabel(tagLabel);
-                tag.Update(tagLabel,false,user);
-                _repository.UpdateTag(tag);
-            }
+                _service.Create(tagModel);
         }
 
         // DELETE: api/Tags/5
-        [HttpDelete("{id}")]
-        public void DeleteTag([FromRoute] Guid id)
+        [HttpDelete("{label}")]
+        public void DeleteTag([FromRoute] string label)
         {
-            _repository.DeleteTag(id);
+            _service.Delete(label);
         }
     }
 }

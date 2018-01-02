@@ -1,5 +1,7 @@
 ﻿using Data.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Data.Persistence
 {
@@ -8,6 +10,11 @@ namespace Data.Persistence
         DbSet<Tag> Tags { get; set; }
         DbSet<Event> Events { get; set; }
         DbSet<User> Users { get; set; }
+        DbSet<UserTag> UserTag { get; set; }
+        DbSet<EventTag> EventTag { get; set; }
+        EntityEntry Entry(object entity);
+        DatabaseFacade Database { get; }
+
         int SaveChanges();
     }
 }

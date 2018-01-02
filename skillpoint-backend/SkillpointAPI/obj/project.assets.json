@@ -5097,6 +5097,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
+          "CreatingModels": "1.0.0",
+          "DTOs": "1.0.0",
           "Data.Domain": "1.0.0",
           "Data.Persistence": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.0.1"
@@ -5113,6 +5115,7 @@
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
           "Business.Repositories": "1.0.0",
+          "CreatingModels": "1.0.0",
           "Data.Domain": "1.0.0"
         },
         "compile": {
@@ -5122,9 +5125,23 @@
           "bin/placeholder/Business.Services.dll": {}
         }
       },
+      "CreatingModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/CreatingModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CreatingModels.dll": {}
+        }
+      },
       "Data.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "CreatingModels": "1.0.0",
+          "Microsoft.AspNetCore.All": "2.0.3"
+        },
         "compile": {
           "bin/placeholder/Data.Domain.dll": {}
         },
@@ -5146,6 +5163,20 @@
         },
         "runtime": {
           "bin/placeholder/Data.Persistence.dll": {}
+        }
+      },
+      "DTOs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "CreatingModels": "1.0.0",
+          "Data.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DTOs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTOs.dll": {}
         }
       }
     }
@@ -13285,6 +13316,11 @@
       "path": "../Business.Services/Business.Services.csproj",
       "msbuildProject": "../Business.Services/Business.Services.csproj"
     },
+    "CreatingModels/1.0.0": {
+      "type": "project",
+      "path": "../CreatingModels/CreatingModels.csproj",
+      "msbuildProject": "../CreatingModels/CreatingModels.csproj"
+    },
     "Data.Domain/1.0.0": {
       "type": "project",
       "path": "../Data.Domain/Data.Domain.csproj",
@@ -13294,6 +13330,11 @@
       "type": "project",
       "path": "../Data.Persistence/Data.Persistence.csproj",
       "msbuildProject": "../Data.Persistence/Data.Persistence.csproj"
+    },
+    "DTOs/1.0.0": {
+      "type": "project",
+      "path": "../DTOs/DTOs.csproj",
+      "msbuildProject": "../DTOs/DTOs.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -13309,7 +13350,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bogdan\\.nuget\\packages\\": {},
+    "C:\\Users\\Ovidiu\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13318,17 +13359,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\SkillpointAPI\\SkillpointAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\SkillpointAPI\\SkillpointAPI.csproj",
       "projectName": "SkillpointAPI",
-      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\SkillpointAPI\\SkillpointAPI.csproj",
-      "packagesPath": "C:\\Users\\Bogdan\\.nuget\\packages\\",
-      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\SkillpointAPI\\obj\\",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\SkillpointAPI\\SkillpointAPI.csproj",
+      "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\SkillpointAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bogdan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ovidiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13341,17 +13382,17 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj"
             },
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj"
             },
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj"
             },
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj"
             }
           }
         }
@@ -13371,7 +13412,7 @@
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0",
+            "version": "2.0.0",
             "autoReferenced": true
           },
           "Swashbuckle.AspNetCore": {

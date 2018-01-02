@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CreatingModels;
 using Data.Domain.Entities;
+using DTOs;
 
-namespace Business.Interfaces
+namespace Business.Repositories.Interfaces
 {
-    public interface IEventsRepository
+    public interface IEventsRepository : ICrudRepository<Event, EventCreatingModel, Guid>
     {
-        void CreateEvent(Event myEvent);
 
-        IReadOnlyList<Event> GetAllEvents();
-
-        Event GetEventById(Guid id);
-
-        void UpdateEvent(Event myEvent);
-
-        void DeleteEvent(Guid id);
     }
 }

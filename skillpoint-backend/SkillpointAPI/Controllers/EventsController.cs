@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Business.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using CreatingModels;
 using Data.Domain.Entities;
-using Data.Persistence;
+using DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
@@ -14,15 +13,17 @@ namespace SkillpointAPI.Controllers
     public class EventsController : Controller
     {
         private readonly IEventService _eventService;
+        private readonly ITagsService _tagsService;
 
-        public EventsController(IEventService eventService)
+        public EventsController(IEventService eventService, ITagsService tagsService)
         {
             _eventService = eventService;
+            _tagsService = tagsService;
         }
 
         // GET: api/Events
         [HttpGet]
-        public IEnumerable<Event> GetEvents()
+        public IEnumerable<EventDTO> GetEvents()
         {
             return _eventService.GetAll();
         }
@@ -48,35 +49,30 @@ namespace SkillpointAPI.Controllers
 
         // PUT: api/Events/5
         [HttpPut("{id}")]
-        public IActionResult PutEvent([FromRoute] Guid id, [FromBody] Event @event)
+        public IActionResult PutEvent([FromRoute] Guid id, [FromBody]EventCreatingModel @event)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != @event.Id)
-            {
-                return BadRequest();
-            }
-
-            _eventService.Save(@event);
+            _eventService.Update(@event,id);
 
             return NoContent();
         }
 
         // POST: api/Events
         [HttpPost]
-        public IActionResult PostEvent([FromBody] Event @event)
+        public IActionResult PostEvent([FromBody] EventCreatingModel eventModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _eventService.Save(@event);
+            _eventService.Create(eventModel);
 
-            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+            return Created("", null);
         }
 
         // DELETE: api/Events/5

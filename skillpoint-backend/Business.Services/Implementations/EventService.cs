@@ -1,34 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Business.Interfaces;
+using System.Linq;
+using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
+using CreatingModels;
 using Data.Domain.Entities;
+using DTOs;
 
 namespace Business.Services.Implementations
 {
     public class EventService : IEventService
     {
-        private IEventsRepository _eventsRepository;
+        public readonly IEventsRepository _eventsRepository;
 
-        public void Save(Event entity)
+        public EventService(IEventsRepository eventsRepository)
         {
-            _eventsRepository.CreateEvent(entity);
+            _eventsRepository = eventsRepository;
         }
 
-        public IEnumerable<Event> GetAll()
+        public void Create(EventCreatingModel model)
         {
-            return _eventsRepository.GetAllEvents();
+            _eventsRepository.Create(model);
         }
 
-        public Event GetById(Guid id)
+ 
+
+        public void Update(EventCreatingModel model, Guid id)
         {
-            return _eventsRepository.GetEventById(id);
+            _eventsRepository.Update(model,id);
         }
+
+        public IEnumerable<EventDTO> GetAll() => _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
+    
+
+        public EventDTO GetById(Guid id) => new EventDTO(_eventsRepository.GetById(id));
+
 
         public void Delete(Guid id)
         {
-            _eventsRepository.DeleteEvent(id);
+            _eventsRepository.Delete(id);
         }
     }
 }

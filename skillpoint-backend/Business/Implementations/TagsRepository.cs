@@ -1,40 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Business.Interfaces;
+using Business.Repositories.Interfaces;
+using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
+using DTOs;
 
 namespace Business.Repositories.Implementations
 {
     public class TagsRepository : ITagsRepository
     {
-        private IDatabaseContext _databaseContext;
+        private readonly IDatabaseContext _databaseContext;
 
-        public void CreateTag(Tag tag)
+        public TagsRepository(IDatabaseContext databaseContext)
         {
+            _databaseContext = databaseContext;
+        }
+
+        public void Create(TagCreatingModel tagModel)
+        {
+            var tag = Tag.Create(tagModel.Label);
             _databaseContext.Tags.Add(tag);
             _databaseContext.SaveChanges();
         }
 
-        public IReadOnlyList<Tag> GetAllTags() => _databaseContext.Tags.ToList();
+        public IReadOnlyList<Tag> GetAll() => _databaseContext.Tags.ToList();
 
-        public Tag GetTagByLabel(string label) =>
-            _databaseContext.Tags.First(t => t.Label.ToLower().Equals(label.ToLower()));
+        public Tag GetById(string label) =>
+            _databaseContext.Tags.FirstOrDefault(t => t.Label.ToLower().Equals(label.ToLower()));
 
-        public Tag GetTagById(Guid id) => _databaseContext.Tags.First(t => t.Id == id);
-
-        public void UpdateTag(Tag tag)
+        public void Update(TagCreatingModel tag, string id)
         {
-            _databaseContext.Tags.Update(tag);
+            var dbTag = GetById(tag.Label);
+            dbTag.Update(tag.Label, tag.Verified);
+            _databaseContext.Tags.Update(dbTag);
             _databaseContext.SaveChanges();
         }
 
-        public void DeleteTag(Guid id)
+   
+
+        public void Delete(string label)
         {
-            var tag = _databaseContext.Tags.FirstOrDefault(t => t.Id == id);
+            var tag = _databaseContext.Tags.FirstOrDefault(t => t.Label.Equals(label));
             _databaseContext.Tags.Remove(tag);
             _databaseContext.SaveChanges();
         }
+
     }
 }
