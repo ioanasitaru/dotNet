@@ -7,6 +7,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { IntroSectionComponent } from './intro-section/intro-section.component';
 import { FooterComponent } from './footer/footer.component';
 import { EventsSectionComponent } from './events-section/events-section.component';
+import { LeaderboardSectionComponent } from './leaderboard-section/leaderboard-section.component';
+import { FutureEventsSectionComponent } from './future-events-section/future-events-section.component';
+import { PastEventsSectionComponent } from './past-events-section/past-events-section.component';
+import { AboutWebsiteComponent } from './about-website/about-website.component';
+import { AboutLocationComponent } from './about-location/about-location.component';
 
 
 @NgModule({
@@ -15,7 +20,12 @@ import { EventsSectionComponent } from './events-section/events-section.componen
     NavbarComponent,
     IntroSectionComponent,
     FooterComponent,
-    EventsSectionComponent
+    EventsSectionComponent,
+    LeaderboardSectionComponent,
+    FutureEventsSectionComponent,
+    PastEventsSectionComponent,
+    AboutWebsiteComponent,
+    AboutLocationComponent
   ],
   imports: [
     BrowserModule
