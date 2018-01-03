@@ -3,16 +3,25 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { IntroSectionComponent } from './intro-section/intro-section.component';
-import { FooterComponent } from './footer/footer.component';
-import { EventsSectionComponent } from './events-section/events-section.component';
-import { LeaderboardSectionComponent } from './leaderboard-section/leaderboard-section.component';
-import { FutureEventsSectionComponent } from './future-events-section/future-events-section.component';
-import { PastEventsSectionComponent } from './past-events-section/past-events-section.component';
-import { AboutWebsiteComponent } from './about-website/about-website.component';
-import { AboutLocationComponent } from './about-location/about-location.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { IntroSectionComponent } from './components/intro-section/intro-section.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { EventsSectionComponent } from './components/events-section/events-section.component';
+import { LeaderboardSectionComponent } from './components/leaderboard-section/leaderboard-section.component';
+import { FutureEventsSectionComponent } from './components/future-events-section/future-events-section.component';
+import { PastEventsSectionComponent } from './components/past-events-section/past-events-section.component';
+import { AboutWebsiteComponent } from './components/about-website/about-website.component';
+import { AboutLocationComponent } from './components/about-location/about-location.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { EventPageComponent } from './pages/event-page/event-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
+import {AppRoutingModule} from './routing/app-routing.module';
+import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +34,19 @@ import { AboutLocationComponent } from './about-location/about-location.componen
     FutureEventsSectionComponent,
     PastEventsSectionComponent,
     AboutWebsiteComponent,
-    AboutLocationComponent
+    AboutLocationComponent,
+    ProfileComponent,
+    HomePageComponent,
+    AboutPageComponent,
+    EventPageComponent,
+    ProfilePageComponent,
+    ProfileInfoComponent,
+    EditPageComponent,
+    SignupPageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

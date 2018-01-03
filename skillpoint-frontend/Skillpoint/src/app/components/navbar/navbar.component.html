@@ -6,7 +6,7 @@
         <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
       </button>
       <img src="../assets/img/logo.png" alt="Logo" class="img-responsive" id="logo">
-      <a class="navbar-brand-image" href="#page-top">
+      <a class="navbar-brand-image" routerLink="/">
         <span id="brand-name">Skillpoint</span>
       </a>
     </div>
@@ -14,19 +14,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">
-          <a href="#page-top"></a>
+          <a routerLink=""></a>
         </li>
         <li>
           <a href="#loginModal" data-toggle="modal">Login</a>
         </li>
         <li class="page-scroll">
-          <a href="#events">Events</a>
+          <a routerLink="/events">Events</a>
         </li>
         <li class="page-scroll">
           <a href="#leaderboards">Leaderboards</a>
         </li>
         <li class="page-scroll">
-          <a href="#">About</a>
+          <a routerLink="/about">About</a>
         </li>
       </ul>
     </div>
@@ -62,7 +62,7 @@
                   <h4 style="display:inline; margin-bottom:50%">&nbsp;Remember me</h4>
 
                   <label>
-                    <small><a class="btn btn-link btn-multi-line" href="signup.html" role="button">Don't have an account? <strong>Sign up!</strong></a></small>
+                    <small><a class="btn btn-link btn-multi-line" data-dismiss="modal" routerLink="/signup" role="button">Don't have an account? <strong>Sign up!</strong></a></small>
                   </label>
 
                   <br/><br/>
