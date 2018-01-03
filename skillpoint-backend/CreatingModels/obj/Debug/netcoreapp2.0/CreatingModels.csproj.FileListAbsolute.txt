@@ -7,3 +7,12 @@ C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\De
 C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.dll
 C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.pdb
 C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.deps.json
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.dll
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.pdb
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfo.cs
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.dll
+C:\Users\Lenovo\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.pdb

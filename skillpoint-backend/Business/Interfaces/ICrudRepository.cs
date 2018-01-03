@@ -18,5 +18,6 @@ namespace Business.Repositories.Interfaces
         void Update(TCreatingModel entity, ID id);
 
         void Delete(ID id);
+
     }
 }

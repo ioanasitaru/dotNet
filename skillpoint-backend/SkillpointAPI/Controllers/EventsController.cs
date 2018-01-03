@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
@@ -63,16 +65,14 @@ namespace SkillpointAPI.Controllers
 
         // POST: api/Events
         [HttpPost]
-        public IActionResult PostEvent([FromBody] EventCreatingModel eventModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        public async Task PostEvent([FromBody] EventCreatingModel eventModel)
+        { 
+            await _eventService.CreateAsync(eventModel);
+            var tags = _tagsService.CreateOrGet(eventModel.Tags);
+            var @event = _eventService.GetByName(eventModel.Name);
 
-            _eventService.Create(eventModel);
+            _eventService.CreateRelations(@event,tags);
 
-            return Created("", null);
         }
 
         // DELETE: api/Events/5

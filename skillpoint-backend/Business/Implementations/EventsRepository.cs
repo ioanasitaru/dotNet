@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Business.Repositories.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
@@ -168,5 +169,31 @@ namespace Business.Repositories.Implementations
         }
 
 
+        public async Task CreateAsync(EventCreatingModel model)
+        {
+            var @event = Event.Create(model.Name, model.Description, model.DateAndTime, model.Location, model.Image,
+                null);
+            await _databaseContext.Events.AddAsync(@event);
+
+            _databaseContext.SaveChanges();
+        }
+
+        public void CreateRelations(Event @event, List<Tag> tags)
+        {
+            List<EventTag> eventTags = tags.ConvertAll(t => new EventTag(@event.Id, @event,t.Label,t));
+
+            foreach (var eventTag in eventTags)
+            {
+                var sql = String.Format("INSERT INTO dbo.EventTag VALUES('{0}', '{1}')", @event.Id, eventTag.Tag.Label);
+                _databaseContext.Database.ExecuteSqlCommand(sql);
+
+            }
+            _databaseContext.SaveChanges();
+        }
+
+        public Event GetByName(string name)
+        {
+           return _databaseContext.Events.FirstOrDefault(e => e.Name.Equals(name));
+        }
     }
 }

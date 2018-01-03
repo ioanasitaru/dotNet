@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
 using CreatingModels;
@@ -39,6 +40,21 @@ namespace Business.Services.Implementations
         public void Delete(Guid id)
         {
             _eventsRepository.Delete(id);
+        }
+
+        public async Task CreateAsync(EventCreatingModel model)
+        {
+            await _eventsRepository.CreateAsync(model);
+        }
+
+        public void CreateRelations(Event @event, List<Tag> tags)
+        {
+            _eventsRepository.CreateRelations(@event,tags);
+        }
+
+        public Event GetByName(string name)
+        {
+            return _eventsRepository.GetByName(name);
         }
     }
 }

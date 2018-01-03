@@ -9,7 +9,7 @@ namespace CreatingModels
         public string Description { get; set; }
         public DateTime DateAndTime { get; set; }
         public string Location { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
 
         public List<TagCreatingModel> Tags { get; set; }
     }
