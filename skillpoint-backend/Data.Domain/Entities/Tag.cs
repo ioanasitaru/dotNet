@@ -4,18 +4,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Data.Domain.Entities
 {
+    // + Perciun Adrian
     public class Tag
-    {
-        private string _label;
-        
+    {   
         [Key]
         public string Label
         {
-            get => _label;
-            private set => CheckLabel(value);
+            get ;
+            private set ;
         }
 
         public List<UserTag> UsersList { get; private set; }
+        public List<EventTag> EventsList { get; private set; }
+
 
         public bool Verified { get; private set; }
 
@@ -34,15 +35,6 @@ namespace Data.Domain.Entities
         {
             Label = label;
             Verified = verified;
-        }
-
-        private void CheckLabel(string label)
-        {
-            if (label == null)
-            {
-                throw new Exception("Invalid label!(No value specified!)");
-            }
-            _label = label;
         }
     }
 }

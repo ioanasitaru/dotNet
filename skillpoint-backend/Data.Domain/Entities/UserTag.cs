@@ -7,7 +7,7 @@ namespace Data.Domain.Entities
 
         private UserTag() { }
 
-        public UserTag(Guid userId, User user, string label, Tag tag)
+        public UserTag(string userId, User user, string label, Tag tag)
         {
             UserId = userId;
             User = user;
@@ -15,7 +15,7 @@ namespace Data.Domain.Entities
             Tag = tag;
         }
 
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
         public User User { get; set; }
 
         public string TagLabel { get; private set; }

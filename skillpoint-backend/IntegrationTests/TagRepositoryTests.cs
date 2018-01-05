@@ -1,7 +1,8 @@
-﻿using Data.Domain.Entities;
+using Business.Repositories.Implementations;
+using CreatingModels;
+using Data.Domain.Entities;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Business.Repositories.Implementations;
 
 namespace IntegrationTests
 {
@@ -14,22 +15,26 @@ namespace IntegrationTests
 //            RunOnDatabase(sut =>
 //            {
 //                var tagRepository = new TagsRepository(sut);
-//                var tag = Tag.Create("Label");
+//                var currentTagsInDatabase = tagRepository.GetAllTags().Count;
+//
+//                var tag = Tag.Create(new TagCreatingModel(){Label = "cola"});
 //                tagRepository.CreateTag(tag);
-//                tagRepository.GetAllTags().Should().HaveCount(1);
+//                tagRepository.GetAllTags().Should().HaveCount(currentTagsInDatabase+1);
 //            });
 //
-//           }
+//    }
+//
 //        [TestMethod]
 //        public void Given_TagRepository_When_DeletingATag_Then_ShouldDeleteIt()
 //        {
 //            RunOnDatabase(sut =>
 //            {
 //                var tagRepository = new TagsRepository(sut);
-//                var tag = Tag.Create("Label");
+//                var tag = Tag.Create(new TagCreatingModel() { Label = "cola" });
 //                tagRepository.CreateTag(tag);
-//                
-//                tagRepository.GetAllTags().Should().HaveCount(0);
+//                var currentTagsInDatabase = tagRepository.GetAllTags().Count;
+//                tagRepository.DeleteTag(tag.Label);
+//                tagRepository.GetAllTags().Should().HaveCount(currentTagsInDatabase-1);
 //            });
 //        }
 //        [TestMethod]
@@ -37,55 +42,41 @@ namespace IntegrationTests
 //        {
 //            RunOnDatabase(sut =>
 //            {
+//
 //                var tagRepository = new TagsRepository(sut);
-//                var firstTag = Tag.Create("Label1");
-//                var secondTag = Tag.Create("Label2");
-//                var thirdTag = Tag.Create("Label3");
-//                var forthTag = Tag.Create("Label4");
-//                var fifthTag = Tag.Create("Label5");
+//
+//                var currentTagsInDatabase = tagRepository.GetAllTags().Count;
+//
+//                var firstTag = Tag.Create(new TagCreatingModel(){Label = "Label1"});
+//                var secondTag = Tag.Create(new TagCreatingModel() { Label = "Label2" });
+//                var thirdTag = Tag.Create(new TagCreatingModel() { Label = "Label3" });
+//                var forthTag = Tag.Create(new TagCreatingModel() { Label = "Label4" });
+//                var fifthTag = Tag.Create(new TagCreatingModel() { Label = "Label5" });
 //                tagRepository.CreateTag(firstTag);
 //                tagRepository.CreateTag(secondTag);
 //                tagRepository.CreateTag(thirdTag);
 //                tagRepository.CreateTag(forthTag);
 //                tagRepository.CreateTag(fifthTag);
-//                tagRepository.GetAllTags().Should().HaveCount(5);
+//                tagRepository.GetAllTags().Should().HaveCount(currentTagsInDatabase + 5);
 //            });
 //        }
-//        [TestMethod]
-//        public void Given_TagRepository_When_GettingATagById_Then_ShouldGetIt()
-//        {
-//            RunOnDatabase(sut =>
-//            {
-//                var tagRepository = new TagsRepository(sut);
-//                var firstTag = Tag.Create("Label1");
-//                var secondTag = Tag.Create("Label2");
-//                var thirdTag = Tag.Create("Label3");
-//                var forthTag = Tag.Create("Label4");
-//                var fiftsTag = Tag.Create("Label5");
-//                tagRepository.CreateTag(firstTag);
-//                tagRepository.CreateTag(secondTag);
-//                tagRepository.CreateTag(thirdTag);
-//                tagRepository.CreateTag(forthTag);
-//                tagRepository.CreateTag(fiftsTag);
-//                
-//            });
-//        }
+//
 //        [TestMethod]
 //        public void Given_TagRepository_When_GettingATagByLabel_Then_ShouldGetIt()
 //        {
 //            RunOnDatabase(sut =>
 //            {
 //                var tagRepository = new TagsRepository(sut);
-//                var firstTag = Tag.Create("Label1");
-//                var secondTag = Tag.Create("Label2");
-//                var thirdTag = Tag.Create("Label3");
-//                var forthTag = Tag.Create("Label4");
-//                var fiftsTag = Tag.Create("Label5");
+//                var firstTag = Tag.Create(new TagCreatingModel() { Label = "Label1" });
+//                var secondTag = Tag.Create(new TagCreatingModel() { Label = "Label2" });
+//                var thirdTag = Tag.Create(new TagCreatingModel() { Label = "Label3" });
+//                var forthTag = Tag.Create(new TagCreatingModel() { Label = "Label4" });
+//                var fifthTag = Tag.Create(new TagCreatingModel() { Label = "Label5" });
 //                tagRepository.CreateTag(firstTag);
 //                tagRepository.CreateTag(secondTag);
 //                tagRepository.CreateTag(thirdTag);
 //                tagRepository.CreateTag(forthTag);
-//                tagRepository.CreateTag(fiftsTag);
+//                tagRepository.CreateTag(fifthTag);
 //                tagRepository.GetTagByLabel(thirdTag.Label).Should().Be(thirdTag);
 //            });
 //        }
@@ -95,11 +86,14 @@ namespace IntegrationTests
 //            RunOnDatabase(sut =>
 //            {
 //                var tagRepository = new TagsRepository(sut);
-//                var tag = Tag.Create("Label");
+//                var tag = Tag.Create(new TagCreatingModel() { Label = "Label1" });
 //                tagRepository.CreateTag(tag);
+//                var initialVerifiedValue = tag.Verified;
 //                tag.Update(tag.Label, true);
 //                tagRepository.UpdateTag(tag);
-//                
+//
+//                tagRepository.GetTagByLabel(tag.Label).Should().NotBe(initialVerifiedValue);
+//
 //            });
 //        }
     }

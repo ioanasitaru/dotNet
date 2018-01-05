@@ -1,10 +1,13 @@
-﻿using Data.Domain.Entities;
+﻿using CreatingModels;
+using Data.Domain.Entities;
 
 namespace DTOs
 {
-    public class TagDTO : DTO<Tag>
+    public class TagDTO : TagCreatingModel
     {
         public TagDTO(UserTag ut) : this(ut.Tag) { }
+
+        public TagDTO(EventTag et) : this(et.Tag) { }
 
         public TagDTO(string label, bool verified)
         {
@@ -13,8 +16,5 @@ namespace DTOs
         }
 
         public TagDTO(Tag t) : this(t.Label, t.Verified) { }
-
-        public string Label { get; set; }
-        public bool Verified { get; set; }
     }
 }

@@ -16,33 +16,27 @@
         <li class="hidden">
           <a routerLink=""></a>
         </li>
-        <li>
-          <div *ngIf="!isUserLoggedIn()">
-            <a href="#loginModal" data-toggle="modal">Login</a>
-          </div>
-          <div *ngIf="isUserLoggedIn()">
-            <a routerLink="profile">{{user.username}}</a>
-          </div>
+        <li *ngIf="!isUserLoggedIn()">
+          <a href="#loginModal" data-toggle="modal">Login</a>
         </li>
-        <li class="page-scroll">
-          <div *ngIf="isUserLoggedIn()">
-            <a routerLink="events">My Events</a>
-          </div>
-          <div *ngIf="!isUserLoggedIn()">
-            <a href="#events">Events</a>
-          </div>
+        <li *ngIf="isUserLoggedIn()">
+            <!--<a routerLink="profile">{{user.username}}</a>-->
         </li>
-        <div *ngIf="!isUserLoggedIn()">
-        <li class="page-scroll">
-            <a href="#leaderboards">Leaderboards</a>
-          </li>
-        </div>
+        <li *ngIf="isUserLoggedIn()">
+          <a routerLink="events">My Events</a>
+        </li>
+        <li class="page-scroll" *ngIf="!isUserLoggedIn()">
+          <a href="#event-section">Events</a>
+        </li>
+        <li class="page-scroll" *ngIf="!isUserLoggedIn()">
+          <a href="#leaderboards">Leaderboards</a>
+        </li>
         <li class="page-scroll">
           <a routerLink="about">About</a>
         </li>
-        <div *ngIf="isUserLoggedIn()">
+        <li class="page-scroll" *ngIf="isUserLoggedIn()">
           <a routerLink="/">Logout</a>
-        </div>
+        </li>
       </ul>
     </div>
   </div>

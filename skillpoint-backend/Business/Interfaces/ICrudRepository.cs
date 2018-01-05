@@ -7,16 +7,16 @@ using DTOs;
 
 namespace Business.Repositories.Interfaces
 {
-    public interface ICrudRepository<T, in TCreatingModel, TDTO>
+    public interface ICrudRepository<T, in TCreatingModel, ID>
     {
-        T Create(TCreatingModel entity);
+        void Create(TCreatingModel entity);
 
         IReadOnlyList<T> GetAll();
 
-        T GetById(Guid id);
+        T GetById(ID id);
 
-        void Update(TDTO entity);
+        void Update(TCreatingModel entity, ID id);
 
-        void Delete(Guid id);
+        void Delete(ID id);
     }
 }

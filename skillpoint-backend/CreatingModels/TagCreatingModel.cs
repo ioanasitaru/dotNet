@@ -1,10 +1,9 @@
-﻿using Data.Domain.Entities;
-
 namespace CreatingModels
 {
-    public class TagCreatingModel : CreatingModel<Tag>
+    public class TagCreatingModel
 
     {
-    public string Label { get; set; }
+        public string Label { get; set; }
+        public bool Verified { get; set; }
     }
 }

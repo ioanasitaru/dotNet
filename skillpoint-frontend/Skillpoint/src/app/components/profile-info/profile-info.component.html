@@ -1,5 +1,5 @@
 <br><br>
-<section id="signup" style="padding-top: 100px">
+<form id="signup" style="padding-top: 100px" (ngSubmit)="onSubmit(userForm.value)" #userForm="ngForm">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -16,48 +16,60 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" placeholder="Name" id="name"
-                   required data-validation-required-message="Please enter your name.">
-            <p class="help-block text-danger"></p>
+                   required [(ngModel)]="model.name" #name="ngModel" name="name">
+            <div [hidden]="name.valid || name.untouched"><p class="help-block text-danger">Please enter your name</p>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="email">Email Address</label>
-            <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
-            <p class="help-block text-danger"></p>
+            <input type="email" class="form-control" placeholder="Email Address" id="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"
+                   [(ngModel)]="model.email" #email="ngModel" name="email">
+            <div [hidden]="email.valid || email.untouched"><p class="help-block text-danger">Please enter your email
+              address</p></div>
           </div>
         </div>
 
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="location">Location</label>
-            <input type="text" class="form-control" placeholder="Location" id="location" required data-validation-required-message="Please enter your location.">
-            <p class="help-block text-danger"></p>
+            <input type="text" class="form-control" placeholder="Location" id="location" required
+                   [(ngModel)]="model.location" #location="ngModel" name="location">
+            <div [hidden]="location.valid || location.untouched"><p class="help-block text-danger">Please enter your
+              location</p></div>
           </div>
         </div>
 
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" placeholder="Username" id="username" required data-validation-required-message="Please enter your name.">
-            <p class="help-block text-danger"></p>
+            <input type="text" class="form-control" placeholder="Username" id="userName" required
+                   [(ngModel)]="model.userName" #userName="ngModel" name="userName">
+            <div [hidden]="userName.valid || userName.untouched"><p class="help-block text-danger">Please enter an
+              username</p></div>
           </div>
         </div>
 
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Please enter a message.">
-            <p class="help-block text-danger"></p>
+            <input type="password" class="form-control" placeholder="Password" id="password" required
+                   [(ngModel)]="model.password" #password="ngModel" name="password">
+            <div [hidden]="password.valid || password.untouched"><p class="help-block text-danger">Please enter your
+              password</p></div>
           </div>
         </div>
 
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword" required data-validation-required-message="Please enter a message.">
-            <p class="help-block text-danger"></p>
+            <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword" required
+                   [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" name="confirmPassword" (blur)="checkPasswords()">
+            <div [hidden]="confirmPassword.valid || confirmPassword.untouched"><p class="help-block text-danger">Please
+              re-enter your password</p></div>
+            <div *ngIf="!passwords"><p class="help-block text-danger">Passwords don't match</p></div>
           </div>
         </div>
 
@@ -66,8 +78,8 @@
         <div id="success"></div>
         <div class="row">
           <div class="form-group col-xs-12">
-            <form action="index-login.php">
-              <input type="submit" value="Register" class="btn btn-success btn-lg">
+            <form action="">
+              <input type="submit" value="Register" class="btn btn-success btn-lg" [disabled]="checkForm(userForm.valid)">
             </form>
           </div>
         </div>
@@ -76,4 +88,4 @@
       </div>
     </div>
   </div>
-</section>
+</form>
