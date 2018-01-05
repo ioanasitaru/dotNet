@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace CreatingModels
 {
-    public class UserCreatingModel
+    public class LogInCreatingModel
     {
         public String Username { get; set; }
 
@@ -14,7 +13,5 @@ namespace CreatingModels
         public String Email { get; set; }
 
         public String Location { get; set; }
-
-        public List<TagCreatingModel> Tags { get; set; }
-    }
+        }
 }

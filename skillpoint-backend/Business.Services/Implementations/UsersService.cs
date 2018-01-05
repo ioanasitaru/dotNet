@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Business.Repositories.Interfaces;
 using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using DTOs;
+using Microsoft.AspNetCore.Identity;
 
 namespace Business.Services.Implementations
 {
@@ -18,28 +20,16 @@ namespace Business.Services.Implementations
             _usersRepository = usersRepository;
         }
 
-        public void Create(UserCreatingModel userModel, List<Tag> tagsList)
+        public void Create(UserCreatingModel userModel)
         {
-            //            foreach (var tag in user.TagsList)
-            //            {
-            //                try
-            //                {
-            //                    _tagsRepository.DeleteTag(tag.Label);
-            //                }
-            //                catch (ArgumentNullException ex)
-            //                {
-            //                    continue;
-            //                }
-            //            }
-
             
-            _usersRepository.Create(userModel, tagsList);
+            _usersRepository.Create(userModel);
         }
 
-        public void Update(UserDTO user)
+
+        public void Update(UserCreatingModel userModel, Guid Id)
         {
-            List<Tag> tags = new List<Tag>();
-            _usersRepository.Update(user, tags);
+            _usersRepository.Update(userModel, Id);
         }
 
         public IEnumerable<UserDTO> GetAll()
@@ -57,10 +47,15 @@ namespace Business.Services.Implementations
             _usersRepository.Delete(id);
         }
 
-
-        public void Create(UserCreatingModel entity)
+        public async Task CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
-            throw new NotImplementedException("Users require a tag list as well");
+           await _usersRepository.CreateAsync(model, userManager);
+        }
+
+        public User GetByUsername(string username) => _usersRepository.GetByUsername(username);
+        public void CreateRelations(User user, List<Tag> tags)
+        {
+            _usersRepository.CreateRelations(user, tags);
         }
     }
 }
