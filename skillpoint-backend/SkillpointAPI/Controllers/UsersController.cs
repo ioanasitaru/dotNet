@@ -6,12 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Domain.Entities;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 
 namespace SkillpointAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Users")]
+    [EnableCors("CorsPolicy")]
     public class UsersController : Controller
     {
         private readonly IUsersService _usersService;

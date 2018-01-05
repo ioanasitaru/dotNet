@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: '',  component: HomePageComponent},
   { path: 'about',  component: AboutPageComponent},
   { path: 'events',  component: EventPageComponent},
-  { path: 'profile', component: ProfilePageComponent, canActivate: LoginGuard},
+  { path: 'profile', component: ProfilePageComponent, canActivate: [LoginGuard]},
   { path: 'signup', component: SignupPageComponent},
   { path: 'edit', component: EditPageComponent}
 ];

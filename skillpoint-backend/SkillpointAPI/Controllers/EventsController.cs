@@ -4,12 +4,14 @@ using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using DTOs;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Events")]
+    [EnableCors("CorsPolicy")]
     public class EventsController : Controller
     {
         private readonly IEventService _eventService;

@@ -88,6 +88,15 @@ namespace SkillpointAPI
             {
                 c.SwaggerDoc("v1", new Info { Title = "Skillpoint API", Version = "v1" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
         }
 
 
@@ -115,6 +124,8 @@ namespace SkillpointAPI
             app.UseAuthentication();
 
             app.UseMvc();
+
+            app.UseCors("CorsPolicy");
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {

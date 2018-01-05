@@ -79,7 +79,11 @@
         <div class="row">
           <div class="form-group col-xs-12">
             <form action="">
+<<<<<<< HEAD
               <input type="submit" value="Register" class="btn btn-success btn-lg" [disabled]="checkForm(userForm.valid)">
+=======
+              <input type="submit" value="Register" class="btn btn-success btn-lg" [disabled]="!userForm.valid || !passwords">
+>>>>>>> 663762df0d43092bd180d393d504eaf7c335c695
             </form>
           </div>
         </div>
