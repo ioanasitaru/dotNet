@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../model/user';
+import {User} from '../../models/user';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-profile-info',
@@ -16,13 +17,14 @@ export class ProfileInfoComponent implements OnInit {
   ngOnInit() {
   }
   checkPasswords() {
-    if (this.model.password && !this.model.confirmPassword) {
+    if (!isNullOrUndefined(this.model.password) && !isNullOrUndefined(this.model.confirmPassword)) {
+      console.log(this.model.password, this.model.confirmPassword);
       this.passwords = this.model.password === this.model.confirmPassword;
     }
   }
 
   checkForm(form) {
-    return !!(form && this.passwords);
+    console.log(form, this.passwords);
+    return form && this.passwords;
   }
-
 }

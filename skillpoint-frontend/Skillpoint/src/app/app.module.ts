@@ -18,11 +18,14 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { EventPageComponent } from './pages/event-page/event-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
-import {AppRoutingModule} from './routing/app-routing.module';
+import {AppRoutingModule, LoginGuard} from './routing/app-routing.module';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import {FormsModule} from '@angular/forms';
+import {DataService} from './services/data.service';
+import {AuthenticationService} from './services/authentication.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,9 +51,10 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DataService, LoginGuard, AuthenticationService],
   bootstrap: [AppComponent]
 })
 

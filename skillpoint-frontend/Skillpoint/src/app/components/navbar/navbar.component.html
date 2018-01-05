@@ -57,11 +57,11 @@
           <div class="modal-body">
             <h2>Log In</h2>
             <hr class="star-primary">
-            <form method="post">
+            <form method="post" (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
               <div class="form-group">
 
-                <input class="form-control email" type="email" name="email" placeholder="Email"><br/>
-                <input class="form-control" type="password" name="password" placeholder="Password" style="margin-bottom:3px">
+                <input class="form-control email" type="email" name="email" placeholder="Username" [(ngModel)]="model.username" #username="ngModel"><br/>
+                <input class="form-control" type="password" name="password" placeholder="Password" [(ngModel)]="model.password" #password ="ngModel" style="margin-bottom:3px">
                 <fieldset>
 
                   <label >

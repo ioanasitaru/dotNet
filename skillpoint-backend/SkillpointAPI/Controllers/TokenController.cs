@@ -10,6 +10,7 @@ using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using DTOs;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,38 +20,39 @@ using Newtonsoft.Json;
 
 namespace SkillpointAPI.Controllers
 {
-    public partial class TokenController : Controller
+    [EnableCors("CorsPolicy")]
+    public class TokenController : Controller
     {
-        private DatabaseContext context;
-        private RoleManager<IdentityRole> roleManager;
-        private UserManager<User> userManager;
-        private SignInManager<User> signInManager;
-        private IConfiguration configuration;
+        private DatabaseContext _context;
+        private RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration _configuration;
 
         public TokenController(
-            DatabaseContext _context,
-            RoleManager<IdentityRole> _roleManager,
-            UserManager<User> _userManager,
-            SignInManager<User> _signInManager,
-            IConfiguration _configuration)
+            DatabaseContext context,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IConfiguration configuration)
         {
-            context = _context;
-            roleManager = _roleManager;
-            userManager = _userManager;
-            signInManager = _signInManager;
-            configuration = _configuration;
+            this._context = context;
+            this._roleManager = roleManager;
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+            this._configuration = configuration;
         }
 
         protected SignInManager<User> SignInManager { get; private set; }
 
-        [HttpPost("Auth")]
+        [HttpPost("auth")]
         public async Task<object> Auth([FromBody] TokenCreatingModel model)
         {
-            var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
 
             if (result.Succeeded)
             {
-                var appUser = userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
+                var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
                 return GenerateJwtToken(model.Username, appUser);
             }
 
@@ -66,13 +68,13 @@ namespace SkillpointAPI.Controllers
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Auth:Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Auth:Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(configuration["Auth:Jwt:ExpireDays"]));
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration["Auth:Jwt:ExpireDays"]));
 
             var token = new JwtSecurityToken(
-                configuration["Auth:Jwt:Issuer"],
-                configuration["Auth:Jwt:Issuer"],
+                _configuration["Auth:Jwt:Issuer"],
+                _configuration["Auth:Jwt:Issuer"],
                 claims,
                 expires: expires,
                 signingCredentials: creds
@@ -82,4 +84,3 @@ namespace SkillpointAPI.Controllers
         }
     }
 }
-

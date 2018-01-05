@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
-import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-root',
