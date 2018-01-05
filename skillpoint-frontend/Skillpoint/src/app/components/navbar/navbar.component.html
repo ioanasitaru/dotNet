@@ -17,17 +17,32 @@
           <a routerLink=""></a>
         </li>
         <li>
-          <a href="#loginModal" data-toggle="modal">Login</a>
+          <div *ngIf="!isUserLoggedIn()">
+            <a href="#loginModal" data-toggle="modal">Login</a>
+          </div>
+          <div *ngIf="isUserLoggedIn()">
+            <a routerLink="profile">{{user.username}}</a>
+          </div>
         </li>
         <li class="page-scroll">
-          <a routerLink="/events">Events</a>
+          <div *ngIf="isUserLoggedIn()">
+            <a routerLink="events">My Events</a>
+          </div>
+          <div *ngIf="!isUserLoggedIn()">
+            <a href="#events">Events</a>
+          </div>
         </li>
+        <div *ngIf="!isUserLoggedIn()">
         <li class="page-scroll">
-          <a href="#leaderboards">Leaderboards</a>
-        </li>
+            <a href="#leaderboards">Leaderboards</a>
+          </li>
+        </div>
         <li class="page-scroll">
-          <a routerLink="/about">About</a>
+          <a routerLink="about">About</a>
         </li>
+        <div *ngIf="isUserLoggedIn()">
+          <a routerLink="/">Logout</a>
+        </div>
       </ul>
     </div>
   </div>
