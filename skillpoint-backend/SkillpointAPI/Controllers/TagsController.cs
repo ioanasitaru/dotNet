@@ -2,10 +2,12 @@
 using Business.Services.Interfaces;
 using CreatingModels;
 using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/Tags")]
     public class TagsController : Controller

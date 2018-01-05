@@ -1,0 +1,81 @@
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+      </button>
+      <img src="../assets/img/logo.png" alt="Logo" class="img-responsive" id="logo">
+      <a class="navbar-brand-image" routerLink="/">
+        <span id="brand-name">Skillpoint</span>
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="hidden">
+          <a routerLink=""></a>
+        </li>
+        <li>
+          <a href="#loginModal" data-toggle="modal">Login</a>
+        </li>
+        <li class="page-scroll">
+          <a routerLink="/events">Events</a>
+        </li>
+        <li class="page-scroll">
+          <a href="#leaderboards">Leaderboards</a>
+        </li>
+        <li class="page-scroll">
+          <a routerLink="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Login Modal -->
+<div class="login-modal modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
+          <div class="modal-body">
+            <h2>Log In</h2>
+            <hr class="star-primary">
+            <form method="post">
+              <div class="form-group">
+
+                <input class="form-control email" type="email" name="email" placeholder="Email"><br/>
+                <input class="form-control" type="password" name="password" placeholder="Password" style="margin-bottom:3px">
+                <fieldset>
+
+                  <label >
+                    <input type="checkbox" style="display:inline; clear:left">
+                  </label>
+
+                  <h4 style="display:inline; margin-bottom:50%">&nbsp;Remember me</h4>
+
+                  <label>
+                    <small><a class="btn btn-link btn-multi-line" data-dismiss="modal" routerLink="/signup" role="button">Don't have an account? <strong>Sign up!</strong></a></small>
+                  </label>
+
+                  <br/><br/>
+                  <label>
+                    <button type="Submit" class="btn btn-default">Login </button>
+                  </label>
+                </fieldset>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
