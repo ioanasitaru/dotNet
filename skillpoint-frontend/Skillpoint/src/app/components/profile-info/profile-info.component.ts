@@ -12,19 +12,16 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   model = new User('', '', '', '', '', '');
-  passwords = true;
+  passwords = false;
 
   ngOnInit() {
   }
   checkPasswords() {
+    console.log(this.model.password, this.model.confirmPassword, this.passwords);
     if (!isNullOrUndefined(this.model.password) && !isNullOrUndefined(this.model.confirmPassword)) {
-      console.log(this.model.password, this.model.confirmPassword);
       this.passwords = this.model.password === this.model.confirmPassword;
+    } else {
+      this.passwords = false;
     }
-  }
-
-  checkForm(form) {
-    console.log(form, this.passwords);
-    return form && this.passwords;
   }
 }
