@@ -1,3 +1,7 @@
 a:focus {
   outline: none;
 }
+
+.page-scroll {
+  cursor: pointer;
+}

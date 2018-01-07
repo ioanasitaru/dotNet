@@ -13344,6 +13344,7 @@
       "Data.Domain >= 1.0.0",
       "Data.Persistence >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.3",
+      "Microsoft.AspNetCore.Cors >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.0",
       "Swashbuckle.AspNetCore >= 1.1.0"
@@ -13409,6 +13410,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "2.0.0"
+          },
+          "Microsoft.AspNetCore.Cors": {
+            "target": "Package",
+            "version": "2.0.1"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",

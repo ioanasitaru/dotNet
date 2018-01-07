@@ -10,7 +10,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) {
     // set token if saved in local storage
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(localStorage.getItem('user'));
     this.token = currentUser && currentUser.token;
   }
 
@@ -20,9 +20,10 @@ export class AuthenticationService {
     headers.append('Content-Type', 'application/javascript');
     return this.http.post(`http://localhost:51571/auth`, loginModel, {headers: headers})
       .map((response: HttpResponse<string>) => {
-        console.log(response);
+        console.log('response:', response);
         // login successful if there's a jwt token in the response
-        const token = response.headers.get('authorization');
+        const token = 'Bearer ' + response['token'];
+        const user = response['user'];
         if (token) {
           // set token property
           this.token = token;
@@ -31,6 +32,7 @@ export class AuthenticationService {
           // localStorage.setItem('currentUser', JSON.stringify(loginModel));
 
           localStorage.setItem('authorization', token);
+          localStorage.setItem('user', JSON.stringify(user));
           // return true to indicate successful login
           return true;
         } else {
@@ -43,7 +45,7 @@ export class AuthenticationService {
   logout(): void {
     // clear token remove user from local storage to log user out
     this.token = null;
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('user');
     localStorage.removeItem('authorization');
     this.router.navigate(['/']);
   }

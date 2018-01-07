@@ -20,7 +20,7 @@
           <a href="#loginModal" data-toggle="modal">Login</a>
         </li>
         <li *ngIf="isUserLoggedIn()">
-            <!--<a routerLink="profile">{{user.username}}</a>-->
+            <a routerLink="profile">{{ this.user.username }}</a>
         </li>
         <li *ngIf="isUserLoggedIn()">
           <a routerLink="events">My Events</a>
@@ -35,7 +35,7 @@
           <a routerLink="about">About</a>
         </li>
         <li class="page-scroll" *ngIf="isUserLoggedIn()">
-          <a routerLink="/">Logout</a>
+          <a (click)="logout()">Logout</a>
         </li>
       </ul>
     </div>
@@ -57,10 +57,10 @@
           <div class="modal-body">
             <h2>Log In</h2>
             <hr class="star-primary">
-            <form method="post" (ngSubmit)="onSubmit(loginForm.value)" #loginForm="ngForm">
+            <form method="post"  #loginForm="ngForm">
               <div class="form-group">
 
-                <input class="form-control email" type="email" name="email" placeholder="Username" [(ngModel)]="model.username" #username="ngModel"><br/>
+                <input class="form-control email" type="text" name="username" placeholder="Username" [(ngModel)]="model.username" #username="ngModel"><br/>
                 <input class="form-control" type="password" name="password" placeholder="Password" [(ngModel)]="model.password" #password ="ngModel" style="margin-bottom:3px">
                 <fieldset>
 
@@ -76,7 +76,7 @@
 
                   <br/><br/>
                   <label>
-                    <button type="Submit" class="btn btn-default">Login </button>
+                    <button (click)="onSubmit(loginForm.value)" class="btn btn-default" data-dismiss="modal">Login </button>
                   </label>
                 </fieldset>
               </div>

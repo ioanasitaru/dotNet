@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import {RequestOptions, Headers} from '@angular/http';
-
 import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
-import {Router} from '@angular/router';
-import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
-import {isNullOrUndefined} from "util";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class DataService {

@@ -11,7 +11,7 @@ export class ProfileInfoComponent implements OnInit {
   constructor() {
   }
 
-  model = new User('', '', '', '', '', '');
+  model = new User('', '', '', '', '', '', []);
   passwords = false;
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { Location, PopStateEvent } from '@angular/common';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',

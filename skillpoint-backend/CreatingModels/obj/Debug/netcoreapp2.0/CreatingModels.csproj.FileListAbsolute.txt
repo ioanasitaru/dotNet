@@ -10,9 +10,9 @@ C:\Users\Ovidiu\Documents\GitHub\dotNet\skillpoint-backend\CreatingModels\obj\De
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.deps.json
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.dll
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\bin\Debug\netcoreapp2.0\CreatingModels.pdb
-E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csprojResolveAssemblyReference.cache
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csproj.CoreCompileInputs.cache
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfoInputs.cache
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.AssemblyInfo.cs
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.dll
 E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.pdb
+E:\MS.NET\project\dotNet\skillpoint-backend\CreatingModels\obj\Debug\netcoreapp2.0\CreatingModels.csprojResolveAssemblyReference.cache

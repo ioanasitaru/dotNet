@@ -8,7 +8,6 @@ namespace DTOs
 {
     public class UserDTO : UserCreatingModel
     {
-
         public string Id { get; set; }
 
         public new List<TagDTO> Tags { get; set; }
@@ -21,7 +20,7 @@ namespace DTOs
             Name = user.Name;
             Email = user.Email;
             Location = user.Location;
-            Tags = user.Tags.ConvertAll(ut => new TagDTO(ut)).ToList();
+            Tags = user.Tags?.ConvertAll(ut => new TagDTO(ut)).ToList();
         }
     }
 }

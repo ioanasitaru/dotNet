@@ -38,7 +38,14 @@ namespace SkillpointAPI
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ITagsService, TagsService>();
 
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+            });
 
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
@@ -88,15 +95,6 @@ namespace SkillpointAPI
             {
                 c.SwaggerDoc("v1", new Info { Title = "Skillpoint API", Version = "v1" });
             });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
-            });
         }
 
 
@@ -105,7 +103,9 @@ namespace SkillpointAPI
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {   
+        {
+            app.UseCors("CorsPolicy");
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -121,12 +121,6 @@ namespace SkillpointAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
-
-            app.UseMvc();
-
-            app.UseCors("CorsPolicy");
-
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetService<DatabaseContext>();
@@ -136,6 +130,12 @@ namespace SkillpointAPI
 
                 DbSeeder.Seed(dbContext, roleManager, userManager);
             }
+
+            app.UseAuthentication();
+
+            app.UseMvc();
+
+            
         }
     }
 }

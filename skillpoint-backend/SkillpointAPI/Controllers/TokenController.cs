@@ -53,7 +53,7 @@ namespace SkillpointAPI.Controllers
             if (result.Succeeded)
             {
                 var appUser = _userManager.Users.SingleOrDefault(r => r.UserName == model.Username);
-                return GenerateJwtToken(model.Username, appUser);
+                return Json(new {token = GenerateJwtToken(model.Username, appUser), user = new UserDTO(appUser)});
             }
 
             throw new ApplicationException("INVALID_LOGIN_ATTEMPT");

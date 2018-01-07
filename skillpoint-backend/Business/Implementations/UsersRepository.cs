@@ -25,6 +25,8 @@ namespace Business.Repositories.Implementations
         {
 
             var user = User.Create(model.Username, model.Name, model.Email, model.Location, null);
+            if (model.Password != model.ConfirmPassword)
+                throw new ArgumentException("Passwords do not match!");
             // Add the user to the Db with the choosen password
             await userManager.CreateAsync(user, model.Password);
 

@@ -33,7 +33,7 @@ namespace Data.Domain.Entities
             //TODO: add eventlist and achivementlist
 
             var instance = new User {Id = Guid.NewGuid().ToString()};
-            instance.Update(username,  name, email, location, tagsList);
+            instance.Update(username, name, email, location, tagsList);
             return instance;
         }
 

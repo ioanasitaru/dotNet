@@ -46,7 +46,7 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" placeholder="Username" id="userName" required
-                   [(ngModel)]="model.userName" #userName="ngModel" name="userName">
+                   [(ngModel)]="model.username" #userName="ngModel" name="username">
             <div [hidden]="userName.valid || userName.untouched"><p class="help-block text-danger">Please enter an
               username</p></div>
           </div>
@@ -56,9 +56,8 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" placeholder="Password" id="password" required
-                   [(ngModel)]="model.password" #password="ngModel" name="password">
-            <div [hidden]="password.valid || password.untouched"><p class="help-block text-danger" (blur)="checkPasswords()">Please enter your
-              password</p></div>
+                   [(ngModel)]="model.password" #password="ngModel" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+            <div [hidden]="password.valid || password.untouched"><p class="help-block text-danger">Password must contain at least one uppercase, one digit, one symbol, and must be at least 6 characters!</p></div>
           </div>
         </div>
 
@@ -66,9 +65,7 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword" required
-                   [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" name="confirmPassword" (blur)="checkPasswords()">
-            <div [hidden]="confirmPassword.valid || confirmPassword.untouched"><p class="help-block text-danger">Please
-              re-enter your password</p></div>
+                   [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" name="confirmPassword" (blur)="checkPasswords()" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
             <div *ngIf="!passwords && !confirmPassword.untouched && !password.untouched"><p class="help-block text-danger">Passwords don't match</p></div>
           </div>
         </div>
