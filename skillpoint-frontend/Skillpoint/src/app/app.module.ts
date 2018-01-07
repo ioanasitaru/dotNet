@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { IntroSectionComponent } from './components/intro-section/intro-section.component';
@@ -26,6 +25,7 @@ import {FormsModule} from '@angular/forms';
 import {DataService} from './services/data.service';
 import {AuthenticationService} from './services/authentication.service';
 import {HttpClientModule} from '@angular/common/http';
+import {Select2Module} from 'ng2-select2';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Select2Module
   ],
   providers: [DataService, LoginGuard, AuthenticationService],
   bootstrap: [AppComponent]

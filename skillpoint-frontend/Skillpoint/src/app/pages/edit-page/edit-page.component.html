@@ -52,15 +52,24 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+              <select2 [data]="this.exampleData"></select2>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+
 
         <br><br>
         <div id="success"></div>
         <div class="row">
           <div class="form-group col-xs-12">
-            <input type="submit" value="Register" class="btn btn-success btn-lg" [disabled]="!editForm.valid">
+            <input type="submit" value="Save" class="btn btn-success btn-lg" [disabled]="!editForm.valid">
           </div>
         </div>
       </div>
     </div>
   </div>
 </form>
+<script src="../../../assets/vendor/jquery/jquery.min.js"></script>
+<script src="../../../assets/vendor/select2/select2.js"></script>
