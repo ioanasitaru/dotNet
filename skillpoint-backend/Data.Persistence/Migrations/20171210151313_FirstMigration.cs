@@ -14,7 +14,7 @@ namespace Data.Persistence.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     DateAndTime = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Image = table.Column<byte[]>(nullable: true),
+                    Image = table.Column<string>(nullable: true),
                     Location = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },

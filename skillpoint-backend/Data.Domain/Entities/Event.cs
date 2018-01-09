@@ -13,11 +13,11 @@ namespace Data.Domain.Entities
         public string Description { get; private set; }
         public DateTime DateAndTime { get; private set; }
         public string Location { get; private set; }
-        public byte[] Image { get; private set; }
+        public string Image { get; private set; }
 
         public List<EventTag> Tags { get; private set; }
 
-        public static Event Create(string name, string description, DateTime dateAndTime, string location, byte[] image,List<EventTag> tagList)
+        public static Event Create(string name, string description, DateTime dateAndTime, string location, string image,List<EventTag> tagList)
         {
             var instance = new Event
             {
@@ -37,7 +37,7 @@ namespace Data.Domain.Entities
             return instance;
         }
 
-        public void Update(string name, string description, DateTime dateAndTime, string location, byte[] image,List<EventTag> tagList)
+        public void Update(string name, string description, DateTime dateAndTime, string location, string image,List<EventTag> tagList)
         {
             Name = name;
             Description = description;

@@ -36,7 +36,6 @@ namespace Business.Repositories.Implementations
             @event.Update(@event.Name,@event.Description,@event.DateAndTime,@event.Location,@event.Image,eventTags);
             AddEvent(@event, creatingModel.Tags);
             _databaseContext.SaveChanges();
-            GetById(@event.Id);
         }
 
         private void AddEvent(Event _event, List<TagCreatingModel> tags)
@@ -52,7 +51,7 @@ namespace Business.Repositories.Implementations
                     if (tagsRepository.GetById(tag.Label) != null)
                     {
                         var sql = String.Format(
-                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}',CONVERT(varbinary,'{3}'),'{4}','{5}')",
+                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
                             _event.Id, _event.DateAndTime, _event.Description, _event.Image, _event.Location,
                             _event.Name);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
@@ -64,7 +63,7 @@ namespace Business.Repositories.Implementations
                     else
                     {
                         var sql = String.Format(
-                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}',CONVERT(varbinary,'{3}'),'{4}','{5}')",
+                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
                             _event.Id, _event.DateAndTime, _event.Description, _event.Image, _event.Location,
                             _event.Name);
                         _databaseContext.Database.ExecuteSqlCommand(sql);

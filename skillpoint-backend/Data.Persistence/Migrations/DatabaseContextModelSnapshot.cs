@@ -26,7 +26,7 @@ namespace Data.Persistence.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<byte[]>("Image");
+                    b.Property<string>("Image");
 
                     b.Property<string>("Location");
 

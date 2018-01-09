@@ -31,7 +31,7 @@ export class UpdateComponent implements OnInit {
       console.log(data);
       const events = data.events;
       for (let infoIndex = 0; infoIndex < events.length; infoIndex++) {
-        eventsShort.push(new Event(events[infoIndex].name.text, events[infoIndex].description.text, new Date(events[infoIndex].start.local), events[infoIndex].location, events[infoIndex].logo.url));
+        eventsShort.push(new Event(events[infoIndex].name.text, events[infoIndex].description.text, new Date(events[infoIndex].start.local), events[infoIndex].location, events[infoIndex].logo.url, []));
       }
 
     });
@@ -65,7 +65,7 @@ export class UpdateComponent implements OnInit {
             detailedLocation = 'Not provided';
           }
 
-          eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ''), new Date(events[infoIndex].time / 1000), detailedLocation, events[infoIndex].event_url));
+          eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ''), new Date(events[infoIndex].time / 1000), detailedLocation, events[infoIndex].event_url, []));
         }
       }
 
@@ -89,7 +89,7 @@ export class UpdateComponent implements OnInit {
     $.ajax(settings).done(function (data) {
       const events = data;
       for (let infoIndex = 0; infoIndex < events.length; infoIndex++) {
-        eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description, new Date(events[infoIndex].start_timestamp), events[infoIndex].full_address, events[infoIndex].public_url));
+        eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description, new Date(events[infoIndex].start_timestamp), events[infoIndex].full_address, events[infoIndex].public_url, []));
       }
       console.log(eventsShort);
 
@@ -103,8 +103,8 @@ export class UpdateComponent implements OnInit {
     eventModels = eventModels.concat(this.get_events_hack(), this.get_events_eventbrite(), this.get_events_meetup());
     var content = "Successfully saved!";
     $("#all").append(content);
-    console.log(JSON.stringify({'eventModels'}));
-    this.dataService.postData('http://localhost:51571/api/Events/bulk', JSON.stringify(eventModels)).subscribe(response => {
+    // console.log(JSON.stringify({'eventModels': eventModels}));
+    this.dataService.postData('http://localhost:51571/api/Events', JSON.stringify(eventModels[0])).subscribe(response => {
         console.log(response);
           },
           err => {
