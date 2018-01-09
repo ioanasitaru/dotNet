@@ -13661,7 +13661,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bogdan\\.nuget\\packages\\": {},
+    "C:\\Users\\Ovidiu\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13670,17 +13670,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
-      "packagesPath": "C:\\Users\\Bogdan\\.nuget\\packages\\",
-      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\UnitTests\\UnitTests.csproj",
+      "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bogdan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ovidiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13693,8 +13693,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj"
             }
           }
         }
@@ -13708,26 +13708,26 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "MSTest.TestFramework": {
-            "target": "Package",
-            "version": "1.1.18"
-          },
           "FluentAssertions": {
             "target": "Package",
-            "version": "4.19.4"
+            "version": "[4.19.4, )"
           },
           "MSTest.TestAdapter": {
             "target": "Package",
-            "version": "1.1.18"
+            "version": "[1.1.18, )"
           },
-          "Microsoft.NETCore.App": {
+          "MSTest.TestFramework": {
             "target": "Package",
-            "version": "2.0",
-            "autoReferenced": true
+            "version": "[1.1.18, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "15.3.0-preview-20170628-02"
+            "version": "[15.3.0-preview-20170628-02, )"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "[2.0.0, )",
+            "autoReferenced": true
           }
         },
         "imports": [

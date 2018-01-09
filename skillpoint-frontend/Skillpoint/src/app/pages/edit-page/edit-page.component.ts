@@ -17,7 +17,7 @@ export class EditPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(sessionStorage.getItem('user'));
     this.exampleData = [
       {
         id: '0',

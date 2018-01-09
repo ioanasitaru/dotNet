@@ -12,7 +12,7 @@ import {isNullOrUndefined} from 'util';
 export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
   canActivate() {
-    if (localStorage.getItem('authorization') !== undefined) {
+    if (sessionStorage.getItem('authorization') !== undefined) {
       return true;
     }
     this.router.navigate(['/login']);
@@ -24,8 +24,8 @@ export class LoginGuard implements CanActivate {
 export class NotLoginGuard implements CanActivate {
   constructor(private router: Router) {}
   canActivate() {
-    if (isNullOrUndefined(localStorage.getItem('authorization'))){
-      console.log(localStorage.getItem('authorization'));
+    if (isNullOrUndefined(sessionStorage.getItem('authorization'))){
+      console.log(sessionStorage.getItem('authorization'));
       return true;
     }
     this.router.navigate(['']);

@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isUserLoggedIn = function () {
-    return !isNullOrUndefined(localStorage.getItem('authorization'));
+    return !isNullOrUndefined(sessionStorage.getItem('authorization'));
   };
 
   logout() {
@@ -40,6 +40,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    
   }
 }

@@ -10,7 +10,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private router: Router) {
     // set token if saved in local storage
-    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const currentUser = JSON.parse(sessionStorage.getItem('user'));
     this.token = currentUser && currentUser.token;
   }
 
@@ -29,10 +29,10 @@ export class AuthenticationService {
           this.token = token;
 
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          // localStorage.setItem('currentUser', JSON.stringify(loginModel));
+          // sessionStorage.setItem('currentUser', JSON.stringify(loginModel));
 
-          localStorage.setItem('authorization', token);
-          localStorage.setItem('user', JSON.stringify(user));
+          sessionStorage.setItem('authorization', token);
+          sessionStorage.setItem('user', JSON.stringify(user));
           // return true to indicate successful login
           return true;
         } else {
@@ -45,8 +45,8 @@ export class AuthenticationService {
   logout(): void {
     // clear token remove user from local storage to log user out
     this.token = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('authorization');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('authorization');
     this.router.navigate(['/']);
   }
 }
