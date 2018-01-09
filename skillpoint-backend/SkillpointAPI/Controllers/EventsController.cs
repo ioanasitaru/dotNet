@@ -51,14 +51,14 @@ namespace SkillpointAPI.Controllers
 
         // PUT: api/Events/5
         [HttpPut("{id}")]
-        public IActionResult PutEvent([FromRoute] Guid id, [FromBody]EventCreatingModel @event)
+        public IActionResult PutEvent([FromRoute] Guid id, [FromBody] EventCreatingModel @event)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-        
-            _eventService.Update(@event,id);
+
+            _eventService.Update(@event, id);
 
             return NoContent();
         }
@@ -71,14 +71,29 @@ namespace SkillpointAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+
 //            _eventService.Create(eventModel);
             _eventService.Create(eventModel);
             return Created("", null);
         }
 
+        [HttpPost]
+        [Route("bulk")]
+        public IActionResult PostEvents([FromBody] List<EventCreatingModel> eventModels)
+        {
+            foreach (var _event in eventModels)
+            {
+//                TODO: Verificat pentru duplicate(mai intai filtram dupa startdate dupa care dupa nume)
+
+                _eventService.Create(_event);
+            }
+
+            return Created("", null);
+        }
+
         // DELETE: api/Events/5
         [HttpDelete("{id}")]
-        public  IActionResult DeleteEvent([FromRoute] Guid id)
+        public IActionResult DeleteEvent([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
             {

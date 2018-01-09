@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import $ from '';
+import {Event} from "../../models/event";
+import {DataService} from "../../services/data.service";
+import {Credentials} from "../../models/credentials";
 
 @Component({
   selector: 'app-update',
@@ -7,15 +9,18 @@ import $ from '';
 })
 export class UpdateComponent implements OnInit {
 
-  constructor() {
+
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit() {
   }
 
   get_events_eventbrite = function () {
+    const eventsShort = [];
+
     const settings = {
-      'async': true,
+      'async': false,
       'crossDomain': true,
       'url': 'https://www.eventbriteapi.com/v3/events/search/?subcategories=2002,2007,1010,2004,2005&token=XZYAN77TJCA2AIBI4A6N',
       'method': 'GET',
@@ -25,45 +30,19 @@ export class UpdateComponent implements OnInit {
     $.ajax(settings).done(function (data) {
       console.log(data);
       const events = data.events;
-      const eventsShort = [];
-      const event = function (name, description, location, date_and_time, url, img) {
-        this.name = name;
-        this.description = description;
-        this.location = location;
-        this.date_and_time = date_and_time;
-        this.url = url;
-        this.img = img;
-      }
       for (let infoIndex = 0; infoIndex < events.length; infoIndex++) {
-        eventsShort.push(new event(events[infoIndex].name.text, events[infoIndex].description.text, events[infoIndex].location, events[infoIndex].start.local, events[infoIndex].url, events[infoIndex].logo.url));
+        eventsShort.push(new Event(events[infoIndex].name.text, events[infoIndex].description.text, new Date(events[infoIndex].start.local), events[infoIndex].location, events[infoIndex].logo.url));
       }
-      console.log(eventsShort);
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.ajax({
-        type: 'POST',
-        url: 'storeEvent',
-        dataType: 'json',
-        data: {'events': eventsShort, 'source': 'Eventbrite'},
-        success: function (response) {
-          console.log('All good!');
-          console.log(response);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          console.log(xhr.status);
-          console.log(xhr.responseText);
-          console.log(thrownError);
-        }
-      });
+
     });
+    return eventsShort;
   }
 
   get_events_meetup = function () {
+    const eventsShort = [];
+
     const settings = {
-      'async': true,
+      'async': false,
       'crossDomain': true,
       'url': 'https://api.meetup.com/2/open_events?topic=softwaredev,newtech,1w&key=3311642666775f7d4b6a1c496c30613e',
       'method': 'GET',
@@ -72,17 +51,8 @@ export class UpdateComponent implements OnInit {
     }
 
     $.ajax(settings).done(function (data) {
-      console.log(data);
       const events = data.results;
-      const eventsShort = [];
-      const event = function (name, description, location, date_and_time, url, img) {
-        this.name = name;
-        this.description = description;
-        this.location = location;
-        this.date_and_time = date_and_time;
-        this.url = url;
-        this.img = img;
-      }
+      console.log(data);
 
 
       for (let infoIndex = 0; infoIndex < data.results.length; infoIndex++) {
@@ -94,40 +64,22 @@ export class UpdateComponent implements OnInit {
           else {
             detailedLocation = 'Not provided';
           }
-          console.log(detailedLocation);
 
-          eventsShort.push(new event(events[infoIndex].name, events[infoIndex].description.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ''), detailedLocation, events[infoIndex].time / 1000, events[infoIndex].event_url, null));
-          console.log(eventsShort[infoIndex]);
+          eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ''), new Date(events[infoIndex].time / 1000), detailedLocation, events[infoIndex].event_url));
         }
       }
 
-      console.log(eventsShort);
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.ajax({
-        type: 'POST',
-        url: 'storeEvent',
-        dataType: 'json',
-        data: {'events': eventsShort, 'source': 'Meetup'},
-        success: function (response) {
-          console.log('All good!');
-          console.log(response);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          console.log(xhr.status);
-          console.log(xhr.responseText);
-          console.log(thrownError);
-        }
-      });
+
     });
+    console.log(eventsShort);
+    return eventsShort;
   };
 
   get_events_hack = function () {
+    const eventsShort = [];
+
     const settings = {
-      'async': true,
+      'async': false,
       'crossDomain': true,
       'url': 'http://www.hackathonwatch.com:80/api//hackathons/coming.json?page=1',
       'method': 'GET',
@@ -135,41 +87,31 @@ export class UpdateComponent implements OnInit {
     }
 
     $.ajax(settings).done(function (data) {
-      console.log(data);
       const events = data;
-      const eventsShort = [];
-      const event = function (name, description, location, date_and_time, url) {
-        this.name = name;
-        this.description = description;
-        this.location = location;
-        this.date_and_time = date_and_time;
-        this.url = url;
-      }
       for (let infoIndex = 0; infoIndex < events.length; infoIndex++) {
-        eventsShort.push(new event(events[infoIndex].name, events[infoIndex].description, events[infoIndex].full_address, events[infoIndex].start_timestamp, events[infoIndex].public_url));
+        eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description, new Date(events[infoIndex].start_timestamp), events[infoIndex].full_address, events[infoIndex].public_url));
       }
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.ajax({
-        type: 'POST',
-        url: 'storeEvent',
-        dataType: 'json',
-        data: {'events': eventsShort, 'source': 'Hackathon'},
-        success: function (response) {
-          console.log('All good!');
-          console.log(response);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          console.log(xhr.status);
-          console.log(xhr.responseText);
-          console.log(thrownError);
-        }
-      });
+      console.log(eventsShort);
+
+
     });
+    return eventsShort;
   };
 
+  get_events_from_all_apis = function () {
+    let eventModels = [];
+    eventModels = eventModels.concat(this.get_events_hack(), this.get_events_eventbrite(), this.get_events_meetup());
+    var content = "Successfully saved!";
+    $("#all").append(content);
+    console.log(JSON.stringify({'eventModels'}));
+    this.dataService.postData('http://localhost:51571/api/Events/bulk', JSON.stringify(eventModels)).subscribe(response => {
+        console.log(response);
+          },
+          err => {
+            console.log(err);
+            console.log('erroare ');
+          }
+        );
+  }
 
 }

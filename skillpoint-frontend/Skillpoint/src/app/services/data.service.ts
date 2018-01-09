@@ -17,10 +17,12 @@ export class DataService {
   }
 
   postData(url, jsonObject) {
-    const headers = new HttpHeaders();
+    console.log("se intampla");
+    let headers = new HttpHeaders();
     if (sessionStorage.getItem('authorization') !== '') {
       headers.append('authorization', sessionStorage.getItem('authorization'));
     }
-    return this.http.post(url, jsonObject);
+    headers = headers.append('Content-Type', 'application/json');
+    return this.http.post(url, jsonObject, {headers: headers}).catch((error: any) => Observable.throw(error || 'Server error'));
   }
 }
