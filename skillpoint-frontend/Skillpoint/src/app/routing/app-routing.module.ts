@@ -6,6 +6,7 @@ import {EventPageComponent} from '../pages/event-page/event-page.component';
 import {ProfilePageComponent} from '../pages/profile-page/profile-page.component';
 import {SignupPageComponent} from '../pages/signup-page/signup-page.component';
 import {EditPageComponent} from '../pages/edit-page/edit-page.component';
+import {UpdateComponent} from "../components/update/update.component";
 
 const routes: Routes = [
   { path: '',  component: HomePageComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'events',  component: EventPageComponent},
   { path: 'profile', component: ProfilePageComponent},
   { path: 'signup', component: SignupPageComponent},
-  { path: 'edit', component: EditPageComponent}
+  { path: 'edit', component: EditPageComponent},
+  { path: 'update', component: UpdateComponent}
 ];
 
 @NgModule({

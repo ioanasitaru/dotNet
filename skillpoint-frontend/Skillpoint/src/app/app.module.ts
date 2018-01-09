@@ -22,6 +22,7 @@ import {AppRoutingModule} from './routing/app-routing.module';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import {UpdateComponent} from "./components/update/update.component";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     ProfilePageComponent,
     ProfileInfoComponent,
     EditPageComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,
