@@ -4,19 +4,23 @@ using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using DTOs;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Events")]
+    [EnableCors("CorsPolicy")]
     public class EventsController : Controller
     {
         private readonly IEventService _eventService;
+        private readonly ITagsService _tagsService;
 
-        public EventsController(IEventService eventService)
+        public EventsController(IEventService eventService, ITagsService tagsService)
         {
             _eventService = eventService;
+            _tagsService = tagsService;
         }
 
         // GET: api/Events
@@ -47,19 +51,14 @@ namespace SkillpointAPI.Controllers
 
         // PUT: api/Events/5
         [HttpPut("{id}")]
-        public IActionResult PutEvent([FromRoute] Guid id, [FromBody] EventDTO @event)
+        public IActionResult PutEvent([FromRoute] Guid id, [FromBody]EventCreatingModel @event)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != @event.Id)
-            {
-                return BadRequest();
-            }
-
-            _eventService.Update(@event);
+        
+            _eventService.Update(@event,id);
 
             return NoContent();
         }
@@ -72,8 +71,8 @@ namespace SkillpointAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+//            _eventService.Create(eventModel);
             _eventService.Create(eventModel);
-
             return Created("", null);
         }
 

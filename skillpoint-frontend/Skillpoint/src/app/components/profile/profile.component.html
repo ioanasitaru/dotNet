@@ -1,94 +1,79 @@
+<br><br>
+<section id="profile" style="padding-top: 100px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Profile</h2>
+        <hr class="star-primary"/>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
 
-    <br><br>
-    <section id="profile" style="padding-top: 100px">
-      <div class="container">
         <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2>Profile</h2>
-            <hr class="star-primary"/>
-            <br>
+          <div class="col-lg-4 col-lg-offset-2">
+            <p>Name: <b>{{this.user.name}}</b></p>
           </div>
         </div>
+
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-lg-4 col-lg-offset-2">
+            <p>Email: <b>{{this.user.email}}</b></p>
+          </div>
+        </div>
 
-            <div class="row">
-              <div class="col-lg-4 col-lg-offset-2">
-      <p>Name:</p>
-      </div>
-      <div class="col-lg-4">
-        <p>Mark</p>
-      </div>
-      </div>
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-2">
+            <p>Location: <b>{{this.user.location}}</b></p>
+          </div>
+        </div>
 
-      <div class="row">
-        <div class="col-lg-4 col-lg-offset-2">
-          <p>Email:</p>
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-2">
+            <p>Username: <b>{{this.user.username}}</b></p>
+          </div>
         </div>
-        <div class="col-lg-4">
-          <p>proiectTW@info.uaic.ro</p>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-lg-4 col-lg-offset-2">
-          <p>Location:</p>
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-2">
+            <p>Events attended: <b>102</b></p>
+          </div>
         </div>
-        <div class="col-lg-4">
-          <p>Washington, D.C</p>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-lg-4 col-lg-offset-2">
-          <p>Username:</p>
+        <!--TODO: FOREACH pentru tag-uri-->
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-2">
+            <p>Interests:</p>
+          </div>
+          <div class="col-lg-4">
+            <span class="badge">C++</span>
+            <span class="badge">JAVA</span>
+            <span class="badge">JAVASCRIPT</span>
+            <span class="badge">PHP</span>
+            <br>
+            <span class="badge">C#</span>
+            <span class="badge">SQL ORACLE</span>
+            <span class="badge">PYTHON</span>
+          </div>
         </div>
-        <div class="col-lg-4">
-          <p>ProiectTW</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-4 col-lg-offset-2">
-          <p>Events attended:</p>
-        </div>
-        <div class="col-lg-4">
-          <p>102</p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-4 col-lg-offset-2">
-          <p>Interests:</p>
-        </div>
-        <div class="col-lg-4">
-          <span class="badge">C++</span>
-          <span class="badge">JAVA</span>
-          <span class="badge">JAVASCRIPT</span>
-          <span class="badge">PHP</span>
-          <br>
-          <span class="badge">C#</span>
-          <span class="badge">SQL ORACLE</span>
-          <span class="badge">PYTHON</span>
-        </div>
-      </div>
 
 
-      <br><br>
-      <div class="row" >
-        <div class="col-lg-4 col-lg-offset-2" id="Edit">
-          <button routerLink="/edit" type="submit" class="btn btn-success btn-lg">Edit</button>
+        <br><br>
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-2" id="Edit">
+            <button routerLink="/edit" type="submit" class="btn btn-success btn-lg">Edit</button>
+          </div>
         </div>
-      </div>
 
 
       </div>
       <div class="col-md-4">
         <img class="img-responsive center-block" src="../assets/img/profile.png" alt="Profile picture">
         <div class="intro-text">
-          <h1 class="name text-center">Mark</h1>
+          <h1 class="name text-center">{{this.user.username}}</h1>
         </div>
       </div>
-      </div>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>

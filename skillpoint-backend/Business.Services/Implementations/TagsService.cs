@@ -21,24 +21,26 @@ namespace Business.Services.Implementations
 
         public IEnumerable<TagDTO> GetAll() => _repository.GetAll().ToList().ConvertAll(t => new TagDTO(t)).ToList();
 
-        public TagDTO GetByLabel(string label) => new TagDTO(_repository.GetByLabel(label));
+        public TagDTO GetById(string label) => new TagDTO(_repository.GetById(label));
 
-        public void Update(TagDTO tag) => _repository.Update(tag);
+        public void Update(TagCreatingModel model, string label) => _repository.Update(model,label);
 
-        public List<Tag> TagsFromCreatingModels(List<TagCreatingModel> tagsModels)
+        public List<Tag> CreateOrGet(List<TagCreatingModel> tagsModels)
         {
+            List<Tag> tags = new List<Tag>();
+            foreach (var tag in tagsModels)
+            {
+                var dbTag = _repository.GetByLabel(tag.Label);
+                if (dbTag == null)
+                {
+                    _repository.Create(tag);
+                    dbTag = _repository.GetByLabel(tag.Label);
+                }
+                tags.Add(dbTag);
+            }
 
-            return tagsModels.Select(tagModel => _repository.GetByLabel(tagModel.Label) ?? Tag.Create(tagModel.Label)).ToList();
-        }
+            return tags;
 
-        public TagDTO GetById(Guid id)
-        {
-            throw new NotImplementedException("Tags do not have Guids");
-        }
-
-        public void Delete(Guid id)
-        {
-            throw new NotImplementedException("Tags do not have Guids");
         }
     }
 }

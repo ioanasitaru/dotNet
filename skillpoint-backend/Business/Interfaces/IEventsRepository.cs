@@ -6,7 +6,8 @@ using DTOs;
 
 namespace Business.Repositories.Interfaces
 {
-    public interface IEventsRepository : ICrudRepository<Event, EventCreatingModel, EventDTO>
+    public interface IEventsRepository : ICrudRepository<Event, EventCreatingModel, Guid>
     {
+
     }
 }

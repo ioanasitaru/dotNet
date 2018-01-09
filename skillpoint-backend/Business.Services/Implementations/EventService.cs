@@ -11,32 +11,30 @@ namespace Business.Services.Implementations
 {
     public class EventService : IEventService
     {
-        private readonly IEventsRepository _eventsRepository;
+        public readonly IEventsRepository _eventsRepository;
 
         public EventService(IEventsRepository eventsRepository)
         {
             _eventsRepository = eventsRepository;
         }
 
-        public void Create(EventCreatingModel entity)
+        public void Create(EventCreatingModel model)
         {
-            _eventsRepository.Create(entity);
+            _eventsRepository.Create(model);
         }
 
-        public void Update(EventDTO entity)
+ 
+
+        public void Update(EventCreatingModel model, Guid id)
         {
-            _eventsRepository.Update(entity);
+            _eventsRepository.Update(model,id);
         }
 
-        public IEnumerable<EventDTO> GetAll()
-        {
-            return _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
-        }
+        public IEnumerable<EventDTO> GetAll() => _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
+    
 
-        public EventDTO GetById(Guid id)
-        {
-            return new EventDTO(_eventsRepository.GetById(id));
-        }
+        public EventDTO GetById(Guid id) => new EventDTO(_eventsRepository.GetById(id));
+
 
         public void Delete(Guid id)
         {

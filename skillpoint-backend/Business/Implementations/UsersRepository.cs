@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Business.Repositories.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
+using Microsoft.EntityFrameworkCore;
 using DTOs;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace Business.Repositories.Implementations
 {
@@ -19,23 +21,33 @@ namespace Business.Repositories.Implementations
             _databaseContext = database;
         }
 
-        public User Create(UserCreatingModel user, List<Tag> tagsList)
+        public async Task CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
-            var dbUser = User.Create(user.Username, user.Password, user.Name, user.Email, user.Location, null);
-            List<UserTag> userTags = new List<UserTag>();
-            foreach (var tag in tagsList)
-            {
-                userTags.Add(new UserTag(dbUser.Id, dbUser, tag.Label, tag));
-            }
-            dbUser.Update(user.Username, user.Password, user.Name, user.Email, user.Location, userTags);
-            _databaseContext.Users.Add(dbUser);
+
+            var user = User.Create(model.Username, model.Name, model.Email, model.Location, null);
+            if (model.Password != model.ConfirmPassword)
+                throw new ArgumentException("Passwords do not match!");
+            // Add the user to the Db with the choosen password
+            await userManager.CreateAsync(user, model.Password);
+
+            await userManager.AddToRoleAsync(user, "RegisteredUser");
             _databaseContext.SaveChanges();
-            return _databaseContext.Users.FirstOrDefault(u => u.Id == dbUser.Id);
         }
 
-        public User Create(UserCreatingModel userModel)
+        public User GetByUsername(string username) =>
+            _databaseContext.Users.FirstOrDefault(u => u.UserName.Equals(username));
+
+        public void CreateRelations(User user, List<Tag> tags)
         {
-            throw new NotImplementedException("Users require a tag list along the model");
+            List<UserTag> userTags = tags.ConvertAll(t => new UserTag(user.Id, user, t.Label, t));
+            foreach (var userTag in userTags)
+            {
+                //                _databaseContext.UserTag.Add(userTag);
+                var sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, userTag.Tag.Label);
+                _databaseContext.Database.ExecuteSqlCommand(sql);
+
+            }
+            _databaseContext.SaveChanges();
         }
 
         public IReadOnlyList<User> GetAll()
@@ -44,7 +56,7 @@ namespace Business.Repositories.Implementations
 
             foreach (var user in _databaseContext.Users.ToList())
             {
-                var userTags = _databaseContext.Entry(user).Collection("TagsList");
+                var userTags = _databaseContext.Entry(user).Collection("Tags");
                 if (!userTags.IsLoaded)
                 {
                     userTags.Load();
@@ -65,8 +77,8 @@ namespace Business.Repositories.Implementations
 
         public User GetById(Guid id)
         {
-            var user = _databaseContext.Users.FirstOrDefault(u => u.Id == id);
-            var userTags = _databaseContext.Entry(user).Collection("TagsList");
+            var user = _databaseContext.Users.FirstOrDefault(u => u.Id == id.ToString());
+            var userTags = _databaseContext.Entry(user).Collection("Tags");
             if (!userTags.IsLoaded)
             {
                 userTags.Load();
@@ -84,19 +96,21 @@ namespace Business.Repositories.Implementations
             return user;
         }
 
-        public void Update(UserDTO user, List<Tag> tags)
+        public void Update(UserCreatingModel userModel, Guid id)
         {
-            var dbUser = GetById(user.Id);
-            var userTags = tags.ConvertAll(t => new UserTag(dbUser.Id, dbUser, t.Label, t)).ToList();
-            dbUser.Update(user.Username, user.Password, user.Name, user.Email, user.Location, userTags);
-            _databaseContext.Users.Update(dbUser);
-            _databaseContext.SaveChanges();
-        }
+            var user = GetById(id);
 
-        public void Delete(User user)
-        {
-            _databaseContext.Users.Remove(user);
-            _databaseContext.SaveChanges();
+            List<UserTag> userTags = new List<UserTag>();
+
+            foreach (var tag in userModel.Tags)
+            {
+                userTags.Add(new UserTag(user.Id, user, tag.Label, Tag.Create(tag.Label)));
+            }
+
+            user.Update(userModel.Username, userModel.Name, userModel.Email,
+                userModel.Location, userTags);
+
+            _databaseContext.Users.Update(user);
         }
 
         public void Delete(Guid id)
@@ -105,9 +119,9 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
-        public void Update(UserDTO entity)
+        public void Create(UserCreatingModel entity)
         {
-            throw new NotImplementedException("Users also require a tag list");
+            throw new NotImplementedException();
         }
     }
 }

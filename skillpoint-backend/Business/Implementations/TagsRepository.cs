@@ -18,22 +18,21 @@ namespace Business.Repositories.Implementations
             _databaseContext = databaseContext;
         }
 
-        public Tag Create(TagCreatingModel tagModel)
+        public void Create(TagCreatingModel tagModel)
         {
             var tag = Tag.Create(tagModel.Label);
             _databaseContext.Tags.Add(tag);
             _databaseContext.SaveChanges();
-            return GetByLabel(tag.Label);
         }
 
         public IReadOnlyList<Tag> GetAll() => _databaseContext.Tags.ToList();
 
-        public Tag GetByLabel(string label) =>
+        public Tag GetById(string label) =>
             _databaseContext.Tags.FirstOrDefault(t => t.Label.ToLower().Equals(label.ToLower()));
 
-        public void Update(TagDTO tag)
+        public void Update(TagCreatingModel tag, string id)
         {
-            var dbTag = GetByLabel(tag.Label);
+            var dbTag = GetById(tag.Label);
             dbTag.Update(tag.Label, tag.Verified);
             _databaseContext.Tags.Update(dbTag);
             _databaseContext.SaveChanges();
@@ -46,14 +45,6 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
-        public Tag GetById(Guid id)
-        {
-            throw new NotImplementedException("Tags do not have Guids");
-        }
-
-        public void Delete(Guid id)
-        {
-            throw new NotImplementedException("Tags do not have Guids");
-        }
+        public Tag GetByLabel(string label) => _databaseContext.Tags.FirstOrDefault(t => t.Label.Equals(label));
     }
 }

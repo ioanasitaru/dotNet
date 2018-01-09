@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Data.Domain.Entities;
 
 namespace CreatingModels
 {
-    public class UserCreatingModel : CreatingModel<User>
+    public class UserCreatingModel
     {
         public String Username { get; set; }
 
         public String Password { get; set; }
+
+        public String ConfirmPassword { get; set; }
 
         public String Name { get; set; }
 

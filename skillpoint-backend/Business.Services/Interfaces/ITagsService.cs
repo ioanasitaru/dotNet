@@ -6,12 +6,8 @@ using Data.Domain.Entities;
 
 namespace Business.Services.Interfaces
 {
-    public interface ITagsService : ICrudService<Tag, TagCreatingModel, TagDTO>
-
+    public interface ITagsService : ICrudService<Tag, TagCreatingModel, TagDTO, string>
     {
-        TagDTO GetByLabel(string label);
-        void Delete(string label);
-
-        List<Tag> TagsFromCreatingModels(List<TagCreatingModel> tagModels);
+        List<Tag> CreateOrGet(List<TagCreatingModel> tagModels);
     }
 }

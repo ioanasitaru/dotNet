@@ -1,1 +1,95 @@
-<app-profile-info></app-profile-info>
+<br><br>
+<form id="signup" style="padding-top: 100px" (ngSubmit)="onSubmit(signupForm.value)" #signupForm="ngForm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Signup</h2>
+        <hr class="star-primary"/>
+        <h5>Join our community!</h5>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" placeholder="Name" id="name"
+                   required [(ngModel)]="model.name" #name="ngModel" name="name">
+            <div [hidden]="name.valid || name.untouched"><p class="help-block text-danger">Please enter your name</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <label for="email">Email Address</label>
+            <input type="email" class="form-control" placeholder="Email Address" id="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"
+                   [(ngModel)]="model.email" #email="ngModel" name="email">
+            <div [hidden]="email.valid || email.untouched"><p class="help-block text-danger">Please enter your email
+              address</p></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" placeholder="Location" id="location" required
+                   [(ngModel)]="model.location" #location="ngModel" name="location">
+            <div [hidden]="location.valid || location.untouched"><p class="help-block text-danger">Please enter your
+              location</p></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" placeholder="Username" id="userName" required
+                   [(ngModel)]="model.username" #userName="ngModel" name="username">
+            <div [hidden]="userName.valid || userName.untouched"><p class="help-block text-danger">Please enter an
+              username</p></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" placeholder="Password" id="password" required
+                   [(ngModel)]="model.password" #password="ngModel" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+            <div [hidden]="password.valid || password.untouched"><p class="help-block text-danger">Password must contain at least one uppercase, one digit, one symbol, and must be at least 6 characters!</p></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword" required
+                   [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" name="confirmPassword" (blur)="checkPasswords()" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+            <div *ngIf="!passwords && !confirmPassword.untouched && !password.untouched"><p class="help-block text-danger">Passwords don't match</p></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+              <option value='test' selected="selected">test </option>
+              <option value="test3">test</option>
+              <option value='teste'>teste</option>
+            </select>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+
+
+        <br><br>
+        <div id="success"></div>
+        <div class="row">
+          <div class="form-group col-xs-12">
+              <input type="submit" value="Register" class="btn btn-success btn-lg" [disabled]="!signupForm.valid || !passwords">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

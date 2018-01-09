@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { IntroSectionComponent } from './components/intro-section/intro-section.component';
@@ -18,11 +17,16 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { EventPageComponent } from './pages/event-page/event-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
-import {AppRoutingModule} from './routing/app-routing.module';
+import {AppRoutingModule, LoginGuard} from './routing/app-routing.module';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
-import {UpdateComponent} from "./components/update/update.component";
+import {UpdateComponent} from './components/update/update.component';
+import {FormsModule} from '@angular/forms';
+import {DataService} from './services/data.service';
+import {AuthenticationService} from './services/authentication.service';
+import {HttpClientModule} from '@angular/common/http';
+import {Select2Module} from 'ng2-select2';
 
 @NgModule({
   declarations: [
@@ -48,9 +52,13 @@ import {UpdateComponent} from "./components/update/update.component";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    Select2Module
   ],
-  providers: [],
+  providers: [DataService, LoginGuard, AuthenticationService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
