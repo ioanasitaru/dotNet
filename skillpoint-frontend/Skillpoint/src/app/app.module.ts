@@ -21,6 +21,7 @@ import {AppRoutingModule, LoginGuard} from './routing/app-routing.module';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import {UpdateComponent} from './components/update/update.component';
 import {FormsModule} from '@angular/forms';
 import {DataService} from './services/data.service';
 import {AuthenticationService} from './services/authentication.service';
@@ -46,7 +47,8 @@ import {Select2Module} from 'ng2-select2';
     ProfilePageComponent,
     ProfileInfoComponent,
     EditPageComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,
