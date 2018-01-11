@@ -12550,7 +12550,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ovidiu\\.nuget\\packages\\": {},
+    "C:\\Users\\Bogdan\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -12559,17 +12559,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
+      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
       "projectName": "Data.Domain",
-      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
-      "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Domain\\obj\\",
+      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\Data.Domain.csproj",
+      "packagesPath": "C:\\Users\\Bogdan\\.nuget\\packages\\",
+      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ovidiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Bogdan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12582,8 +12582,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj": {
-              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj"
+            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj": {
+              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj"
             }
           }
         }
@@ -12597,15 +12597,15 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "[2.0.3, )"
-          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.0.0, )",
+            "version": "2.0",
             "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "2.0.3"
           }
         },
         "imports": [

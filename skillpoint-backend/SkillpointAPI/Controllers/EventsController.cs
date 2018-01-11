@@ -81,6 +81,7 @@ namespace SkillpointAPI.Controllers
         [Route("bulk")]
         public IActionResult PostEvents([FromBody] List<EventCreatingModel> eventModels)
         {
+            System.Diagnostics.Debug.WriteLine(eventModels);
             foreach (var _event in eventModels)
             {
 //                TODO: Verificat pentru duplicate(mai intai filtram dupa startdate dupa care dupa nume)

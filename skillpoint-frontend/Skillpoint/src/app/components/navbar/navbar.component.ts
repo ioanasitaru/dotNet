@@ -20,7 +20,9 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit(loginModel: Credentials) {
+    console.log(loginModel)
     this.authService.login(loginModel).subscribe(response => {
+      console.log(loginModel)
         this.router.navigate(['/']);
       },
       err => {

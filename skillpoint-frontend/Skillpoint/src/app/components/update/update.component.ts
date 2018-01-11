@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Event} from "../../models/event";
-import {DataService} from "../../services/data.service";
-import {Credentials} from "../../models/credentials";
+import {Event} from '../../models/event';
+import {DataService} from '../../services/data.service';
+import {EventModels} from '../../models/eventModels';
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html'
 })
 export class UpdateComponent implements OnInit {
-
+  eventModels: EventModels;
 
   constructor(private dataService: DataService) {
   }
@@ -25,7 +25,7 @@ export class UpdateComponent implements OnInit {
       'url': 'https://www.eventbriteapi.com/v3/events/search/?subcategories=2002,2007,1010,2004,2005&token=XZYAN77TJCA2AIBI4A6N',
       'method': 'GET',
       'headers': {}
-    }
+    };
 
     $.ajax(settings).done(function (data) {
       console.log(data);
@@ -36,7 +36,7 @@ export class UpdateComponent implements OnInit {
 
     });
     return eventsShort;
-  }
+  };
 
   get_events_meetup = function () {
     const eventsShort = [];
@@ -48,7 +48,7 @@ export class UpdateComponent implements OnInit {
       'method': 'GET',
       'dataType': 'jsonp',
       'headers': {}
-    }
+    };
 
     $.ajax(settings).done(function (data) {
       const events = data.results;
@@ -84,7 +84,7 @@ export class UpdateComponent implements OnInit {
       'url': 'http://www.hackathonwatch.com:80/api//hackathons/coming.json?page=1',
       'method': 'GET',
       'headers': {}
-    }
+    };
 
     $.ajax(settings).done(function (data) {
       const events = data;
@@ -99,19 +99,36 @@ export class UpdateComponent implements OnInit {
   };
 
   get_events_from_all_apis = function () {
-    let eventModels = [];
-    eventModels = eventModels.concat(this.get_events_hack(), this.get_events_eventbrite(), this.get_events_meetup());
-    var content = "Successfully saved!";
-    $("#all").append(content);
-    // console.log(JSON.stringify({'eventModels': eventModels}));
-    this.dataService.postData('http://localhost:51571/api/Events', JSON.stringify(eventModels[0])).subscribe(response => {
-        console.log(response);
-          },
-          err => {
-            console.log(err);
-            console.log('erroare ');
-          }
-        );
-  }
+    let eeventModels = [];
+    eeventModels = eeventModels.concat(this.get_events_hack(), this.get_events_eventbrite(), this.get_events_meetup());
+    this.eventModels = new EventModels(eeventModels);
+    const content = 'Successfully saved!';
+    $('#all').append(content);
+    for (let i = 0; i < this.eventModels.eventModels.length; i++) {
+      console.log(this.eventModels.eventModels[i]);
+      this.eventModels.eventModels[i].tags = [
+        {
+          label: 'string',
+          verified: true
+        }
+      ];
+      this.dataService.postData('http://localhost:51571/api/Events', this.eventModels.eventModels[i]).subscribe(response => {
+            console.log(response);
+              },
+              err => {
+                console.log(err);
+                console.log('erroare ');
+              }
+            );
+    }
+    // this.dataService.postData('http://localhost:51571/api/Events/bulk', this.eventModels.eventModels).subscribe(response => {
+    //     console.log(response);
+    //       },
+    //       err => {
+    //         console.log(err);
+    //         console.log('erroare ');
+    //       }
+    //     );
+  };
 
 }

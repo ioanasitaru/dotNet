@@ -27,11 +27,11 @@ namespace Business.Repositories.Implementations
             var @event = Event.Create(creatingModel, null);
 
             List<EventTag> eventTags = new List<EventTag>();
-
-            foreach (var tag in creatingModel.Tags)
-            {
-                eventTags.Add(new EventTag(@event.Id,@event,tag.Label,tagsRepository.GetById(tag.Label)));
-            }
+            if (creatingModel.Tags != null)
+                foreach (var tag in creatingModel.Tags)
+                {
+                    eventTags.Add(new EventTag(@event.Id,@event,tag.Label,tagsRepository.GetById(tag.Label)));
+                }
       
             @event.Update(@event.Name,@event.Description,@event.DateAndTime,@event.Location,@event.Image,eventTags);
             AddEvent(@event, creatingModel.Tags);
@@ -56,7 +56,7 @@ namespace Business.Repositories.Implementations
                             _event.Name);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
 
-                        sql = String.Format("INSERT INTO dbo.EventTag VALUES('{0}', '{1}')", _event.Id, tag.Label);
+                        sql = String.Format("INSERT INTO dbo.EventTag VALUES('{0}','{1}');", _event.Id, tag.Label);
                         _databaseContext.Database.ExecuteSqlCommand(sql);
                         _databaseContext.SaveChanges();
                     }
