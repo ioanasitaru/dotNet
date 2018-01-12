@@ -7,7 +7,6 @@ using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
-using DTOs;
 using Microsoft.AspNetCore.Identity;
 
 namespace Business.Repositories.Implementations
@@ -15,7 +14,7 @@ namespace Business.Repositories.Implementations
     public class UsersRepository : IUsersRepository
     {
         private readonly IDatabaseContext _databaseContext;
-
+        
         public UsersRepository(IDatabaseContext database)
         {
             _databaseContext = database;
@@ -24,7 +23,7 @@ namespace Business.Repositories.Implementations
         public async Task CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
 
-            var user = User.Create(model.Username, model.Name, model.Email, model.Location, null);
+            var user = User.Create(model.Username, model.Name, model.Email, model.Location, null, null);
             if (model.Password != model.ConfirmPassword)
                 throw new ArgumentException("Passwords do not match!");
             // Add the user to the Db with the choosen password
@@ -50,6 +49,13 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
+        public void CreateRelation(string userId, Guid eventId)
+        {
+            var sql = String.Format("INSERT INTO dbo.EventUser VALUES('{0}', '{1}')", eventId, userId);
+            _databaseContext.Database.ExecuteSqlCommand(sql);
+            _databaseContext.SaveChanges();
+        }
+
         public IReadOnlyList<User> GetAll()
         {
             List<User> users = new List<User>();
@@ -70,6 +76,22 @@ namespace Business.Repositories.Implementations
                         tags.Load();
                     }
                 }
+
+                var userEvents = _databaseContext.Entry(user).Collection("Events");
+                if (!userEvents.IsLoaded)
+                {
+                    userEvents.Load();
+
+                }
+                foreach (var ue in userEvents.CurrentValue)
+                {
+                    var events = _databaseContext.Entry(ue).Reference("Event");
+                    if (!events.IsLoaded)
+                    {
+                        events.Load();
+                    }
+                }
+
                 users.Add(user);
             }
             return users;
@@ -78,6 +100,7 @@ namespace Business.Repositories.Implementations
         public User GetById(Guid id)
         {
             var user = _databaseContext.Users.FirstOrDefault(u => u.Id == id.ToString());
+
             var userTags = _databaseContext.Entry(user).Collection("Tags");
             if (!userTags.IsLoaded)
             {
@@ -92,7 +115,24 @@ namespace Business.Repositories.Implementations
                     tags.Load();
 
                 }
+
             }
+
+            var userEvents = _databaseContext.Entry(user).Collection("Events");
+            if (!userEvents.IsLoaded)
+            {
+                userEvents.Load();
+
+            }
+            foreach (var ue in userEvents.CurrentValue)
+            {
+                var events = _databaseContext.Entry(ue).Reference("Event");
+                if (!events.IsLoaded)
+                {
+                    events.Load();
+                }
+            }
+
             return user;
         }
 
@@ -101,14 +141,26 @@ namespace Business.Repositories.Implementations
             var user = GetById(id);
 
             List<UserTag> userTags = new List<UserTag>();
+            List<EventUser> eventUser = new List<EventUser>();
 
             foreach (var tag in userModel.Tags)
             {
                 userTags.Add(new UserTag(user.Id, user, tag.Label, Tag.Create(tag.Label)));
             }
 
+            foreach (var _event in userModel.Events)
+            {
+                var dbEvent = _databaseContext.Events.FirstOrDefault(e =>
+                    e.Name == _event.Name && e.DateAndTime == _event.DateAndTime && e.Location == _event.Location &&
+                    e.Description == _event.Description && e.Image == _event.Image);
+                if (dbEvent != null)
+                {
+                    eventUser.Add(new EventUser(dbEvent.Id, dbEvent, user.Id, user));
+                }
+            }
+
             user.Update(userModel.Username, userModel.Name, userModel.Email,
-                userModel.Location, userTags);
+                userModel.Location, userTags, eventUser);
 
             _databaseContext.Users.Update(user);
         }
@@ -117,6 +169,13 @@ namespace Business.Repositories.Implementations
         {
             _databaseContext.Users.Remove(GetById(id));
             _databaseContext.SaveChanges();
+        }
+
+        public List<Event> GetEventsByUserId(Guid userId)
+        {
+            var user = GetById(userId);
+           
+            return user?.Events?.ConvertAll(ue => ue.Event).ToList();
         }
 
         public void Create(UserCreatingModel entity)

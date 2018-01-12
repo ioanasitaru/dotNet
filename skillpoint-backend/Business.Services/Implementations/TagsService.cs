@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Business.Repositories.Interfaces;
@@ -41,6 +40,11 @@ namespace Business.Services.Implementations
 
             return tags;
 
+        }
+
+        public List<EventDTO> GetEventsByTag(string label)
+        {
+            return _repository.GetEventsByTag(label).ConvertAll(e => new EventDTO(e)).ToList();
         }
     }
 }

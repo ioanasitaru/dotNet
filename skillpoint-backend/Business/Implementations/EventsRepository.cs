@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Business.Repositories.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
 using Microsoft.EntityFrameworkCore;
-using DTOs;
 
 namespace Business.Repositories.Implementations
 {
@@ -20,69 +19,50 @@ namespace Business.Repositories.Implementations
             _databaseContext = databaseContext;
         }
 
-        public void Create(EventCreatingModel creatingModel)
+
+        public async Task CreateAsync(EventCreatingModel model)
         {
-            ITagsRepository tagsRepository = new TagsRepository(_databaseContext);
+            var @event = Event.Create(model.Name, model.Description, model.DateAndTime, model.Location, model.Image,
+                null, null);
+            await _databaseContext.Events.AddAsync(@event);
 
-            var @event = Event.Create(creatingModel, null);
-
-            List<EventTag> eventTags = new List<EventTag>();
-            if (creatingModel.Tags != null)
-                foreach (var tag in creatingModel.Tags)
-                {
-                    eventTags.Add(new EventTag(@event.Id,@event,tag.Label,tagsRepository.GetById(tag.Label)));
-                }
-      
-            @event.Update(@event.Name,@event.Description,@event.DateAndTime,@event.Location,@event.Image,eventTags);
-            AddEvent(@event, creatingModel.Tags);
             _databaseContext.SaveChanges();
         }
 
-        private void AddEvent(Event _event, List<TagCreatingModel> tags)
+        public void CreateRelations(Event @event, List<Tag> tags)
         {
-            _databaseContext.Database.OpenConnection();
+            List<EventTag> eventTags = tags.ConvertAll(t => new EventTag(@event.Id, @event, t.Label, t));
 
-            ITagsRepository tagsRepository = new TagsRepository(_databaseContext);
-
-            try
+            foreach (var eventTag in eventTags)
             {
-                foreach (var tag in tags)
-                {
-                    if (tagsRepository.GetById(tag.Label) != null)
-                    {
-                        var sql = String.Format(
-                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
-                            _event.Id, _event.DateAndTime, _event.Description, _event.Image, _event.Location,
-                            _event.Name);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-
-                        sql = String.Format("INSERT INTO dbo.EventTag VALUES('{0}','{1}');", _event.Id, tag.Label);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-                        _databaseContext.SaveChanges();
-                    }
-                    else
-                    {
-                        var sql = String.Format(
-                            "INSERT INTO dbo.Events VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
-                            _event.Id, _event.DateAndTime, _event.Description, _event.Image, _event.Location,
-                            _event.Name);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-
-                        sql = String.Format("INSERT INTO dbo.Tags VALUES('{0}','{1}')", tag.Label, tag.Verified);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-
-                        sql = String.Format("INSERT INTO dbo.EventTag VALUES('{0}', '{1}')", _event.Id, tag.Label);
-                        _databaseContext.Database.ExecuteSqlCommand(sql);
-                        _databaseContext.SaveChanges();
-                    }
-                }
+                var sql = String.Format("INSERT INTO dbo.EventTag VALUES('{0}', '{1}')", @event.Id, eventTag.Tag.Label);
+                _databaseContext.Database.ExecuteSqlCommand(sql);
             }
-            finally
-            {
-                _databaseContext.Database.CloseConnection();
-            }
+            _databaseContext.SaveChanges();
         }
-        
+
+        public void CreateRelations(Event @event, List<User> users)
+        {
+            List<EventUser> eventUsers = users.ConvertAll(u => new EventUser(@event.Id, @event, u.Id, u));
+
+            foreach (var eventUser in eventUsers)
+            {
+                var sql = String.Format("INSERT INTO dbo.EventUser VALUES('{0}', '{1}')", @event.Id, eventUser.UserId);
+                _databaseContext.Database.ExecuteSqlCommand(sql);
+            }
+            _databaseContext.SaveChanges();
+        }
+
+        public Event GetByName(string name)
+        {
+            return _databaseContext.Events.FirstOrDefault(e => e.Name.Equals(name));
+        }
+
+        public void Create(EventCreatingModel entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public IReadOnlyList<Event> GetAll()
         {
             List<Event> events = new List<Event>();
@@ -94,7 +74,6 @@ namespace Business.Repositories.Implementations
                 if (!eventTags.IsLoaded)
                 {
                     eventTags.Load();
-
                 }
 
                 foreach (var et in eventTags.CurrentValue)
@@ -104,12 +83,10 @@ namespace Business.Repositories.Implementations
                     if (!tags.IsLoaded)
                     {
                         tags.Load();
-
                     }
                 }
 
                 events.Add(@event);
-
             }
 
             return events;
@@ -118,13 +95,12 @@ namespace Business.Repositories.Implementations
         public Event GetById(Guid id)
         {
             var @event = _databaseContext.Events.FirstOrDefault(e => e.Id.Equals(id));
-            
+
             var eventTags = _databaseContext.Entry(@event).Collection("Tags");
 
             if (!eventTags.IsLoaded)
             {
                 eventTags.Load();
-
             }
 
             foreach (var et in eventTags.CurrentValue)
@@ -134,12 +110,10 @@ namespace Business.Repositories.Implementations
                 if (!tags.IsLoaded)
                 {
                     tags.Load();
-
                 }
             }
 
             return @event;
-
         }
 
         public void Update(EventCreatingModel eventCreatingModel, Guid id)
@@ -147,15 +121,24 @@ namespace Business.Repositories.Implementations
             var @event = GetById(id);
 
             List<EventTag> eventTags = new List<EventTag>();
+            List<EventUser> eventUsers = new List<EventUser>();
 
             foreach (var tag in eventCreatingModel.Tags)
             {
                 eventTags.Add(new EventTag(@event.Id, @event, tag.Label, Tag.Create(tag.Label)));
             }
 
-            @event.Update(eventCreatingModel.Name, eventCreatingModel.Description, eventCreatingModel.DateAndTime,
-                eventCreatingModel.Location, eventCreatingModel.Image, eventTags);
+            foreach (var _user in eventCreatingModel.Users)
+            {
+                var dbUser = _databaseContext.Users.FirstOrDefault(u => u.UserName == _user.Username);
+                if (dbUser != null)
+                {
+                    eventUsers.Add(new EventUser(@event.Id, @event, dbUser.Id, dbUser));
+                }
+            }
 
+            @event.Update(eventCreatingModel.Name, eventCreatingModel.Description, eventCreatingModel.DateAndTime,
+                eventCreatingModel.Location, eventCreatingModel.Image, eventTags, eventUsers);
         }
 
         public void Delete(Guid id)
@@ -164,6 +147,9 @@ namespace Business.Repositories.Implementations
             _databaseContext.SaveChanges();
         }
 
-
+        public Event IsInDb(EventCreatingModel model)
+        {
+            return _databaseContext.Events.FirstOrDefault(e => e.Name == model.Name && e.DateAndTime == model.DateAndTime && e.Location == model.Location && e.Description == model.Description && e.Image == model.Image);
+        }
     }
 }

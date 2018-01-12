@@ -1,10 +1,3 @@
-using System.Collections.Generic;
-using Business.Repositories.Implementations;
-using Business.Repositories.Interfaces;
-using Business.Services.Implementations;
-using CreatingModels;
-using Data.Domain.Entities;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests

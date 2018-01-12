@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Business.Services.Interfaces;
 using CreatingModels;
-using Data.Domain.Entities;
 using DTOs;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -65,31 +65,51 @@ namespace SkillpointAPI.Controllers
 
         // POST: api/Events
         [HttpPost]
-        public IActionResult PostEvent([FromBody] EventCreatingModel eventModel)
+        public async Task PostEvent([FromBody] EventCreatingModel eventModel)
         {
-            if (!ModelState.IsValid)
+            await _eventService.CreateAsync(eventModel);
+            var tags = _tagsService.CreateOrGet(eventModel.Tags);
+            var @event = _eventService.IsInDb(eventModel);
+
+            _eventService.CreateRelations(@event, tags);
+
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteAll()
+        {
+
+            var events = _eventService.GetAll();
+            foreach (var _event in events)
             {
-                return BadRequest(ModelState);
+                _eventService.Delete(_event.Id);
             }
 
-//            _eventService.Create(eventModel);
-            _eventService.Create(eventModel);
-            return Created("", null);
+            return Ok();
+
         }
 
         [HttpPost]
         [Route("bulk")]
-        public IActionResult PostEvents([FromBody] List<EventCreatingModel> eventModels)
+        public async Task PostEvents([FromBody] List<EventCreatingModel> eventModels)
         {
             System.Diagnostics.Debug.WriteLine(eventModels);
+            
             foreach (var _event in eventModels)
             {
-//                TODO: Verificat pentru duplicate(mai intai filtram dupa startdate dupa care dupa nume)
+                var dbEvent = _eventService.IsInDb(_event);
 
-                _eventService.Create(_event);
+                if (dbEvent == null)
+                {
+                    await _eventService.CreateAsync(_event);
+                    dbEvent = _eventService.IsInDb(_event);
+                }
+
+                var tags = _tagsService.CreateOrGet(_event.Tags);
+                _eventService.CreateRelations(dbEvent, tags);
+
             }
 
-            return Created("", null);
         }
 
         // DELETE: api/Events/5

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Business.Repositories.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
-using DTOs;
 
 namespace Business.Repositories.Implementations
 {
@@ -46,5 +44,27 @@ namespace Business.Repositories.Implementations
         }
 
         public Tag GetByLabel(string label) => _databaseContext.Tags.FirstOrDefault(t => t.Label.Equals(label));
+
+        public List<Event> GetEventsByTag(string label)
+        {
+            var tag = GetById(label);
+
+            var tagEvents = _databaseContext.Entry(tag).Collection("EventsList");
+            if (!tagEvents.IsLoaded)
+            {
+                tagEvents.Load();
+
+            }
+            foreach (var et in tagEvents.CurrentValue)
+            {
+                var events = _databaseContext.Entry(et).Reference("Event");
+                if (!events.IsLoaded)
+                {
+                    events.Load();
+                }
+            }
+
+            return tag.EventsList?.ConvertAll(et => et.Event);
+        }
     }
 }

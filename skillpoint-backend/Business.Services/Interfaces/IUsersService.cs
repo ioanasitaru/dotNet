@@ -13,5 +13,7 @@ namespace Business.Services.Interfaces
         Task CreateAsync(UserCreatingModel model, UserManager<User> userManager);
         User GetByUsername(string username);
         void CreateRelations(User user, List<Tag> tags);
+        void CreateRelation(Guid userId, Guid eventId);
+        List<EventDTO> GetEventsByUserId(Guid userId);
     }
 }

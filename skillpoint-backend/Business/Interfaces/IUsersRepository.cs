@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using CreatingModels;
 using Data.Domain.Entities;
-using DTOs;
 using Microsoft.AspNetCore.Identity;
 
 namespace Business.Repositories.Interfaces
@@ -13,5 +12,7 @@ namespace Business.Repositories.Interfaces
         Task CreateAsync(UserCreatingModel model, UserManager<User> userManager);
         User GetByUsername(string username);
         void CreateRelations(User user, List<Tag> tags);
+        void CreateRelation(string userId, Guid eventId);
+        List<Event> GetEventsByUserId(Guid userId);
     }
 } 

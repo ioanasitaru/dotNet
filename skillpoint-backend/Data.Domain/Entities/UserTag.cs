@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Data.Domain.Entities
+﻿namespace Data.Domain.Entities
 {
     public class UserTag
     {

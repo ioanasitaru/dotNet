@@ -16,28 +16,29 @@ namespace Data.Domain.Entities
         public string Image { get; private set; }
 
         public List<EventTag> Tags { get; private set; }
+        public List<EventUser> Users { get; private set; }
 
-        public static Event Create(string name, string description, DateTime dateAndTime, string location, string image,List<EventTag> tagList)
+        public static Event Create(string name, string description, DateTime dateAndTime, string location, string image,List<EventTag> tagList, List<EventUser> users)
         {
             var instance = new Event
             {
                 Id = Guid.NewGuid()
             };
-            instance.Update(name, description, dateAndTime, location, image,tagList);
+            instance.Update(name, description, dateAndTime, location, image,tagList, users);
             return instance;
         }
 
-        public static Event Create(EventCreatingModel eventModel,List<EventTag> tagList)
+        public static Event Create(EventCreatingModel eventModel,List<EventTag> tagList, List<EventUser> users)
         {
             var instance = new Event
             {
                 Id = Guid.NewGuid()
             };
-            instance.Update(eventModel.Name, eventModel.Description, eventModel.DateAndTime, eventModel.Location, eventModel.Image,tagList);
+            instance.Update(eventModel.Name, eventModel.Description, eventModel.DateAndTime, eventModel.Location, eventModel.Image,tagList, users);
             return instance;
         }
 
-        public void Update(string name, string description, DateTime dateAndTime, string location, string image,List<EventTag> tagList)
+        public void Update(string name, string description, DateTime dateAndTime, string location, string image,List<EventTag> tagList, List<EventUser> users)
         {
             Name = name;
             Description = description;
@@ -45,6 +46,7 @@ namespace Data.Domain.Entities
             Location = location;
             Image = image;
             Tags = tagList;
+            Users = users;
         }
     }
 }

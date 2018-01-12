@@ -20,7 +20,7 @@ namespace DTOs
             DateAndTime = Event.DateAndTime;
             Location = Event.Location;
             Image = Event.Image;
-            Tags = Event.Tags.ConvertAll(et => new TagDTO(et)).ToList();
+            Tags = Event.Tags?.ConvertAll(et => new TagDTO(et)).ToList();
         }
     }
 }

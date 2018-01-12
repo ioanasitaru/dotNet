@@ -46,7 +46,7 @@ namespace Data.Persistence
             }
 
             // Create the "Admin" ApplicationUser account
-            var userAdmin = User.Create("Admin", "Admin", "admin@skillpoint.com", "Wherever", null);
+            var userAdmin = User.Create("Admin", "Admin", "admin@skillpoint.com", "Wherever", null, null);
             // Insert "Admin" into the Database and assign the "Administrator" and "Registered" roles to him.
             if (await userManager.FindByIdAsync(userAdmin.Id) == null)
             {

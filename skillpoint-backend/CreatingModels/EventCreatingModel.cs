@@ -11,5 +11,6 @@ namespace CreatingModels
         public string Location { get; set; }
         public string Image { get; set; }
         public List<TagCreatingModel> Tags { get; set; }
+        public List<UserCreatingModel> Users { get; set; }
     }
 }
