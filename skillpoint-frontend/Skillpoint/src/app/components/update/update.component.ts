@@ -46,7 +46,7 @@ export class UpdateComponent implements OnInit {
       'crossDomain': true,
       'url': 'https://api.meetup.com/2/open_events?topic=softwaredev,newtech,1w&key=3311642666775f7d4b6a1c496c30613e',
       'method': 'GET',
-      'dataType': 'jsonp',
+      // 'dataType': 'jsonp',
       'headers': {}
     };
 
@@ -65,7 +65,7 @@ export class UpdateComponent implements OnInit {
             detailedLocation = 'Not provided';
           }
 
-          eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ''), new Date(events[infoIndex].time / 1000), detailedLocation, events[infoIndex].event_url, []));
+          eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, ''), new Date(events[infoIndex].time * 1000), detailedLocation, events[infoIndex].event_url, []));
         }
       }
 
@@ -89,7 +89,7 @@ export class UpdateComponent implements OnInit {
     $.ajax(settings).done(function (data) {
       const events = data;
       for (let infoIndex = 0; infoIndex < events.length; infoIndex++) {
-        eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description, new Date(events[infoIndex].start_timestamp), events[infoIndex].full_address, events[infoIndex].public_url, []));
+        eventsShort.push(new Event(events[infoIndex].name, events[infoIndex].description, new Date(events[infoIndex].start_timestamp*1000), events[infoIndex].full_address, '', []));
       }
       console.log(eventsShort);
 

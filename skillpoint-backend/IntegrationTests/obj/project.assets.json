@@ -13852,7 +13852,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bogdan\\.nuget\\packages\\": {},
+    "C:\\Users\\Ovidiu\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13861,17 +13861,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\IntegrationTests\\IntegrationTests.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\IntegrationTests\\IntegrationTests.csproj",
       "projectName": "IntegrationTests",
-      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\IntegrationTests\\IntegrationTests.csproj",
-      "packagesPath": "C:\\Users\\Bogdan\\.nuget\\packages\\",
-      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\IntegrationTests\\obj\\",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\IntegrationTests\\IntegrationTests.csproj",
+      "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\IntegrationTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bogdan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ovidiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13884,14 +13884,14 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Data.Persistence\\Data.Persistence.csproj"
             },
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj"
             },
-            "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj": {
-              "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\Business\\Business.Repositories.csproj"
+            "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj": {
+              "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\Business.Services\\Business.Services.csproj"
             }
           }
         }
@@ -13905,30 +13905,30 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "MSTest.TestFramework": {
-            "target": "Package",
-            "version": "1.2.0"
-          },
           "FluentAssertions": {
             "target": "Package",
-            "version": "4.19.4"
-          },
-          "Microsoft.EntityFrameworkCore.InMemory": {
-            "target": "Package",
-            "version": "2.0.1"
+            "version": "[4.19.4, )"
           },
           "MSTest.TestAdapter": {
             "target": "Package",
-            "version": "1.2.0"
+            "version": "[1.2.0, )"
           },
-          "Microsoft.NETCore.App": {
+          "MSTest.TestFramework": {
             "target": "Package",
-            "version": "2.0",
-            "autoReferenced": true
+            "version": "[1.2.0, )"
+          },
+          "Microsoft.EntityFrameworkCore.InMemory": {
+            "target": "Package",
+            "version": "[2.0.1, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "15.5.0"
+            "version": "[15.5.0, )"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "[2.0.0, )",
+            "autoReferenced": true
           }
         },
         "imports": [

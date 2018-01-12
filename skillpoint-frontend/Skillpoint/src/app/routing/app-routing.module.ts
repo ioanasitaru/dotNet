@@ -13,10 +13,11 @@ import {isNullOrUndefined} from 'util';
 export class LoginGuard implements CanActivate {
   constructor(private router: Router) {}
   canActivate() {
-    if (sessionStorage.getItem('authorization') !== undefined) {
+    console.log(sessionStorage.getItem('authorization'));
+    if (sessionStorage.getItem('authorization') !== null) {
       return true;
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
     return false;
   }
 }
@@ -37,7 +38,7 @@ export class NotLoginGuard implements CanActivate {
 const routes: Routes = [
   { path: '',  component: HomePageComponent},
   { path: 'about',  component: AboutPageComponent},
-  { path: 'events',  component: EventPageComponent},
+  { path: 'events',  component: EventPageComponent, canActivate: [LoginGuard]},
   { path: 'profile', component: ProfilePageComponent, canActivate: [LoginGuard]},
   { path: 'signup', component: SignupPageComponent},
   { path: 'edit', component: EditPageComponent},

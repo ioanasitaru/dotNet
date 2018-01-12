@@ -27,6 +27,10 @@ import {DataService} from './services/data.service';
 import {AuthenticationService} from './services/authentication.service';
 import {HttpClientModule} from '@angular/common/http';
 import {Select2Module} from 'ng2-select2';
+import { EventModalComponent } from './components/event-modal/event-modal.component';
+import { EventGenericComponent } from './components/event-generic/event-generic.component';
+
+
 
 @NgModule({
   declarations: [
@@ -48,7 +52,9 @@ import {Select2Module} from 'ng2-select2';
     ProfileInfoComponent,
     EditPageComponent,
     SignupPageComponent,
-    UpdateComponent
+    UpdateComponent,
+    EventModalComponent,
+    EventGenericComponent
   ],
   imports: [
     BrowserModule,

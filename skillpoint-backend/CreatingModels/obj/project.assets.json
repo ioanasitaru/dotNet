@@ -664,7 +664,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bogdan\\.nuget\\packages\\": {},
+    "C:\\Users\\Ovidiu\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -673,17 +673,17 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj",
+      "projectUniqueName": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj",
       "projectName": "CreatingModels",
-      "projectPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj",
-      "packagesPath": "C:\\Users\\Bogdan\\.nuget\\packages\\",
-      "outputPath": "E:\\MS.NET\\project\\dotNet\\skillpoint-backend\\CreatingModels\\obj\\",
+      "projectPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\CreatingModels\\CreatingModels.csproj",
+      "packagesPath": "C:\\Users\\Ovidiu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ovidiu\\Documents\\GitHub\\dotNet\\skillpoint-backend\\CreatingModels\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bogdan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ovidiu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -710,7 +710,7 @@
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           }
         },
