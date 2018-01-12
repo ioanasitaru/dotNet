@@ -15,6 +15,5 @@ namespace Business.Services.Interfaces
         Event GetByName(string name);
         Event IsInDb(EventCreatingModel model);
         void CreateRelations(Event @event, List<User> users);
-        Event GetById(Guid id);
     }
 }
