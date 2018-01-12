@@ -2,13 +2,11 @@ using System.Collections.Generic;
 using Business.Services.Interfaces;
 using CreatingModels;
 using DTOs;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SkillpointAPI.Controllers
 {
-    [Authorize]
     [Produces("application/json")]
     [Route("api/Tags")]
     [EnableCors("CorsPolicy")]
@@ -29,10 +27,17 @@ namespace SkillpointAPI.Controllers
         }
 
         // GET: api/Tags/5
-        [HttpGet("{id}")]
+        [HttpGet("{label}")]
         public TagDTO GetTag([FromRoute] string label)
         {
             return _service.GetById(label);
+        }
+
+        // GET: api/Tags/Events/5
+        [HttpGet("/EventsByTag/{label}")]
+        public List<EventDTO> GetEventsByTag([FromRoute] string label)
+        {
+            return _service.GetEventsByTag(label);
         }
 
 

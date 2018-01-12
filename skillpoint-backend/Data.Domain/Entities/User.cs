@@ -24,34 +24,32 @@ namespace Data.Domain.Entities
 
         public List<UserTag> Tags { get; private set; }
 
-        //public List<Event> EventsList { get; private set; }
-        //public List<Achivement> AchievementsList { get; private set; }
-
+        public List<EventUser> Events { get; private set; }
+        
         public static User Create(string username, string name, string email, string location,
-            List<UserTag> tagsList)
+            List<UserTag> tagsList, List<EventUser> events)
         {
-            //TODO: add eventlist and achivementlist
-
             var instance = new User {Id = Guid.NewGuid().ToString()};
-            instance.Update(username, name, email, location, tagsList);
+            instance.Update(username, name, email, location, tagsList, events);
             return instance;
         }
 
-        public static User Create(UserCreatingModel userModel, List<UserTag> tagsList)
+        public static User Create(UserCreatingModel userModel, List<UserTag> tagsList, List<EventUser> events)
         {
             //add eventlist and achivementlist
             var instance = new User { Id = Guid.NewGuid().ToString() };
-            instance.Update(userModel.Username, userModel.Name, userModel.Email, userModel.Location, tagsList);
+            instance.Update(userModel.Username, userModel.Name, userModel.Email, userModel.Location, tagsList, events);
             return instance;
         }
 
         public void Update(string username, string name, string email, string location,
-            List<UserTag> tagsList)
+            List<UserTag> tagsList, List<EventUser> events)
         {
             Name = name;
             Email = email;
             Location = location;
             Tags = tagsList;
+            Events = events;
             UserName = username;
         }
     }

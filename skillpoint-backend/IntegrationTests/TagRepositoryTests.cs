@@ -1,7 +1,3 @@
-using Business.Repositories.Implementations;
-using CreatingModels;
-using Data.Domain.Entities;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests

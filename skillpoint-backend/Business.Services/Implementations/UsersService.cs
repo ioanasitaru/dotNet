@@ -57,5 +57,15 @@ namespace Business.Services.Implementations
         {
             _usersRepository.CreateRelations(user, tags);
         }
+
+        public void CreateRelation(Guid userId, Guid eventId)
+        {
+            _usersRepository.CreateRelation(userId.ToString(), eventId);
+        }
+
+        public List<EventDTO> GetEventsByUserId(Guid userId)
+        {
+            return _usersRepository.GetEventsByUserId(userId).ConvertAll(e => new EventDTO(e)).ToList();
+        }
     }
 }

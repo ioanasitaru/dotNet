@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CreatingModels;
-using Data.Domain.Entities;
-using DTOs;
+﻿using System.Collections.Generic;
 
 namespace Business.Repositories.Interfaces
 {

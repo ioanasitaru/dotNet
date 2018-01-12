@@ -29,6 +29,12 @@ namespace Data.Persistence
             modelBuilder.Entity<EventTag>().HasOne(u => u.Event).WithMany(t => t.Tags).HasForeignKey(u => u.EventId);
 
             modelBuilder.Entity<EventTag>().HasOne(t => t.Tag).WithMany(e => e.EventsList).HasForeignKey(t => t.TagLabel);
+
+            modelBuilder.Entity<EventUser>().HasKey(u => new { u.EventId, u.UserId });
+
+            modelBuilder.Entity<EventUser>().HasOne(u => u.Event).WithMany(e => e.Users).HasForeignKey(u => u.EventId);
+
+            modelBuilder.Entity<EventUser>().HasOne(u => u.User).WithMany(e => e.Events).HasForeignKey(u => u.UserId);
         }
 
         public DbSet<Tag> Tags { get; set; }

@@ -18,5 +18,7 @@ namespace CreatingModels
         public String Location { get; set; }
 
         public List<TagCreatingModel> Tags { get; set; }
+
+        public List<EventCreatingModel> Events { get; set; }
     }
 }
