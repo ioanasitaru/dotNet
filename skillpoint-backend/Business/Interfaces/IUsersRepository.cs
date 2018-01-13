@@ -12,7 +12,7 @@ namespace Business.Repositories.Interfaces
         Task CreateAsync(UserCreatingModel model, UserManager<User> userManager);
         User GetByUsername(string username);
         void CreateRelations(User user, List<Tag> tags);
-        void CreateRelation(string userId, Guid eventId);
         List<Event> GetEventsByUserId(Guid userId);
+        void CreateRelation(Guid userId, Guid eventId);
     }
 } 

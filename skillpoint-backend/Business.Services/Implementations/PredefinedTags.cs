@@ -1,0 +1,67 @@
+﻿using System.Collections.Generic;
+
+namespace Business.Services.Implementations
+{
+    class PredefinedTags
+    {
+        public static List<string> Values = new List<string>()
+        {
+            "IT",
+            "JAVA",
+            "C++",
+            "C",
+            "PYTHON",
+            "C#",
+            "RUBY",
+            "GO",
+            "MACHINE",
+            "LEARNING",
+            "ML",
+            "EMEL",
+            "AI",
+            "ARTIFICIAL INTELLIGENCE",
+            "JAVASCRIPT",
+            "JS",
+            ".NET",
+            "ASP.NET",
+            "OOP",
+            "HTML",
+            "CSS",
+            "PHP",
+            "WEB",
+            "DATABASE",
+            "SQL",
+            "NOSQL",
+            "ORACLE",
+            "POSTGRESS",
+            "SQLITE",
+            "MYSQL",
+            "SQLSERVER",
+            "WINDOWS",
+            "LINUX",
+            "IOS",
+            "ANDROID",
+            "NETWORKING",
+            "CLOUD",
+            "NLP",
+            "COMPUTER VISION",
+            "COMPUTER SCIENCE",
+            "BIT",
+            "GOOGLE",
+            "APPLE",
+            "AMAZON",
+            "AWS",
+            "AUGMENTED REALITY",
+            "AR",
+            "VIRTUAL REALITY",
+            "VR",
+            "SECURITY",
+            "CRYPTOGRAPHY",
+            "ANGULAR",
+            "API",
+            "PROGRAMMING",
+            "DATA",
+            "TUTORIAL"
+        };
+    }
+}

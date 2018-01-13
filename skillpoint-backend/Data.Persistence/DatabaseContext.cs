@@ -42,5 +42,6 @@ namespace Data.Persistence
         public new DbSet<User> Users { get; set; }
         public DbSet<UserTag> UserTag { get; set; }
         public DbSet<EventTag> EventTag { get; set; }
+        public DbSet<EventUser> EventUser { get; set; }
     }
 }

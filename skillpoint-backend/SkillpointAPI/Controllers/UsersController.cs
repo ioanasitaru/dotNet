@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Business.Services.Implementations;
 using Data.Domain.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
@@ -20,14 +19,12 @@ namespace SkillpointAPI.Controllers
         private readonly IUsersService _usersService;
         private readonly ITagsService _tagsService;
         private readonly UserManager<User> _userManager;
-        private readonly IEventService _eventService;
 
         public UsersController(IUsersService usersService, ITagsService tagsService, UserManager<User> userManager, IEventService eventService)
         {
             _usersService = usersService;
             _tagsService = tagsService;
             _userManager = userManager;
-            _eventService = eventService;
         }
 
         //GET: api/Users
@@ -52,8 +49,22 @@ namespace SkillpointAPI.Controllers
             return _usersService.GetEventsByUserId(id);
         }
 
-        //GET: api/Users/FutureEvents/5
-        [HttpGet("/FutureEvents/{id}")]
+        //GET: api/Users/PastEvent/5
+        [HttpGet("/PastEvents/{id}")]
+        public List<EventDTO> GetPastEventsByUserId([FromRoute] Guid id)
+        {
+            return _usersService.GetEventsByUserId(id).FindAll(e => e.DateAndTime < DateTime.Now);
+        }
+
+        //GET: api/Users/AllFutureEvents/5
+        [HttpGet("/AllFutureEvents/{id}")]
+        public List<EventDTO> GetFutureEventsByUserIdAndTags([FromRoute] Guid id)
+        {
+            return _usersService.GetFutureEventsByUserIdAndTags(id);
+        }
+
+        //GET: api/Users/AttendedFutureEvents/5
+        [HttpGet("/AttendedFutureEvents/{id}")]
         public List<EventDTO> GetFutureEventsByUserId([FromRoute] Guid id)
         {
             return _usersService.GetEventsByUserId(id).FindAll(e => e.DateAndTime > DateTime.Now);
@@ -64,7 +75,7 @@ namespace SkillpointAPI.Controllers
         public async Task PostUser([FromBody] UserCreatingModel userModel)
         {
             await _usersService.CreateAsync(userModel, _userManager);
-            var tags = _tagsService.CreateOrGet(userModel.Tags);
+            var tags = _tagsService.CreateOrGet(userModel.Tags, null, null);
             var user = _usersService.GetByUsername(userModel.Username);
             _usersService.CreateRelations(user, tags);
         }

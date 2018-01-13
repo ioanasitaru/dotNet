@@ -22,11 +22,20 @@ namespace Business.Services.Implementations
 
         public TagDTO GetById(string label) => new TagDTO(_repository.GetById(label));
 
-        public void Update(TagCreatingModel model, string label) => _repository.Update(model,label);
+        public void Update(TagCreatingModel model, string label) => _repository.Update(model, label);
 
-        public List<Tag> CreateOrGet(List<TagCreatingModel> tagsModels)
+        public List<Tag> CreateOrGet(List<TagCreatingModel> tagsModels, string title, string description)
         {
+            bool generated = false;
+
             List<Tag> tags = new List<Tag>();
+
+            if (!tagsModels.Any())
+            {
+                tagsModels = GenerateTags(title, description);
+                generated = true;
+            }
+
             foreach (var tag in tagsModels)
             {
                 var dbTag = _repository.GetByLabel(tag.Label);
@@ -35,16 +44,41 @@ namespace Business.Services.Implementations
                     _repository.Create(tag);
                     dbTag = _repository.GetByLabel(tag.Label);
                 }
+
+                if (generated)
+                {
+                    dbTag.Update(dbTag.Label, true);
+                }
+
                 tags.Add(dbTag);
             }
 
             return tags;
-
         }
 
         public List<EventDTO> GetEventsByTag(string label)
         {
             return _repository.GetEventsByTag(label).ConvertAll(e => new EventDTO(e)).ToList();
+        }
+
+        private List<TagCreatingModel> GenerateTags(string title, string description)
+        {
+            List<TagCreatingModel> generatedTags = new List<TagCreatingModel>();
+            List<string> predefinedTags = PredefinedTags.Values;
+
+
+            List<string> words = title.Split(" ").ToList();
+            words.AddRange(description.Split(" ").ToList());
+
+            foreach (var word in words)
+            {
+                if (predefinedTags.Contains(word.ToUpper()))
+                {
+                    generatedTags.Add(new TagCreatingModel(word, true));
+                }
+            }
+
+            return generatedTags;
         }
     }
 }
