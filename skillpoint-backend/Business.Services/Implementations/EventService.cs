@@ -30,13 +30,8 @@ namespace Business.Services.Implementations
         }
 
         public IEnumerable<EventDTO> GetAll() => _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
-        EventDTO ICrudService<Event, EventCreatingModel, EventDTO, Guid>.GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
 
-
-        public Event GetById(Guid id) => _eventsRepository.GetById(id);
+        public EventDTO GetById(Guid id) => new EventDTO(_eventsRepository.GetById(id));
 
 
         public void Delete(Guid id)

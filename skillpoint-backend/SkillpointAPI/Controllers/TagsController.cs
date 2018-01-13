@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Business.Services.Interfaces;
 using CreatingModels;
 using DTOs;
@@ -24,6 +25,13 @@ namespace SkillpointAPI.Controllers
         public IEnumerable<TagDTO> GetTags()
         {
             return _service.GetAll();
+        }
+
+        // GET: api/Tags
+        [HttpGet("Verified")]
+        public IEnumerable<TagDTO> GetVerifiedTags()
+        {
+            return _service.GetAll().ToList().FindAll(t => t.Verified);
         }
 
         // GET: api/Tags/5

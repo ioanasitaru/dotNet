@@ -41,14 +41,15 @@ namespace Business.Services.Implementations
                 var dbTag = _repository.GetByLabel(tag.Label);
                 if (dbTag == null)
                 {
+                    if (generated)
+                    {
+                        tag.Verified = true;
+                    }
+
                     _repository.Create(tag);
                     dbTag = _repository.GetByLabel(tag.Label);
                 }
 
-                if (generated)
-                {
-                    dbTag.Update(dbTag.Label, true);
-                }
 
                 tags.Add(dbTag);
             }
