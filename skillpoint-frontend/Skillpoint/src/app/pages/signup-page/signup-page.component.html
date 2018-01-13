@@ -25,7 +25,8 @@
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="email">Email Address</label>
-            <input type="email" class="form-control" placeholder="Email Address" id="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"
+            <input type="email" class="form-control" placeholder="Email Address" id="email" required
+                   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"
                    [(ngModel)]="model.email" #email="ngModel" name="email">
             <div [hidden]="email.valid || email.untouched"><p class="help-block text-danger">Please enter your email
               address</p></div>
@@ -56,8 +57,10 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" placeholder="Password" id="password" required
-                   [(ngModel)]="model.password" #password="ngModel" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
-            <div [hidden]="password.valid || password.untouched"><p class="help-block text-danger">Password must contain at least one uppercase, one digit, one symbol, and must be at least 6 characters!</p></div>
+                   [(ngModel)]="model.password" #password="ngModel" name="password"
+                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+            <div [hidden]="password.valid || password.untouched"><p class="help-block text-danger">Password must contain
+              at least one uppercase, one digit, one symbol, and must be at least 6 characters!</p></div>
           </div>
         </div>
 
@@ -65,28 +68,30 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword" required
-                   [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" name="confirmPassword" (blur)="checkPasswords()" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
-            <div *ngIf="!passwords && !confirmPassword.untouched && !password.untouched"><p class="help-block text-danger">Passwords don't match</p></div>
+                   [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" name="confirmPassword"
+                   (blur)="checkPasswords()"
+                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,}">
+            <div *ngIf="!passwords && !confirmPassword.untouched && !password.untouched"><p
+              class="help-block text-danger">Passwords don't match</p></div>
           </div>
         </div>
 
-        <!--<div class="row">-->
-          <!--<div class="form-group col-xs-12 floating-label-form-group">-->
-            <!--<select class="form-control select2-multi" name="tags[]" multiple="multiple">-->
-              <!--<option value='test' selected="selected">test </option>-->
-              <!--<option value="test3">test</option>-->
-              <!--<option value='teste'>teste</option>-->
-            <!--</select>-->
-            <!--<p class="help-block text-danger"></p>-->
-          <!--</div>-->
-        <!--</div>-->
+        <div class="row">
+          <div class="form-group col-xs-12 floating-label-form-group">
+            <select class="form-control js-example-basic-multiple select2-multi" multiple="multiple">
+              <option *ngFor="let tag of this.tags" [value]=" tag.label ">{{ tag.label }}</option>
+            </select>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
 
 
         <br><br>
         <div id="success"></div>
         <div class="row">
           <div class="form-group col-xs-12">
-              <input type="submit" value="Register" class="btn btn-success btn-lg" [disabled]="!signupForm.valid || !passwords">
+            <input type="submit" value="Register" class="btn btn-success btn-lg"
+                   [disabled]="!signupForm.valid || !passwords">
           </div>
         </div>
       </div>

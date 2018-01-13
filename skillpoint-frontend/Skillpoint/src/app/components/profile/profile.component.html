@@ -47,14 +47,7 @@
             <p>Interests:</p>
           </div>
           <div class="col-lg-4">
-            <span class="badge">C++</span>
-            <span class="badge">JAVA</span>
-            <span class="badge">JAVASCRIPT</span>
-            <span class="badge">PHP</span>
-            <br>
-            <span class="badge">C#</span>
-            <span class="badge">SQL ORACLE</span>
-            <span class="badge">PYTHON</span>
+            <span *ngFor="let tag of this.user.tags" class="badge badge-edit">{{tag.label | uppercase}}</span>
           </div>
         </div>
 

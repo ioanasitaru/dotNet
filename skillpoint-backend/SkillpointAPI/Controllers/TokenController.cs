@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Business.Services.Interfaces;
 using CreatingModels;
 using Data.Domain.Entities;
 using Data.Persistence;
@@ -25,6 +26,7 @@ namespace SkillpointAPI.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly IUsersService _service;
 
         public TokenController(
             DatabaseContext context,

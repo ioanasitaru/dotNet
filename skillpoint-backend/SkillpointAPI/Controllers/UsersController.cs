@@ -83,9 +83,9 @@ namespace SkillpointAPI.Controllers
 
         // POST: api/Users/attend/324
         [HttpPost("/Attend/{eventId}")]
-        public void AttendEvent(Guid userId, Guid eventId)
+        public void AttendEvent([FromBody] EventUser eventUser)
         {
-            _usersService.CreateRelation(userId, eventId);
+            _usersService.CreateRelation(Guid.Parse( eventUser.UserId), eventUser.EventId);
         }
         
         // PUT: api/Users/5

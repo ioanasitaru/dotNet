@@ -13,7 +13,7 @@ export class FutureEventsSectionComponent implements OnInit {
   events: Array<Event>;
 
   ngOnInit() {
-    this.dataService.fetchData(`http://localhost:51571/FutureEvents/${JSON.parse(sessionStorage.getItem('user')).id}`).subscribe(
+    this.dataService.fetchData(`http://localhost:51571/AttendedFutureEvents/${JSON.parse(sessionStorage.getItem('user')).id}`).subscribe(
         response => {
           console.log(response);
           this.events = response;

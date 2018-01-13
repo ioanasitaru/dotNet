@@ -26,7 +26,7 @@ export class EventsSectionComponent implements OnInit {
       );
     }
     else {
-      this.dataService.fetchData('http://localhost:51571/api/Events').subscribe(
+      this.dataService.fetchData(`http://localhost:51571/AllFutureEvents/${JSON.parse(sessionStorage.getItem('user')).id}`).subscribe(
         response => {
           console.log(response);
           this.events = response;

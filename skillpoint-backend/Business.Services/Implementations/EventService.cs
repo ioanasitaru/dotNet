@@ -31,6 +31,7 @@ namespace Business.Services.Implementations
 
         public IEnumerable<EventDTO> GetAll() => _eventsRepository.GetAll().ToList().ConvertAll(e => new EventDTO(e));
 
+
         public EventDTO GetById(Guid id) => new EventDTO(_eventsRepository.GetById(id));
 
 

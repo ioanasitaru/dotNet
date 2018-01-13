@@ -4,6 +4,7 @@ import {Select2OptionData} from 'ng2-select2';
 import {DataService} from "../../services/data.service";
 import {Tag} from "../../models/tag";
 import {forEach} from "@angular/router/src/utils/collection";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-page',
@@ -19,7 +20,7 @@ export class EditPageComponent implements OnInit {
 
 
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private router: Router) {
   }
 
   ngOnInit() {
@@ -29,8 +30,13 @@ export class EditPageComponent implements OnInit {
     console.log(this.user.tags);
     this.dataService.fetchData('http://localhost:51571/api/Tags').subscribe(
         response => {
+          let databaseTags = this.user.tags.map(tag => tag.label)
           for (let tag of response){
+
+            if(databaseTags.indexOf(tag.label) > -1){}
+            else{
             this.tags.push(new Tag(tag.label, tag.verified));
+            }
           }
           console.log(this.tags);
         },
@@ -47,13 +53,14 @@ export class EditPageComponent implements OnInit {
   onSubmit(user){
     user.tags = this.getTags();
     this.dataService.putData(`http://localhost:51571/api/Users/${JSON.parse(sessionStorage.getItem('user')).id}`, user).subscribe(response => {
-        console.log(response);
+        this.router.navigate(['/profile'])
       },
       err => {
         console.log(err);
         console.log('erroare ');
       }
     );
+
   }
 
 
@@ -68,7 +75,7 @@ export class EditPageComponent implements OnInit {
     let db_tags = this.tags.map(tag => tag.label)
     let finalListOfFuckingTags = [];
     for(let tag of tags){
-        finalListOfFuckingTags.push(new Tag(tag, tag in db_tags));
+        finalListOfFuckingTags.push(new Tag(tag, db_tags.indexOf(tag) > -1));
         }
     return finalListOfFuckingTags;
   }

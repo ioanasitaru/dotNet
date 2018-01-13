@@ -1099,4 +1099,6 @@ html {
   background-size: cover;
 }
 
-
+.badge{
+  margin-right: 2px;
+}

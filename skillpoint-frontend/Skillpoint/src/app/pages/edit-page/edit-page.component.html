@@ -59,7 +59,7 @@
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <select  class="form-control js-example-basic-multiple select2-multi" multiple="multiple">
-              <!--<option *ngFor="let tag of this.user.tags" [value]=" tag.label " selected="selected">{{ tag.label }}</option>-->
+              <option *ngFor="let tag of this.user.tags" [value]=" tag.label " selected="selected">{{ tag.label }}</option>
               <option *ngFor="let tag of this.tags" [value]=" tag.label ">{{ tag.label }}</option>
             </select>
             <p class="help-block text-danger"></p>

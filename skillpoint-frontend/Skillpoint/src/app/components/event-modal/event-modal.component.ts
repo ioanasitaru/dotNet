@@ -20,8 +20,10 @@ export class EventModalComponent implements OnInit {
 
   ToggleStatus(event_id) {
     let user_id = JSON.parse(sessionStorage.getItem('user')).id;
-    this.dataService.postData(`http://localhost:51571/Attend/${user_id}`, {
+    this.dataService.postData(`http://localhost:51571/Attend/${event_id}`, {
       userId: user_id,
+      user: null,
+      event: null,
       eventId: event_id
     }).subscribe(response => {
         console.log(response);
