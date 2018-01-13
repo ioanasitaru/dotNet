@@ -12,6 +12,7 @@ namespace Data.Persistence
         DbSet<User> Users { get; set; }
         DbSet<UserTag> UserTag { get; set; }
         DbSet<EventTag> EventTag { get; set; }
+        DbSet<EventUser> EventUser { get; set; }
         EntityEntry Entry(object entity);
         DatabaseFacade Database { get; }
         int SaveChanges();

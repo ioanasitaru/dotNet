@@ -14,10 +14,12 @@ namespace Business.Services.Implementations
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly ITagsRepository _tagsRepository;
 
-        public UsersService(IUsersRepository usersRepository)
+        public UsersService(IUsersRepository usersRepository, ITagsRepository tagsRepository)
         {
             _usersRepository = usersRepository;
+            _tagsRepository = tagsRepository;
         }
 
         public void Create(UserCreatingModel userModel)
@@ -60,12 +62,27 @@ namespace Business.Services.Implementations
 
         public void CreateRelation(Guid userId, Guid eventId)
         {
-            _usersRepository.CreateRelation(userId.ToString(), eventId);
+            _usersRepository.CreateRelation(userId, eventId);
         }
 
         public List<EventDTO> GetEventsByUserId(Guid userId)
         {
             return _usersRepository.GetEventsByUserId(userId).ConvertAll(e => new EventDTO(e)).ToList();
+        }
+
+        public List<EventDTO> GetFutureEventsByUserIdAndTags(Guid id)
+        {
+            List<EventDTO> eventList = new List<EventDTO>();
+
+            var user = GetById(id);
+
+            foreach (var tag in user.Tags)
+            {
+                var events = _tagsRepository.GetEventsByTag(tag.Label).FindAll(e => e.DateAndTime > DateTime.Now);
+                eventList.AddRange(events.ConvertAll(e => new EventDTO(e)));
+            }
+
+            return eventList;
         }
     }
 }

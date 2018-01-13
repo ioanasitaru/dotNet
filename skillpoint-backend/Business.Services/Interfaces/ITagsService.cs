@@ -7,7 +7,7 @@ namespace Business.Services.Interfaces
 {
     public interface ITagsService : ICrudService<Tag, TagCreatingModel, TagDTO, string>
     {
-        List<Tag> CreateOrGet(List<TagCreatingModel> tagModels);
+        List<Tag> CreateOrGet(List<TagCreatingModel> tagsModels, string title, string description);
         List<EventDTO> GetEventsByTag(string label);
     }
 }

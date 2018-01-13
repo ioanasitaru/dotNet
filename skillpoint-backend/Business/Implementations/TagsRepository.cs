@@ -18,7 +18,7 @@ namespace Business.Repositories.Implementations
 
         public void Create(TagCreatingModel tagModel)
         {
-            var tag = Tag.Create(tagModel.Label);
+            var tag = Tag.Create(tagModel.Label, tagModel.Verified);
             _databaseContext.Tags.Add(tag);
             _databaseContext.SaveChanges();
         }

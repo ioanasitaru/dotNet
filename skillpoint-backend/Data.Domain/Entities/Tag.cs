@@ -23,10 +23,10 @@ namespace Data.Domain.Entities
         {
         }
 
-        public static Tag Create(string label)
+        public static Tag Create(string label, bool verified = false)
         {
             var instance = new Tag();
-            instance.Update(label, false);
+            instance.Update(label, verified);
             return instance;
         }
 

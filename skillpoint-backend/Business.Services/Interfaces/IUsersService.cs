@@ -15,5 +15,6 @@ namespace Business.Services.Interfaces
         void CreateRelations(User user, List<Tag> tags);
         void CreateRelation(Guid userId, Guid eventId);
         List<EventDTO> GetEventsByUserId(Guid userId);
+        List<EventDTO> GetFutureEventsByUserIdAndTags(Guid id);
     }
 }

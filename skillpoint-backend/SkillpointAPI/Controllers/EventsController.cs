@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Business.Services.Interfaces;
 using CreatingModels;
@@ -49,6 +50,13 @@ namespace SkillpointAPI.Controllers
             return Ok(@event);
         }
 
+        //GET: api/Events/Future
+        [HttpGet("Future")]
+        public IEnumerable<EventDTO> GetFutureEvents()
+        {
+            return _eventService.GetAll().ToList().FindAll(e => e.DateAndTime > DateTime.Now);
+        }
+
         // PUT: api/Events/5
         [HttpPut("{id}")]
         public IActionResult PutEvent([FromRoute] Guid id, [FromBody] EventCreatingModel @event)
@@ -68,7 +76,7 @@ namespace SkillpointAPI.Controllers
         public async Task PostEvent([FromBody] EventCreatingModel eventModel)
         {
             await _eventService.CreateAsync(eventModel);
-            var tags = _tagsService.CreateOrGet(eventModel.Tags);
+            var tags = _tagsService.CreateOrGet(eventModel.Tags, eventModel.Name, eventModel.Description);
             var @event = _eventService.IsInDb(eventModel);
 
             _eventService.CreateRelations(@event, tags);
@@ -105,7 +113,7 @@ namespace SkillpointAPI.Controllers
                     dbEvent = _eventService.IsInDb(_event);
                 }
 
-                var tags = _tagsService.CreateOrGet(_event.Tags);
+                var tags = _tagsService.CreateOrGet(_event.Tags, _event.Name, _event.Description);
                 _eventService.CreateRelations(dbEvent, tags);
 
             }

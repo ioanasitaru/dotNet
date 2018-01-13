@@ -14,15 +14,16 @@ namespace Business.Repositories.Implementations
     public class UsersRepository : IUsersRepository
     {
         private readonly IDatabaseContext _databaseContext;
-        
-        public UsersRepository(IDatabaseContext database)
+        private readonly IEventsRepository _eventsRepository;
+
+        public UsersRepository(IDatabaseContext database, IEventsRepository eventsRepository)
         {
             _databaseContext = database;
+            _eventsRepository = eventsRepository;
         }
 
         public async Task CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
-
             var user = User.Create(model.Username, model.Name, model.Email, model.Location, null, null);
             if (model.Password != model.ConfirmPassword)
                 throw new ArgumentException("Passwords do not match!");
@@ -44,15 +45,26 @@ namespace Business.Repositories.Implementations
                 //                _databaseContext.UserTag.Add(userTag);
                 var sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, userTag.Tag.Label);
                 _databaseContext.Database.ExecuteSqlCommand(sql);
-
             }
             _databaseContext.SaveChanges();
         }
 
-        public void CreateRelation(string userId, Guid eventId)
+        public void CreateRelation(Guid userId, Guid eventId)
         {
-            var sql = String.Format("INSERT INTO dbo.EventUser VALUES('{0}', '{1}')", eventId, userId);
-            _databaseContext.Database.ExecuteSqlCommand(sql);
+            var eventUser = new EventUser(eventId, _eventsRepository.GetById(eventId), userId.ToString(),
+                GetById(userId));
+            var userEvent = _databaseContext.EventUser.FirstOrDefault(e => e.Equals(eventUser));
+
+            if (userEvent == null)
+            {
+                var sql = String.Format("INSERT INTO dbo.EventUser VALUES('{0}', '{1}')", eventId, userId);
+                _databaseContext.Database.ExecuteSqlCommand(sql);
+            }
+            else
+            {
+                _databaseContext.EventUser.Remove(userEvent);
+            }
+
             _databaseContext.SaveChanges();
         }
 
@@ -66,7 +78,6 @@ namespace Business.Repositories.Implementations
                 if (!userTags.IsLoaded)
                 {
                     userTags.Load();
-
                 }
                 foreach (var ut in userTags.CurrentValue)
                 {
@@ -81,7 +92,6 @@ namespace Business.Repositories.Implementations
                 if (!userEvents.IsLoaded)
                 {
                     userEvents.Load();
-
                 }
                 foreach (var ue in userEvents.CurrentValue)
                 {
@@ -105,7 +115,6 @@ namespace Business.Repositories.Implementations
             if (!userTags.IsLoaded)
             {
                 userTags.Load();
-
             }
             foreach (var ut in userTags.CurrentValue)
             {
@@ -113,16 +122,13 @@ namespace Business.Repositories.Implementations
                 if (!tags.IsLoaded)
                 {
                     tags.Load();
-
                 }
-
             }
 
             var userEvents = _databaseContext.Entry(user).Collection("Events");
             if (!userEvents.IsLoaded)
             {
                 userEvents.Load();
-
             }
             foreach (var ue in userEvents.CurrentValue)
             {
@@ -165,7 +171,7 @@ namespace Business.Repositories.Implementations
         public List<Event> GetEventsByUserId(Guid userId)
         {
             var user = GetById(userId);
-           
+
             return user?.Events?.ConvertAll(ue => ue.Event).ToList();
         }
 

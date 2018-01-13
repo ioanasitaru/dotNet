@@ -9,11 +9,7 @@ namespace DTOs
 
         public TagDTO(EventTag et) : this(et.Tag) { }
 
-        public TagDTO(string label, bool verified)
-        {
-            Label = label;
-            Verified = verified;
-        }
+        public TagDTO(string label, bool verified) : base(label, verified) { }
 
         public TagDTO(Tag t) : this(t.Label, t.Verified) { }
     }

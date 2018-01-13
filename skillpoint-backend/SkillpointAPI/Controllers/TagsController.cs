@@ -27,6 +27,13 @@ namespace SkillpointAPI.Controllers
             return _service.GetAll();
         }
 
+        // GET: api/Tags
+        [HttpGet("Verified")]
+        public IEnumerable<TagDTO> GetVerifiedTags()
+        {
+            return _service.GetAll().ToList().FindAll(t => t.Verified);
+        }
+
         // GET: api/Tags/5
         [HttpGet("{label}")]
         public TagDTO GetTag([FromRoute] string label)
