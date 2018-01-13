@@ -25,4 +25,13 @@ export class DataService {
     headers = headers.append('Content-Type', 'application/json');
     return this.http.post(url, jsonObject, {headers: headers}).catch((error: any) => Observable.throw(error || 'Server error'));
   }
+  putData(url, jsonObject) {
+    console.log("se intampla");
+    let headers = new HttpHeaders();
+    if (sessionStorage.getItem('authorization') !== '') {
+      headers.append('authorization', sessionStorage.getItem('authorization'));
+    }
+    headers = headers.append('Content-Type', 'application/json');
+    return this.http.put(url, jsonObject, {headers: headers}).catch((error: any) => Observable.throw(error || 'Server error'));
+  }
 }

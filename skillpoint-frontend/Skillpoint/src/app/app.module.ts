@@ -30,6 +30,8 @@ import {Select2Module} from 'ng2-select2';
 import { EventModalComponent } from './components/event-modal/event-modal.component';
 import { EventGenericComponent } from './components/event-generic/event-generic.component';
 
+import{SelectModule} from 'ng2-select'
+
 
 
 @NgModule({
@@ -61,7 +63,8 @@ import { EventGenericComponent } from './components/event-generic/event-generic.
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    Select2Module
+    Select2Module,
+    SelectModule
   ],
   providers: [DataService, LoginGuard, AuthenticationService],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Business.Services.Interfaces;
 using CreatingModels;
 using DTOs;
@@ -46,10 +47,13 @@ namespace SkillpointAPI.Controllers
         public void PostTag([FromBody] TagCreatingModel tagModel)
         {
             var tagLabel = tagModel.Label;
-            if (_service.GetById(tagLabel) == null)
+            if (!GetTags().Any())
+            {
                 _service.Create(tagModel);
-            else
+            }
+            else if (_service.GetById(tagLabel) == null)
                 _service.Create(tagModel);
+            
         }
 
         // DELETE: api/Tags/5

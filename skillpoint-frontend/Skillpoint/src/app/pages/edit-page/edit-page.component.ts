@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {Select2OptionData} from 'ng2-select2';
+import {DataService} from "../../services/data.service";
+import {Tag} from "../../models/tag";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-edit-page',
@@ -9,55 +12,65 @@ import {Select2OptionData} from 'ng2-select2';
 })
 export class EditPageComponent implements OnInit {
   private user: User;
-  private exampleData: Array<Select2OptionData>;
-  private startValue: string;
+  private tags: Array<Tag>;
   private selected: string;
+  private selectedTags: any;
 
-  constructor() {
+
+
+
+  constructor(private dataService: DataService) {
   }
 
   ngOnInit() {
+    this.tags = [];
+    // this.selectedTags = [];
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.exampleData = [
-      {
-        id: '0',
-        text: 'Cars',
-        children: [
-          {
-            id: 'car1',
-            text: 'Car 1'
-          },
-          {
-            id: 'car2',
-            text: 'Car 2'
-          },
-          {
-            id: 'car3',
-            text: 'Car 3'
+    console.log(this.user.tags);
+    this.dataService.fetchData('http://localhost:51571/api/Tags').subscribe(
+        response => {
+          for (let tag of response){
+            this.tags.push(new Tag(tag.label, tag.verified));
           }
-        ]
-      },
-      {
-        id: '0',
-        text: 'Planes',
-        children: [
-          {
-            id: 'plane1',
-            text: 'Plane 1'
-          },
-          {
-            id: 'plane2',
-            text: 'Plane 2'
-          },
-          {
-            id: 'plane3',
-            text: 'Plane 3'
-          }
-        ]
-      }
-    ];
-    this.startValue = 'test3';
+          console.log(this.tags);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
+
     this.selected = '';
+  }
+
+
+  onSubmit(user){
+    user.tags = this.getTags();
+    this.dataService.putData(`http://localhost:51571/api/Users/${JSON.parse(sessionStorage.getItem('user')).id}`, user).subscribe(response => {
+        console.log(response);
+      },
+      err => {
+        console.log(err);
+        console.log('erroare ');
+      }
+    );
+  }
+
+
+
+  getTags(){
+
+    let tags_label= document.getElementsByClassName('select2-selection__choice');
+    let tags = []
+    for(let i=0; i<tags_label.length; i++){
+      tags.push(tags_label[i].innerHTML.replace('<span class="select2-selection__choice__remove" role="presentation">×</span>', ''));
+    }
+    let db_tags = this.tags.map(tag => tag.label)
+    let finalListOfFuckingTags = [];
+    for(let tag of tags){
+        finalListOfFuckingTags.push(new Tag(tag, tag in db_tags));
+        }
+    return finalListOfFuckingTags;
   }
 
 }

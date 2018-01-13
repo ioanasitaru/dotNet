@@ -1,3 +1,5 @@
+import {Tag} from "./tag";
+
 export class User {
   constructor(
     public name: string,
@@ -6,7 +8,7 @@ export class User {
     public username: string,
     public password: string,
     public confirmPassword: string,
-    public tags: Array<string>
+    public tags: Array<Tag>
   ) {}
 
 }

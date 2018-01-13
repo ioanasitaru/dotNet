@@ -148,16 +148,7 @@ namespace Business.Repositories.Implementations
                 userTags.Add(new UserTag(user.Id, user, tag.Label, Tag.Create(tag.Label)));
             }
 
-            foreach (var _event in userModel.Events)
-            {
-                var dbEvent = _databaseContext.Events.FirstOrDefault(e =>
-                    e.Name == _event.Name && e.DateAndTime == _event.DateAndTime && e.Location == _event.Location &&
-                    e.Description == _event.Description && e.Image == _event.Image);
-                if (dbEvent != null)
-                {
-                    eventUser.Add(new EventUser(dbEvent.Id, dbEvent, user.Id, user));
-                }
-            }
+          
 
             user.Update(userModel.Username, userModel.Name, userModel.Email,
                 userModel.Location, userTags, eventUser);
