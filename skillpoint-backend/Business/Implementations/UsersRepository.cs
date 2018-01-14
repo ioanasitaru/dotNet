@@ -186,13 +186,9 @@ namespace Business.Repositories.Implementations
 
    
 
-                var sql = String.Format("DELETE FROM dbo.UserTag WHERE UserId = '{0}'",user.Id);
-                _databaseContext.Database.ExecuteSqlCommand(sql);
+            var sql = String.Format("DELETE FROM dbo.UserTag WHERE UserId = '{0}'",user.Id);
+            _databaseContext.Database.ExecuteSqlCommand(sql);
 
-
-           
-
-            var plm = _databaseContext.UserTag.ToList();
             _databaseContext.SaveChanges();
 
             user.Update(userModel.Username, userModel.Name, userModel.Email,

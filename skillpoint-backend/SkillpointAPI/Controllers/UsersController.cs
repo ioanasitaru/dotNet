@@ -1,16 +1,13 @@
 using Business.Services.Interfaces;
 using CreatingModels;
-using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Data.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SkillpointAPI.Controllers
 {
@@ -51,6 +48,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/Events/5
+        [Authorize]
         [HttpGet("/Events/{id}")]
         public IActionResult GetEventsByUserId([FromRoute] Guid id)
         {
@@ -61,6 +59,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/PastEvent/5
+        [Authorize]
         [HttpGet("/PastEvents/{id}")]
         public IActionResult GetPastEventsByUserId([FromRoute] Guid id)
         {
@@ -71,6 +70,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/AllFutureEvents/5
+        [Authorize]
         [HttpGet("/AllFutureEvents/{id}")]
         public IActionResult GetFutureEvesByUserIdAndTags([FromRoute] Guid id)
         {
@@ -82,6 +82,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/AttendedFutureEvents/5
+        [Authorize]
         [HttpGet("/AttendedFutureEvents/{id}")]
         public IActionResult GetFutureEventsByUserId([FromRoute] Guid id)
         {
@@ -111,6 +112,7 @@ namespace SkillpointAPI.Controllers
 
 
         // POST: api/Users/attend/324
+        [Authorize]
         [HttpPost("/Attend/{eventId}")]
         public IActionResult AttendEvent([FromBody] EventUser eventUser)
         {
@@ -126,6 +128,7 @@ namespace SkillpointAPI.Controllers
         }
         
         // PUT: api/Users/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdateUser([FromBody] UserCreatingModel userModel, [FromRoute] Guid id)
         {
@@ -151,6 +154,7 @@ namespace SkillpointAPI.Controllers
 
 
         // DELETE: api/Users/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteUser([FromRoute] Guid id)
         {

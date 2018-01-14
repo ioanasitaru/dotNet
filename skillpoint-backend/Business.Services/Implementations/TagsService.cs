@@ -74,12 +74,11 @@ namespace Business.Services.Implementations
             List<string> predefinedTags = PredefinedTags.Values;
 
 
-            List<string> words = title.Split(" ").ToList();
-            words.AddRange(description.Split(" ").ToList());
-
-            foreach (var word in words)
+            string words = title + " " + description;
+            words = words.ToUpper();
+            foreach (var word in predefinedTags)
             {
-                if (predefinedTags.Contains(word.ToUpper()))
+                if (words.Contains(word.ToUpper()))
                 {
                     generatedTags.Add(new TagCreatingModel(word, true));
                 }

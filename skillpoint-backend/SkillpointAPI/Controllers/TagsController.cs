@@ -1,8 +1,9 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Net;
 using Business.Services.Interfaces;
 using CreatingModels;
-using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,55 +23,101 @@ namespace SkillpointAPI.Controllers
 
         // GET: api/Tags
         [HttpGet]
-        public IEnumerable<TagDTO> GetTags()
+        public IActionResult GetTags()
         {
-            NotFound("test");
-            return _service.GetAll();
+            try
+            {
+                return Ok(_service.GetAll());
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         // GET: api/Tags
         [HttpGet("Verified")]
-        public IEnumerable<TagDTO> GetVerifiedTags()
+        public IActionResult GetVerifiedTags()
         {
-            return _service.GetAll().ToList().FindAll(t => t.Verified);
+            try
+            {
+                return Ok(_service.GetAll().ToList().FindAll(t => t.Verified));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         // GET: api/Tags/5
         [HttpGet("{label}")]
-        public TagDTO GetTag([FromRoute] string label)
+        public IActionResult GetTag([FromRoute] string label)
         {
-            return _service.GetById(label);
+            try
+            {
+                return Ok(_service.GetById(label));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         // GET: api/Tags/Events/5
+        [Authorize]
         [HttpGet("/EventsByTag/{label}")]
-        public List<EventDTO> GetEventsByTag([FromRoute] string label)
+        public IActionResult GetEventsByTag([FromRoute] string label)
         {
-            return _service.GetEventsByTag(label);
+            try
+            {
+                return Ok(_service.GetEventsByTag(label));
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
 
         // POST: api/Tags
+        [Authorize]
         [HttpPost]
-        public void PostTag([FromBody] TagCreatingModel tagModel)
+        public IActionResult PostTag([FromBody] TagCreatingModel tagModel)
         {
-            var tagLabel = tagModel.Label;
+            try
+            {
+                var tagLabel = tagModel.Label;
 
 //            if (!GetTags().Any())
 //            {
 //                _service.Create(tagModel);
 //            }
 
-             if (_service.GetById(tagLabel) == null)
-                _service.Create(tagModel);
-            
+                if (_service.GetById(tagLabel) == null)
+                    _service.Create(tagModel);
+                return StatusCode((int)HttpStatusCode.Created);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // DELETE: api/Tags/5
+        [Authorize]
         [HttpDelete("{label}")]
-        public void DeleteTag([FromRoute] string label)
+        public IActionResult DeleteTag([FromRoute] string label)
         {
-            _service.Delete(label);
+            try
+            {
+                _service.Delete(label);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
         }
     }
 }
