@@ -22,8 +22,6 @@ export class NavbarComponent implements OnInit {
   onSubmit(loginModel: Credentials) {
     console.log(loginModel)
     this.authService.login(loginModel).subscribe(response => {
-      console.log(loginModel)
-        this.router.navigate(['/']);
       },
       err => {
         console.log(err);
@@ -36,13 +34,17 @@ export class NavbarComponent implements OnInit {
     return !isNullOrUndefined(sessionStorage.getItem('authorization'));
   };
 
+  getUser = function () {
+    return JSON.parse(sessionStorage.getItem('user')).username;
+  };
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);
   }
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
-
   }
+
+
 }

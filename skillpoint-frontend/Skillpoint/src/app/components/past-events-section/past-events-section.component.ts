@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Event} from "../../models/event";
 import {DataService} from "../../services/data.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-past-events-section',
@@ -9,19 +10,24 @@ import {DataService} from "../../services/data.service";
 })
 export class PastEventsSectionComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+  }
+  isNull: boolean;
   events: Array<Event>;
 
   ngOnInit() {
+    this.isNull = isNullOrUndefined(this.events);
     this.dataService.fetchData(`http://localhost:51571/PastEvents/${JSON.parse(sessionStorage.getItem('user')).id}`).subscribe(
-        response => {
-          console.log(response);
-          this.events = response;
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      response => {
+        console.log(response);
+        this.events = response;
+        console.log(this.events);
+
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

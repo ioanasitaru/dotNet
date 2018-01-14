@@ -17,7 +17,7 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { EventPageComponent } from './pages/event-page/event-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
-import {AppRoutingModule, LoginGuard} from './routing/app-routing.module';
+import {AdminGuard, AppRoutingModule, LoginGuard} from './routing/app-routing.module';
 import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
@@ -66,7 +66,7 @@ import{SelectModule} from 'ng2-select'
     Select2Module,
     SelectModule
   ],
-  providers: [DataService, LoginGuard, AuthenticationService],
+  providers: [DataService, LoginGuard, AuthenticationService, AdminGuard],
   bootstrap: [AppComponent]
 })
 

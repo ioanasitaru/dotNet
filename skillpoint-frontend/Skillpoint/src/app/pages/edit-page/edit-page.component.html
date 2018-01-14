@@ -35,23 +35,23 @@
 
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
-            <label for="location">Location</label>
-            <input type="text" class="form-control" placeholder="Location" id="location" required
+            <label >Location</label>
+            <input type="text" class="form-control" placeholder="Location"  required
                    [(ngModel)]="this.user.location" #location="ngModel" name="location">
             <div [hidden]="location.valid || location.untouched"><p class="help-block text-danger">Please enter your
               location</p></div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="form-group col-xs-12 floating-label-form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" placeholder="Username" id="userName" required
-                   [(ngModel)]="this.user.username" #userName="ngModel" name="username">
-            <div [hidden]="userName.valid || userName.untouched"><p class="help-block text-danger">Please enter an
-              username</p></div>
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="form-group col-xs-12 floating-label-form-group">-->
+            <!--<label for="username">Username</label>-->
+            <!--<input type="text" class="form-control" placeholder="Username" id="userName" required-->
+                   <!--[(ngModel)]="this.user.username" #userName="ngModel" name="username">-->
+            <!--<div [hidden]="userName.valid || userName.untouched"><p class="help-block text-danger">Please enter an-->
+              <!--username</p></div>-->
+          <!--</div>-->
+        <!--</div>-->
 
 
 
@@ -78,5 +78,8 @@
     </div>
   </div>
 </form>
+
+
+
 
 

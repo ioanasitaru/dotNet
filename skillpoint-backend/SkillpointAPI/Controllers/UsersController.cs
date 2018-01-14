@@ -114,7 +114,7 @@ namespace SkillpointAPI.Controllers
         // POST: api/Users/attend/324
         [Authorize]
         [HttpPost("/Attend/{eventId}")]
-        public IActionResult AttendEvent([FromBody] EventUser eventUser)
+        public IActionResult AttendEvent([FromBody] UserEventCreatingModel eventUser)
         {
             try
             {

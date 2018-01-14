@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {Event} from "../../models/event";
 
@@ -9,19 +9,23 @@ import {Event} from "../../models/event";
 })
 export class FutureEventsSectionComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+  }
+
   events: Array<Event>;
 
   ngOnInit() {
+
+
     this.dataService.fetchData(`http://localhost:51571/AttendedFutureEvents/${JSON.parse(sessionStorage.getItem('user')).id}`).subscribe(
-        response => {
-          console.log(response);
-          this.events = response;
-        },
-        error => {
-          console.log(error);
-        }
-      );
+      response => {
+        console.log(response);
+        this.events = response;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 }

@@ -34,6 +34,20 @@ export class NotLoginGuard implements CanActivate {
     return false;
   }
 }
+@Injectable()
+export class AdminGuard implements CanActivate {
+  constructor(private router: Router) {}
+  canActivate() {
+    let user = JSON.parse(sessionStorage.getItem('user'))
+    if (user.username === 'Admin'){
+      console.log('Admin');
+      return true;
+    }
+    this.router.navigate(['']);
+    return false;
+  }
+}
+
 
 const routes: Routes = [
   { path: '',  component: HomePageComponent},
@@ -42,7 +56,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent, canActivate: [LoginGuard]},
   { path: 'signup', component: SignupPageComponent},
   { path: 'edit', component: EditPageComponent},
-  { path: 'update', component: UpdateComponent}
+  { path: 'update', component: UpdateComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({
