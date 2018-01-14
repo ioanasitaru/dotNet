@@ -20,7 +20,18 @@ namespace Business.Services.Implementations
 
         public IEnumerable<TagDTO> GetAll() => _repository.GetAll().ToList().ConvertAll(t => new TagDTO(t)).ToList();
 
-        public TagDTO GetById(string label) => new TagDTO(_repository.GetById(label));
+        public TagDTO GetById(string label)
+        {
+
+            var tag = _repository.GetById(label);
+
+            if (tag == null)
+            {
+                return null;
+            }
+
+            return new TagDTO(tag);
+        }
 
         public void Update(TagCreatingModel model, string label) => _repository.Update(model, label);
 
