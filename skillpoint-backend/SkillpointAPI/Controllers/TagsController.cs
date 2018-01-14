@@ -24,6 +24,7 @@ namespace SkillpointAPI.Controllers
         [HttpGet]
         public IEnumerable<TagDTO> GetTags()
         {
+            NotFound("test");
             return _service.GetAll();
         }
 

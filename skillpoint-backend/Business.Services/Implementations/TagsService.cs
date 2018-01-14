@@ -37,25 +37,20 @@ namespace Business.Services.Implementations
 
         public List<Tag> CreateOrGet(List<TagCreatingModel> tagsModels, string title, string description)
         {
-            bool generated = false;
 
             List<Tag> tags = new List<Tag>();
 
-            if (!tagsModels.Any())
-            {
-                tagsModels = GenerateTags(title, description);
-                generated = true;
-            }
+        
+            tagsModels.AddRange(GenerateTags(title, description));
+            
 
             foreach (var tag in tagsModels)
             {
                 var dbTag = _repository.GetByLabel(tag.Label);
                 if (dbTag == null)
                 {
-                    if (generated)
-                    {
+                    
                         tag.Verified = true;
-                    }
 
                     _repository.Create(tag);
                     dbTag = _repository.GetByLabel(tag.Label);

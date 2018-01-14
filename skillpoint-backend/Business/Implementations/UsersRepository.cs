@@ -15,12 +15,14 @@ namespace Business.Repositories.Implementations
     {
         private readonly IDatabaseContext _databaseContext;
         private readonly IEventsRepository _eventsRepository;
+        private readonly ITagsRepository _tagsRepository;
 
-        public UsersRepository(IDatabaseContext database, IEventsRepository eventsRepository)
+        public UsersRepository(IDatabaseContext database, IEventsRepository eventsRepository, ITagsRepository tagsRepository)
         {
             _databaseContext = database;
             _eventsRepository = eventsRepository;
-        }
+            _tagsRepository = tagsRepository;
+    }
 
         public async Task CreateAsync(UserCreatingModel model, UserManager<User> userManager)
         {
@@ -39,12 +41,23 @@ namespace Business.Repositories.Implementations
 
         public void CreateRelations(User user, List<Tag> tags)
         {
+            foreach (var tag in tags)
+            {
+                var dbTag = _tagsRepository.GetByLabel(tag.Label);
+                if (dbTag == null)
+                {
+                    _tagsRepository.Create(new TagCreatingModel(tag.Label,tag.Verified));
+                }
+            }
+
             List<UserTag> userTags = tags.ConvertAll(t => new UserTag(user.Id, user, t.Label, t));
             foreach (var userTag in userTags)
             {
                 //                _databaseContext.UserTag.Add(userTag);
-                var sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, userTag.Tag.Label);
-                _databaseContext.Database.ExecuteSqlCommand(sql);
+
+                    var sql = String.Format("INSERT INTO dbo.UserTag VALUES('{0}', '{1}')", user.Id, userTag.Tag.Label);
+
+                    _databaseContext.Database.ExecuteSqlCommand(sql);
             }
             _databaseContext.SaveChanges();
         }
@@ -101,11 +114,19 @@ namespace Business.Repositories.Implementations
                         events.Load();
                     }
                 }
-
+                
                 users.Add(user);
+            }
+            foreach (var user in users)
+            {
+                foreach (var ut in user.Tags)
+                {
+                    ut.Tag = _tagsRepository.GetByLabel(ut.TagLabel);
+                }
             }
             return users;
         }
+        
 
         public User GetById(Guid id)
         {
@@ -116,6 +137,7 @@ namespace Business.Repositories.Implementations
             {
                 userTags.Load();
             }
+            if (userTags.CurrentValue!=null)
             foreach (var ut in userTags.CurrentValue)
             {
                 var tags = _databaseContext.Entry(ut).Reference("Tag");
@@ -139,6 +161,12 @@ namespace Business.Repositories.Implementations
                 }
             }
 
+            if (user.Tags!=null)
+            foreach (var ut in user.Tags)
+            {
+                ut.Tag = _tagsRepository.GetByLabel(ut.TagLabel);
+            }
+
             return user;
         }
 
@@ -146,20 +174,34 @@ namespace Business.Repositories.Implementations
         {
             var user = GetById(id);
 
-            List<UserTag> userTags = new List<UserTag>();
+            List<Tag> userTags = new List<Tag>();
             List<EventUser> eventUser = new List<EventUser>();
 
             foreach (var tag in userModel.Tags)
             {
-                userTags.Add(new UserTag(user.Id, user, tag.Label, Tag.Create(tag.Label)));
+                var currentTag = Tag.Create(tag.Label);
+                currentTag.Update(currentTag.Label,tag.Verified);
+                userTags.Add(currentTag);
             }
 
-          
+   
+
+                var sql = String.Format("DELETE FROM dbo.UserTag WHERE UserId = '{0}'",user.Id);
+                _databaseContext.Database.ExecuteSqlCommand(sql);
+
+
+           
+
+            var plm = _databaseContext.UserTag.ToList();
+            _databaseContext.SaveChanges();
 
             user.Update(userModel.Username, userModel.Name, userModel.Email,
-                userModel.Location, userTags, eventUser);
-
+                userModel.Location, null, eventUser);
             _databaseContext.Users.Update(user);
+
+            _databaseContext.SaveChanges();
+            
+            CreateRelations(user,userTags);
         }
 
         public void Delete(Guid id)
