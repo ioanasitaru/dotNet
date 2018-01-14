@@ -5,6 +5,7 @@ import {DataService} from "../../services/data.service";
 import {Tag} from "../../models/tag";
 import {forEach} from "@angular/router/src/utils/collection";
 import {Router} from "@angular/router";
+import {cleanSession} from "selenium-webdriver/safari";
 
 @Component({
   selector: 'app-edit-page',
@@ -22,7 +23,7 @@ export class EditPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    eval (' $(\'.select2-multi\').select2({ tags: true, placeholder: "Interests (e.g. C++, java)" }); ');
+    eval(' $(\'.select2-multi\').select2({ tags: true, placeholder: "Interests (e.g. C++, java)" }); ');
 
     this.tags = [];
     // this.selectedTags = [];
@@ -53,8 +54,22 @@ export class EditPageComponent implements OnInit {
 
   onSubmit(user) {
     user.tags = this.getTags();
+    let session_user = JSON.parse(sessionStorage.getItem('user'));
+    user.confirmPassword = session_user.confirmPassword;
+    user.password = session_user.password;
+    user.username = session_user.username;
     this.dataService.putData(`http://localhost:51571/api/Users/${JSON.parse(sessionStorage.getItem('user')).id}`, user).subscribe(response => {
-        this.router.navigate(['/profile'])
+        this.dataService.putData(`http://localhost:51571/api/Users/${JSON.parse(sessionStorage.getItem('user')).id}`, user).subscribe(response => {
+            sessionStorage.setItem('user', JSON.stringify(user));
+            this.router.navigate(['/profile'])
+
+          },
+          err => {
+            console.log(err);
+            console.log('erroare ');
+          }
+        );
+
       },
       err => {
         console.log(err);

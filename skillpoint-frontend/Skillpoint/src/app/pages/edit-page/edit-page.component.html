@@ -16,7 +16,7 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" placeholder="Name" id="name"
-                   required [(ngModel)]="this.user.name" #name="ngModel" name="name" (click)="Refresh()">
+                   required [(ngModel)]="this.user.name" #name="ngModel" name="name">
             <div [hidden]="name.valid || name.untouched"><p class="help-block text-danger">Please enter your name</p>
             </div>
           </div>
@@ -43,15 +43,15 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="form-group col-xs-12 floating-label-form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" placeholder="Username" id="userName" required
-                   [(ngModel)]="this.user.username" #userName="ngModel" name="username">
-            <div [hidden]="userName.valid || userName.untouched"><p class="help-block text-danger">Please enter an
-              username</p></div>
-          </div>
-        </div>
+        <!--<div class="row">-->
+          <!--<div class="form-group col-xs-12 floating-label-form-group">-->
+            <!--<label for="username">Username</label>-->
+            <!--<input type="text" class="form-control" placeholder="Username" id="userName" required-->
+                   <!--[(ngModel)]="this.user.username" #userName="ngModel" name="username">-->
+            <!--<div [hidden]="userName.valid || userName.untouched"><p class="help-block text-danger">Please enter an-->
+              <!--username</p></div>-->
+          <!--</div>-->
+        <!--</div>-->
 
 
 

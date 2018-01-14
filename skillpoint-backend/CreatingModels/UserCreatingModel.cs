@@ -19,7 +19,6 @@ namespace CreatingModels
         
         public List<TagCreatingModel> Tags { get; set; }
 
-        public List<EventCreatingModel> Events { get; set; }
 
         public UserCreatingModel()
         {
@@ -37,8 +36,7 @@ namespace CreatingModels
             this.Location = anotherCreatingModel.Location;
             this.Name = anotherCreatingModel.Name;
 
-            this.Events = new List<EventCreatingModel>();
-            Events.AddRange(anotherCreatingModel.Events);
+            
         }
     }
 }
