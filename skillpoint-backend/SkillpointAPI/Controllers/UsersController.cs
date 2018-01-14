@@ -4,10 +4,13 @@ using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Data.Domain.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SkillpointAPI.Controllers
 {
@@ -29,77 +32,137 @@ namespace SkillpointAPI.Controllers
 
         //GET: api/Users
         [HttpGet]
-        public IEnumerable<UserDTO> GetUsers()
+        public IActionResult GetUsers()
         {
             var users = _usersService.GetAll();
-            return users;
+            if (users == null)
+                return NotFound("There are no users");
+            return Ok(users);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public UserDTO GetUser([FromRoute] Guid id)
+        public IActionResult GetUser([FromRoute] Guid id)
         {
-            return _usersService.GetById(id);
+            var user = _usersService.GetById(id);
+            if(user==null)
+                return NotFound("There is no user with that id");
+            return Ok(user);
         }
 
         //GET: api/Users/Events/5
         [HttpGet("/Events/{id}")]
-        public List<EventDTO> GetEventsByUserId([FromRoute] Guid id)
+        public IActionResult GetEventsByUserId([FromRoute] Guid id)
         {
-            return _usersService.GetEventsByUserId(id);
+            var events= _usersService.GetEventsByUserId(id);
+            if (events == null)
+                return NotFound("There are no events matching that tag");
+            return Ok(events);
         }
 
         //GET: api/Users/PastEvent/5
         [HttpGet("/PastEvents/{id}")]
-        public List<EventDTO> GetPastEventsByUserId([FromRoute] Guid id)
+        public IActionResult GetPastEventsByUserId([FromRoute] Guid id)
         {
-            return _usersService.GetEventsByUserId(id).FindAll(e => e.DateAndTime < DateTime.Now);
+            var events = _usersService.GetEventsByUserId(id).FindAll(e => e.DateAndTime < DateTime.Now);
+            if (events == null)
+                return NotFound("There are no such events");
+            return Ok(events);
         }
 
         //GET: api/Users/AllFutureEvents/5
         [HttpGet("/AllFutureEvents/{id}")]
-        public List<EventDTO> GetFutureEventsByUserIdAndTags([FromRoute] Guid id)
+        public IActionResult GetFutureEvesByUserIdAndTags([FromRoute] Guid id)
         {
-            return _usersService.GetFutureEventsByUserIdAndTags(id);
+            var events=_usersService.GetFutureEventsByUserIdAndTags(id);
+            if (events == null)
+                return NotFound("There are no such events");
+            return Ok(events);
+
         }
 
         //GET: api/Users/AttendedFutureEvents/5
         [HttpGet("/AttendedFutureEvents/{id}")]
-        public List<EventDTO> GetFutureEventsByUserId([FromRoute] Guid id)
+        public IActionResult GetFutureEventsByUserId([FromRoute] Guid id)
         {
-            return _usersService.GetEventsByUserId(id).FindAll(e => e.DateAndTime > DateTime.Now);
+            var events = _usersService.GetEventsByUserId(id).FindAll(e => e.DateAndTime > DateTime.Now);
+            if (events == null)
+                return NotFound("There are no such events");
+            return Ok(events);
         }
 
         // POST: api/Users
         [HttpPost]
-        public async Task PostUser([FromBody] UserCreatingModel userModel)
+        public async Task<IActionResult> PostUser([FromBody] UserCreatingModel userModel)
         {
-            await _usersService.CreateAsync(userModel, _userManager);
-            var tags = _tagsService.CreateOrGet(userModel.Tags, null, null);
-            var user = _usersService.GetByUsername(userModel.Username);
-            _usersService.CreateRelations(user, tags);
+            try
+            {
+                await _usersService.CreateAsync(userModel, _userManager);
+                var tags = _tagsService.CreateOrGet(userModel.Tags, null, null);
+                var user = _usersService.GetByUsername(userModel.Username);
+                _usersService.CreateRelations(user, tags);
+                return StatusCode((int)(HttpStatusCode.Created));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
 
         // POST: api/Users/attend/324
         [HttpPost("/Attend/{eventId}")]
-        public void AttendEvent([FromBody] UserEventCreatingModel eventUser)
+        public IActionResult AttendEvent([FromBody] UserEventCreatingModel eventUser)
         {
-            _usersService.CreateRelation(Guid.Parse( eventUser.UserId), eventUser.EventId);
+            try
+            {
+                _usersService.CreateRelation(Guid.Parse(eventUser.UserId), eventUser.EventId);
+                return StatusCode((int) (HttpStatusCode.Accepted));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
         
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public void UpdateUser([FromBody] UserCreatingModel userModel, [FromRoute] Guid id)
+        public IActionResult UpdateUser([FromBody] UserCreatingModel userModel, [FromRoute] Guid id)
         {
-            _usersService.Update(userModel, id);
+            UserCreatingModel aCreatingModel = new UserCreatingModel(userModel);
+
+
+
+            try
+            {
+                
+                _usersService.Update(aCreatingModel, id);
+                _usersService.Update(userModel, id);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+
+                return NoContent();
+            }
         }
+
+
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public void DeleteUser([FromRoute] Guid id)
+        public IActionResult DeleteUser([FromRoute] Guid id)
         {
-            _usersService.Delete(id);
+            try
+            {
+                _usersService.Delete(id);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

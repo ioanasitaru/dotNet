@@ -73,14 +73,14 @@ namespace SkillpointAPI.Controllers
 
         // POST: api/Events
         [HttpPost]
-        public async Task PostEvent([FromBody] EventCreatingModel eventModel)
+        public async Task<IActionResult> PostEvent([FromBody] EventCreatingModel eventModel)
         {
             await _eventService.CreateAsync(eventModel);
             var tags = _tagsService.CreateOrGet(eventModel.Tags, eventModel.Name, eventModel.Description);
             var @event = _eventService.IsInDb(eventModel);
 
             _eventService.CreateRelations(@event, tags);
-
+            return NotFound();
         }
 
         [HttpDelete]

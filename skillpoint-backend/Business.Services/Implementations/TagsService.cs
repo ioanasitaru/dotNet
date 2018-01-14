@@ -20,31 +20,37 @@ namespace Business.Services.Implementations
 
         public IEnumerable<TagDTO> GetAll() => _repository.GetAll().ToList().ConvertAll(t => new TagDTO(t)).ToList();
 
-        public TagDTO GetById(string label) => new TagDTO(_repository.GetById(label));
+        public TagDTO GetById(string label)
+        {
+
+            var tag = _repository.GetById(label);
+
+            if (tag == null)
+            {
+                return null;
+            }
+
+            return new TagDTO(tag);
+        }
 
         public void Update(TagCreatingModel model, string label) => _repository.Update(model, label);
 
         public List<Tag> CreateOrGet(List<TagCreatingModel> tagsModels, string title, string description)
         {
-            bool generated = false;
 
             List<Tag> tags = new List<Tag>();
 
-            if (!tagsModels.Any())
-            {
-                tagsModels = GenerateTags(title, description);
-                generated = true;
-            }
+        
+            tagsModels.AddRange(GenerateTags(title, description));
+            
 
             foreach (var tag in tagsModels)
             {
                 var dbTag = _repository.GetByLabel(tag.Label);
                 if (dbTag == null)
                 {
-                    if (generated)
-                    {
+                    
                         tag.Verified = true;
-                    }
 
                     _repository.Create(tag);
                     dbTag = _repository.GetByLabel(tag.Label);
