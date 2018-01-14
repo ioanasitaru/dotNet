@@ -20,7 +20,7 @@
           <a href="#loginModal" data-toggle="modal">Login</a>
         </li>
         <li *ngIf="isUserLoggedIn()">
-            <a routerLink="profile">{{ this.user.username | uppercase}}</a>
+            <a routerLink="profile">{{getUser()}}</a>
         </li>
         <li *ngIf="isUserLoggedIn()">
           <a routerLink="events">My Events</a>

@@ -22,6 +22,9 @@
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
   <!-- Boots JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -30,7 +33,16 @@
   <app-root></app-root>
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script type="text/javascript"> $('.select2-multi').select2({ tags: true, placeholder: "Interests (e.g. C++, java)" }); </script>
 
+<script>
+  $(function() {
+        $("body").on("input propertychange", ".floating-label-form-group", function(e) {
+            $(this).toggleClass("floating-label-form-group-with-value", !!$(e.target).val());
+        }).on("focus", ".floating-label-form-group", function() {
+            $(this).addClass("floating-label-form-group-with-focus");
+        }).on("blur", ".floating-label-form-group", function() {
+            $(this).removeClass("floating-label-form-group-with-focus");
+        });
+    });
+</script>
 </html>

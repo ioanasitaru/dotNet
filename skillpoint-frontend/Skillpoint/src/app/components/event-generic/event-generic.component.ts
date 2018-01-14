@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EventDTO} from "../../models/eventDTO";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-event-generic',
@@ -8,11 +9,16 @@ import {EventDTO} from "../../models/eventDTO";
 })
 export class EventGenericComponent implements OnInit {
 
-  constructor() { }
+  currentUrl: string;
 
-  @Input()events: Array<EventDTO>;
+  constructor(private router: Router) {
+  }
+
+  @Input() events: Array<EventDTO>;
 
   ngOnInit() {
+    this.currentUrl = this.router.url;
+
   }
 
 }

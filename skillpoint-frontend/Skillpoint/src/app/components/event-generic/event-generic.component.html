@@ -22,11 +22,12 @@
           </p>
           <p><i class="fa fa-calendar-o fa-1x" aria-hidden="true"></i>&nbsp;{{event.dateAndTime | date:
             'dd-MM-yyyy'}}</p>
-          <button class="btn center-block">Attending</button>
+          <button *ngIf="currentUrl === '/'" class="btn center-block">Attend</button>
+          <button *ngIf="currentUrl === '/events'" class="btn center-block">Attending</button>
         </div>
       </a>
     </div>
-    <app-event-modal [event]="event"></app-event-modal>
+    <app-event-modal [events]="this.events" [event]="event"></app-event-modal>
 
   </div>
 </div>

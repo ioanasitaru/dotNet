@@ -16,7 +16,7 @@
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" placeholder="Name" id="name"
-                   required [(ngModel)]="this.user.name" #name="ngModel" name="name">
+                   required [(ngModel)]="this.user.name" #name="ngModel" name="name" (click)="Refresh()">
             <div [hidden]="name.valid || name.untouched"><p class="help-block text-danger">Please enter your name</p>
             </div>
           </div>
@@ -35,8 +35,8 @@
 
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
-            <label for="location">Location</label>
-            <input type="text" class="form-control" placeholder="Location" id="location" required
+            <label >Location</label>
+            <input type="text" class="form-control" placeholder="Location"  required
                    [(ngModel)]="this.user.location" #location="ngModel" name="location">
             <div [hidden]="location.valid || location.untouched"><p class="help-block text-danger">Please enter your
               location</p></div>
@@ -78,5 +78,8 @@
     </div>
   </div>
 </form>
+
+
+
 
 

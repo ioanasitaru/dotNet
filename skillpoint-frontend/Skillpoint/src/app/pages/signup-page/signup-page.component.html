@@ -36,7 +36,7 @@
         <div class="row">
           <div class="form-group col-xs-12 floating-label-form-group">
             <label for="location">Location</label>
-            <input type="text" class="form-control" placeholder="Location" id="location" required
+            <input type="text" class="form-control" placeholder="Location"  required
                    [(ngModel)]="model.location" #location="ngModel" name="location">
             <div [hidden]="location.valid || location.untouched"><p class="help-block text-danger">Please enter your
               location</p></div>
