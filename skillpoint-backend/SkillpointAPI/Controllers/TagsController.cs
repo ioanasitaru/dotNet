@@ -64,7 +64,7 @@ namespace SkillpointAPI.Controllers
         }
 
         // GET: api/Tags/Events/5
-        [Authorize]
+        // [Authorize]
         [HttpGet("/EventsByTag/{label}")]
         public IActionResult GetEventsByTag([FromRoute] string label)
         {
@@ -80,7 +80,7 @@ namespace SkillpointAPI.Controllers
 
 
         // POST: api/Tags
-        [Authorize]
+        // [Authorize]
         [HttpPost]
         public IActionResult PostTag([FromBody] TagCreatingModel tagModel)
         {
@@ -104,7 +104,7 @@ namespace SkillpointAPI.Controllers
         }
 
         // DELETE: api/Tags/5
-        [Authorize]
+        // [Authorize]
         [HttpDelete("{label}")]
         public IActionResult DeleteTag([FromRoute] string label)
         {

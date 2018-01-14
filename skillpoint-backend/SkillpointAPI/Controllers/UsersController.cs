@@ -31,6 +31,7 @@ namespace SkillpointAPI.Controllers
         [HttpGet]
         public IActionResult GetUsers()
         {
+
             var users = _usersService.GetAll();
             if (users == null)
                 return NotFound("There are no users");
@@ -48,7 +49,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/Events/5
-        [Authorize]
+        // [Authorize]
         [HttpGet("/Events/{id}")]
         public IActionResult GetEventsByUserId([FromRoute] Guid id)
         {
@@ -59,7 +60,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/PastEvent/5
-        [Authorize]
+        // [Authorize]
         [HttpGet("/PastEvents/{id}")]
         public IActionResult GetPastEventsByUserId([FromRoute] Guid id)
         {
@@ -70,7 +71,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/AllFutureEvents/5
-        [Authorize]
+        // [Authorize]
         [HttpGet("/AllFutureEvents/{id}")]
         public IActionResult GetFutureEvesByUserIdAndTags([FromRoute] Guid id)
         {
@@ -82,7 +83,7 @@ namespace SkillpointAPI.Controllers
         }
 
         //GET: api/Users/AttendedFutureEvents/5
-        [Authorize]
+        // [Authorize]
         [HttpGet("/AttendedFutureEvents/{id}")]
         public IActionResult GetFutureEventsByUserId([FromRoute] Guid id)
         {
@@ -112,7 +113,7 @@ namespace SkillpointAPI.Controllers
 
 
         // POST: api/Users/attend/324
-        [Authorize]
+//        // [Authorize]
         [HttpPost("/Attend/{eventId}")]
         public IActionResult AttendEvent([FromBody] UserEventCreatingModel eventUser)
         {
@@ -128,7 +129,7 @@ namespace SkillpointAPI.Controllers
         }
         
         // PUT: api/Users/5
-        [Authorize]
+    
         [HttpPut("{id}")]
         public IActionResult UpdateUser([FromBody] UserCreatingModel userModel, [FromRoute] Guid id)
         {
@@ -154,7 +155,7 @@ namespace SkillpointAPI.Controllers
 
 
         // DELETE: api/Users/5
-        [Authorize]
+//        // [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteUser([FromRoute] Guid id)
         {
